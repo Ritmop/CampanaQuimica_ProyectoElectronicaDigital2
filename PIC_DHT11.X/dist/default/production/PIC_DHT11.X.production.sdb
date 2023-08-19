@@ -1,0 +1,278 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"15 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\DHT11.c
+[v _DHT11_start DHT11_start `(v  1 e 1 0 ]
+"23
+[v _DHT11_response DHT11_response `(v  1 e 1 0 ]
+"29
+[v _DHT11_read_byte DHT11_read_byte `(c  1 e 1 0 ]
+"49
+[v _DHT11_read_data DHT11_read_data `(c  1 e 1 0 ]
+"13 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\LCD4b.c
+[v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+"35
+[v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+"48
+[v _Lcd_Set_Cursor Lcd_Set_Cursor `(v  1 e 1 0 ]
+"65
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+"83
+[v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
+"98
+[v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+"53 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+[v _isr isr `II(v  1 e 1 0 ]
+"62
+[v _main main `(i  1 e 2 0 ]
+"84
+[v _setup setup `(v  1 e 1 0 ]
+"105
+[v _LDC_output LDC_output `(v  1 e 1 0 ]
+"128
+[v _separar_digitos8 separar_digitos8 `(v  1 e 1 0 ]
+"166 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"228
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"352
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+[s S142 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"369
+[u S151 . 1 `S142 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES151  1 e 1 @8 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1478
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1602
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+[s S197 . 1 `uc 1 TRISD0 1 0 :1:0 
+`uc 1 TRISD1 1 0 :1:1 
+`uc 1 TRISD2 1 0 :1:2 
+`uc 1 TRISD3 1 0 :1:3 
+`uc 1 TRISD4 1 0 :1:4 
+`uc 1 TRISD5 1 0 :1:5 
+`uc 1 TRISD6 1 0 :1:6 
+`uc 1 TRISD7 1 0 :1:7 
+]
+"1619
+[u S206 . 1 `S197 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES206  1 e 1 @136 ]
+[s S61 . 1 `uc 1 SCS 1 0 :1:0 
+`uc 1 LTS 1 0 :1:1 
+`uc 1 HTS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+]
+"1882
+[s S67 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S72 . 1 `S61 1 . 1 0 `S67 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES72  1 e 1 @143 ]
+"3387
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3449
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"4185
+[v _RD0 RD0 `VEb  1 e 0 @64 ]
+"4194
+[v _RD3 RD3 `VEb  1 e 0 @67 ]
+"4197
+[v _RD4 RD4 `VEb  1 e 0 @68 ]
+"4200
+[v _RD5 RD5 `VEb  1 e 0 @69 ]
+"4203
+[v _RD6 RD6 `VEb  1 e 0 @70 ]
+"4206
+[v _RD7 RD7 `VEb  1 e 0 @71 ]
+"4251
+[v _SCS SCS `VEb  1 e 0 @1144 ]
+"13 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\DHT11.c
+[v _bits bits `[5]c  1 e 5 0 ]
+"40 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+[v _data_ok data_ok `c  1 e 1 0 ]
+"41
+[v _humedad humedad `i  1 e 2 0 ]
+[v _temperatura temperatura `i  1 e 2 0 ]
+"42
+[v _u_temp u_temp `[3]uc  1 e 3 0 ]
+"43
+[v _d_temp d_temp `[3]uc  1 e 3 0 ]
+"44
+[v _u_hum u_hum `[3]uc  1 e 3 0 ]
+"45
+[v _d_hum d_hum `[3]uc  1 e 3 0 ]
+"62
+[v _main main `(i  1 e 2 0 ]
+{
+"82
+} 0
+"84
+[v _setup setup `(v  1 e 1 0 ]
+{
+"103
+} 0
+"65 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\LCD4b.c
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+{
+"81
+} 0
+"105 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+[v _LDC_output LDC_output `(v  1 e 1 0 ]
+{
+"126
+} 0
+"128
+[v _separar_digitos8 separar_digitos8 `(v  1 e 1 0 ]
+{
+[v separar_digitos8@num num `uc  1 a 1 wreg ]
+"129
+[v separar_digitos8@unidades unidades `uc  1 a 1 5 ]
+[v separar_digitos8@decenas decenas `uc  1 a 1 4 ]
+[v separar_digitos8@div1 div1 `uc  1 a 1 3 ]
+"128
+[v separar_digitos8@num num `uc  1 a 1 wreg ]
+[v separar_digitos8@dig8 dig8 `*.4uc  1 p 1 0 ]
+"130
+[v separar_digitos8@num num `uc  1 a 1 6 ]
+"136
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 7 ]
+[v ___awmod@counter counter `uc  1 a 1 6 ]
+"5
+[v ___awmod@divisor divisor `i  1 p 2 2 ]
+[v ___awmod@dividend dividend `i  1 p 2 4 ]
+"34
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 8 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 7 ]
+[v ___awdiv@counter counter `uc  1 a 1 6 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+[v ___awdiv@dividend dividend `i  1 p 2 4 ]
+"41
+} 0
+"98 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\LCD4b.c
+[v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+{
+"99
+[v Lcd_Write_String@i i `i  1 a 2 3 ]
+"98
+[v Lcd_Write_String@a a `*.26uc  1 p 2 7 ]
+"102
+} 0
+"83
+[v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
+{
+[v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
+"84
+[v Lcd_Write_Char@y y `uc  1 a 1 5 ]
+[v Lcd_Write_Char@temp temp `uc  1 a 1 4 ]
+"83
+[v Lcd_Write_Char@a a `uc  1 a 1 wreg ]
+"85
+[v Lcd_Write_Char@a a `uc  1 a 1 6 ]
+"96
+} 0
+"48
+[v _Lcd_Set_Cursor Lcd_Set_Cursor `(v  1 e 1 0 ]
+{
+[v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
+"49
+[v Lcd_Set_Cursor@temp temp `uc  1 a 1 3 ]
+[v Lcd_Set_Cursor@y y `uc  1 a 1 2 ]
+[v Lcd_Set_Cursor@z z `uc  1 a 1 1 ]
+"48
+[v Lcd_Set_Cursor@a a `uc  1 a 1 wreg ]
+[v Lcd_Set_Cursor@b b `uc  1 p 1 6 ]
+"50
+[v Lcd_Set_Cursor@a a `uc  1 a 1 0 ]
+"63
+} 0
+"35
+[v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+{
+[v Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v Lcd_Cmd@a a `uc  1 a 1 5 ]
+"41
+} 0
+"13
+[v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+{
+[v Lcd_Port@a a `uc  1 a 1 wreg ]
+[v Lcd_Port@a a `uc  1 a 1 wreg ]
+[v Lcd_Port@a a `uc  1 a 1 2 ]
+"33
+} 0
+"49 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\DHT11.c
+[v _DHT11_read_data DHT11_read_data `(c  1 e 1 0 ]
+{
+[v DHT11_read_data@hum hum `*.4i  1 a 1 wreg ]
+"51
+[v DHT11_read_data@parity parity `c  1 a 1 1 ]
+"49
+[v DHT11_read_data@hum hum `*.4i  1 a 1 wreg ]
+[v DHT11_read_data@temp temp `*.1i  1 p 1 5 ]
+[v DHT11_read_data@hum hum `*.4i  1 a 1 0 ]
+"68
+} 0
+"15
+[v _DHT11_start DHT11_start `(v  1 e 1 0 ]
+{
+"21
+} 0
+"23
+[v _DHT11_response DHT11_response `(v  1 e 1 0 ]
+{
+"27
+} 0
+"29
+[v _DHT11_read_byte DHT11_read_byte `(c  1 e 1 0 ]
+{
+"32
+[v DHT11_read_byte@data data `c  1 a 1 4 ]
+"31
+[v DHT11_read_byte@i i `c  1 a 1 3 ]
+"47
+} 0
+"53 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"55
+} 0
