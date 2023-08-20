@@ -1,15 +1,7 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"1608 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1608:     struct {
-[s S59 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S59 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"1607
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1607: typedef union {
-[u S58 `S59 1 ]
-[n S58 . . ]
-"1619
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1619: extern volatile TRISDbits_t TRISDbits __attribute__((address(0x088)));
-[v _TRISDbits `VS58 ~T0 @X0 0 e@136 ]
+"4476 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4476: extern volatile __bit TRISD0 __attribute__((address(0x440)));
+[v _TRISD0 `Vb ~T0 @X0 0 e@1088 ]
 "4185
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4185: extern volatile __bit RD0 __attribute__((address(0x40)));
 [v _RD0 `Vb ~T0 @X0 0 e@64 ]
@@ -261,8 +253,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _DHT11_start ]
 [f ]
 "16
-[; ;DHT11.c: 16:     TRISDbits.TRISD0 = 0;
-[e = . . _TRISDbits 0 0 -> -> 0 `i `uc ]
+[; ;DHT11.c: 16:     TRISD0 = 0;
+[e = _TRISD0 -> -> 0 `i `b ]
 "17
 [; ;DHT11.c: 17:     RD0 = 0;
 [e = _RD0 -> -> 0 `i `b ]
@@ -270,208 +262,199 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;DHT11.c: 18:     _delay((unsigned long)((25)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 25 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "19
-[; ;DHT11.c: 19:     TRISDbits.TRISD0 = 1;
-[e = . . _TRISDbits 0 0 -> -> 1 `i `uc ]
+[; ;DHT11.c: 19:     RD0 = 1;
+[e = _RD0 -> -> 1 `i `b ]
 "20
-[; ;DHT11.c: 20:     _delay((unsigned long)((30)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+[; ;DHT11.c: 20:     TRISD0 = 1;
+[e = _TRISD0 -> -> 1 `i `b ]
 "21
-[; ;DHT11.c: 21: }
+[; ;DHT11.c: 21:     _delay((unsigned long)((30)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"22
+[; ;DHT11.c: 22: }
 [e :UE 138 ]
 }
-"23
-[; ;DHT11.c: 23: void DHT11_response(){
+"24
+[; ;DHT11.c: 24: void DHT11_response(){
 [v _DHT11_response `(v ~T0 @X0 1 ef ]
 {
 [e :U _DHT11_response ]
 [f ]
-"24
-[; ;DHT11.c: 24:     while(RD0);
+"25
+[; ;DHT11.c: 25:     while(RD0 == 1);
 [e $U 140  ]
 [e :U 141 ]
 [e :U 140 ]
-[e $ _RD0 141  ]
+[e $ == -> _RD0 `i -> 1 `i 141  ]
 [e :U 142 ]
-"25
-[; ;DHT11.c: 25:     while(!RD0);
+"26
+[; ;DHT11.c: 26:     while(RD0 == 0);
 [e $U 143  ]
 [e :U 144 ]
 [e :U 143 ]
-[e $ ! _RD0 144  ]
+[e $ == -> _RD0 `i -> 0 `i 144  ]
 [e :U 145 ]
-"26
-[; ;DHT11.c: 26:     while(RD0);
+"27
+[; ;DHT11.c: 27:     while(RD0 == 1);
 [e $U 146  ]
 [e :U 147 ]
 [e :U 146 ]
-[e $ _RD0 147  ]
+[e $ == -> _RD0 `i -> 1 `i 147  ]
 [e :U 148 ]
-"27
-[; ;DHT11.c: 27: }
+"28
+[; ;DHT11.c: 28: }
 [e :UE 139 ]
 }
-"29
-[; ;DHT11.c: 29: int8_t DHT11_read_byte()
-[v _DHT11_read_byte `(c ~T0 @X0 1 ef ]
 "30
-[; ;DHT11.c: 30: {
+[; ;DHT11.c: 30: int8_t DHT11_read_byte()
+[v _DHT11_read_byte `(c ~T0 @X0 1 ef ]
+"31
+[; ;DHT11.c: 31: {
 {
 [e :U _DHT11_read_byte ]
 [f ]
-"31
-[; ;DHT11.c: 31:    int8_t i;
-[v _i `c ~T0 @X0 1 a ]
 "32
-[; ;DHT11.c: 32:    int8_t data = 0;
+[; ;DHT11.c: 32:    int8_t i;
+[v _i `c ~T0 @X0 1 a ]
+"33
+[; ;DHT11.c: 33:    int8_t data = 0;
 [v _data `c ~T0 @X0 1 a ]
 [e = _data -> -> 0 `i `c ]
-"33
-[; ;DHT11.c: 33:    for(i=0; i<8; i++){
+"34
+[; ;DHT11.c: 34:    for(i=0; i<8; i++){
 {
 [e = _i -> -> 0 `i `c ]
 [e $ < -> _i `i -> 8 `i 150  ]
 [e $U 151  ]
 [e :U 150 ]
 {
-"34
-[; ;DHT11.c: 34:       while(!RD0){
+"35
+[; ;DHT11.c: 35:     while(RD0 == 0);
 [e $U 153  ]
 [e :U 154 ]
-{
-"35
-[; ;DHT11.c: 35:       }
-}
 [e :U 153 ]
-"34
-[; ;DHT11.c: 34:       while(!RD0){
-[e $ ! _RD0 154  ]
+[e $ == -> _RD0 `i -> 0 `i 154  ]
 [e :U 155 ]
 "36
-[; ;DHT11.c: 36:       _delay((unsigned long)((30)*(8000000/4000000.0)));
+[; ;DHT11.c: 36:     _delay((unsigned long)((30)*(8000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 30 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "37
-[; ;DHT11.c: 37:       if(RD0){
-[e $ ! _RD0 156  ]
+[; ;DHT11.c: 37:     if(RD0 == 1){
+[e $ ! == -> _RD0 `i -> 1 `i 156  ]
 {
 "38
 [; ;DHT11.c: 38:         data = (data<<1 | 1);
 [e = _data -> | << -> _data `i -> 1 `i -> 1 `i `c ]
 "39
-[; ;DHT11.c: 39:       }
+[; ;DHT11.c: 39:     }
 }
 [e $U 157  ]
 "40
-[; ;DHT11.c: 40:       else{
+[; ;DHT11.c: 40:     else{
 [e :U 156 ]
 {
 "41
 [; ;DHT11.c: 41:         data = (data<<1);
 [e = _data -> << -> _data `i -> 1 `i `c ]
 "42
-[; ;DHT11.c: 42:       }
+[; ;DHT11.c: 42:     }
 }
 [e :U 157 ]
 "43
-[; ;DHT11.c: 43:       while(RD0){
+[; ;DHT11.c: 43:     while(RD0 == 1);
 [e $U 158  ]
 [e :U 159 ]
-{
-"44
-[; ;DHT11.c: 44:       }
-}
 [e :U 158 ]
-"43
-[; ;DHT11.c: 43:       while(RD0){
-[e $ _RD0 159  ]
+[e $ == -> _RD0 `i -> 1 `i 159  ]
 [e :U 160 ]
-"45
-[; ;DHT11.c: 45:    }
+"44
+[; ;DHT11.c: 44:    }
 }
 [e ++ _i -> -> 1 `i `c ]
 [e $ < -> _i `i -> 8 `i 150  ]
 [e :U 151 ]
 }
-"46
-[; ;DHT11.c: 46:    return data;
+"45
+[; ;DHT11.c: 45:    return data;
 [e ) _data ]
 [e $UE 149  ]
-"47
-[; ;DHT11.c: 47: }
+"46
+[; ;DHT11.c: 46: }
 [e :UE 149 ]
 }
-"49
-[; ;DHT11.c: 49: int8_t DHT11_read_data(int16_t *hum, int16_t *temp)
+"48
+[; ;DHT11.c: 48: int8_t DHT11_read_data(int16_t *hum, int16_t *temp)
 [v _DHT11_read_data `(c ~T0 @X0 1 ef2`*i`*i ]
-"50
-[; ;DHT11.c: 50: {
+"49
+[; ;DHT11.c: 49: {
 {
 [e :U _DHT11_read_data ]
-"49
-[; ;DHT11.c: 49: int8_t DHT11_read_data(int16_t *hum, int16_t *temp)
+"48
+[; ;DHT11.c: 48: int8_t DHT11_read_data(int16_t *hum, int16_t *temp)
 [v _hum `*i ~T0 @X0 1 r1 ]
 [v _temp `*i ~T0 @X0 1 r2 ]
-"50
-[; ;DHT11.c: 50: {
+"49
+[; ;DHT11.c: 49: {
 [f ]
-"51
-[; ;DHT11.c: 51:    int8_t parity = 0;
+"50
+[; ;DHT11.c: 50:    int8_t parity = 0;
 [v _parity `c ~T0 @X0 1 a ]
 [e = _parity -> -> 0 `i `c ]
-"52
-[; ;DHT11.c: 52:    DHT11_start();
+"51
+[; ;DHT11.c: 51:    DHT11_start();
 [e ( _DHT11_start ..  ]
-"53
-[; ;DHT11.c: 53:    DHT11_response();
+"52
+[; ;DHT11.c: 52:    DHT11_response();
 [e ( _DHT11_response ..  ]
-"54
-[; ;DHT11.c: 54:    bits[0] = DHT11_read_byte();
+"53
+[; ;DHT11.c: 53:    bits[0] = DHT11_read_byte();
 [e = *U + &U _bits * -> -> -> 0 `i `ui `ux -> -> # *U &U _bits `ui `ux ( _DHT11_read_byte ..  ]
-"55
-[; ;DHT11.c: 55:    bits[1] = DHT11_read_byte();
+"54
+[; ;DHT11.c: 54:    bits[1] = DHT11_read_byte();
 [e = *U + &U _bits * -> -> -> 1 `i `ui `ux -> -> # *U &U _bits `ui `ux ( _DHT11_read_byte ..  ]
-"56
-[; ;DHT11.c: 56:    bits[2] = DHT11_read_byte();
+"55
+[; ;DHT11.c: 55:    bits[2] = DHT11_read_byte();
 [e = *U + &U _bits * -> -> -> 2 `i `ui `ux -> -> # *U &U _bits `ui `ux ( _DHT11_read_byte ..  ]
-"57
-[; ;DHT11.c: 57:    bits[3] = DHT11_read_byte();
+"56
+[; ;DHT11.c: 56:    bits[3] = DHT11_read_byte();
 [e = *U + &U _bits * -> -> -> 3 `i `ui `ux -> -> # *U &U _bits `ui `ux ( _DHT11_read_byte ..  ]
-"58
-[; ;DHT11.c: 58:    bits[4] = DHT11_read_byte();
+"57
+[; ;DHT11.c: 57:    bits[4] = DHT11_read_byte();
 [e = *U + &U _bits * -> -> -> 4 `i `ui `ux -> -> # *U &U _bits `ui `ux ( _DHT11_read_byte ..  ]
-"59
-[; ;DHT11.c: 59:    parity = bits[0] + bits[1] + bits[2] + bits[3];
+"58
+[; ;DHT11.c: 58:    parity = bits[0] + bits[1] + bits[2] + bits[3];
 [e = _parity -> + + + -> *U + &U _bits * -> -> -> 0 `i `ui `ux -> -> # *U &U _bits `ui `ux `i -> *U + &U _bits * -> -> -> 1 `i `ui `ux -> -> # *U &U _bits `ui `ux `i -> *U + &U _bits * -> -> -> 2 `i `ui `ux -> -> # *U &U _bits `ui `ux `i -> *U + &U _bits * -> -> -> 3 `i `ui `ux -> -> # *U &U _bits `ui `ux `i `c ]
-"60
-[; ;DHT11.c: 60:    if (parity == bits[4]){
+"59
+[; ;DHT11.c: 59:    if (parity == bits[4]){
 [e $ ! == -> _parity `i -> *U + &U _bits * -> -> -> 4 `i `ui `ux -> -> # *U &U _bits `ui `ux `i 162  ]
 {
-"61
-[; ;DHT11.c: 61:       *hum = bits[0]<<8 | bits[1];
+"60
+[; ;DHT11.c: 60:         *hum = bits[0]<<8 | bits[1];
 [e = *U _hum | << -> *U + &U _bits * -> -> -> 0 `i `ui `ux -> -> # *U &U _bits `ui `ux `i -> 8 `i -> *U + &U _bits * -> -> -> 1 `i `ui `ux -> -> # *U &U _bits `ui `ux `i ]
-"62
-[; ;DHT11.c: 62:       *temp = bits[2]<<8 | bits[3];
+"61
+[; ;DHT11.c: 61:         *temp = bits[2]<<8 | bits[3];
 [e = *U _temp | << -> *U + &U _bits * -> -> -> 2 `i `ui `ux -> -> # *U &U _bits `ui `ux `i -> 8 `i -> *U + &U _bits * -> -> -> 3 `i `ui `ux -> -> # *U &U _bits `ui `ux `i ]
-"63
-[; ;DHT11.c: 63:       return 1;
+"62
+[; ;DHT11.c: 62:     return 1;
 [e ) -> -> 1 `i `c ]
 [e $UE 161  ]
-"64
-[; ;DHT11.c: 64:    }
+"63
+[; ;DHT11.c: 63:    }
 }
 [e $U 163  ]
-"65
-[; ;DHT11.c: 65:    else{
+"64
+[; ;DHT11.c: 64:    else{
 [e :U 162 ]
 {
-"66
-[; ;DHT11.c: 66:       return 0;
+"65
+[; ;DHT11.c: 65:       return 0;
 [e ) -> -> 0 `i `c ]
 [e $UE 161  ]
-"67
-[; ;DHT11.c: 67:    }
+"66
+[; ;DHT11.c: 66:    }
 }
 [e :U 163 ]
-"68
-[; ;DHT11.c: 68: }
+"67
+[; ;DHT11.c: 67: }
 [e :UE 161 ]
 }

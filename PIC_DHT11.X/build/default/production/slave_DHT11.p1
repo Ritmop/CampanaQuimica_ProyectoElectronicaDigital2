@@ -3,8 +3,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [t T1 __interrupt ]
 [p mainexit ]
 "47 slave_DHT11.c
-[; ;slave_DHT11.c: 47: void setup(void){
+[; ;slave_DHT11.c: 47: 
 [v _setup `(v ~T0 @X0 0 ef ]
+"24 ./DHT11.h
+[; ;./DHT11.h: 24: void DHT11_start(void);
+[v _DHT11_start `(v ~T0 @X0 0 ef ]
 [v F36 `(v ~T0 @X0 1 tf1`ul ]
 "12 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\builtins.h
 [v __delay `JF36 ~T0 @X0 0 e ]
@@ -12,8 +15,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "30 ./DHT11.h
 [; ;./DHT11.h: 30: int8_t DHT11_read_data(int16_t *hum, int16_t *temp);
 [v _DHT11_read_data `(c ~T0 @X0 0 ef2`*i`*i ]
+"51 ./LCD4b.h
+[; ;./LCD4b.h: 51: void Lcd_Clear(void);
+[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
 "48 slave_DHT11.c
-[; ;slave_DHT11.c: 48:     ANSEL = 0;
+[; ;slave_DHT11.c: 48: void setup(void){
 [v _LDC_output `(v ~T0 @X0 0 ef ]
 "53 ./LCD4b.h
 [; ;./LCD4b.h: 53: void Lcd_Set_Cursor(char a, char b);
@@ -21,24 +27,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "59
 [; ;./LCD4b.h: 59: void Lcd_Write_String(char *a);
 [v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
-"166 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
-[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
-"228
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-"3387
+"3387 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3449: extern volatile unsigned char ANSELH __attribute__((address(0x189)));
 [v _ANSELH `Vuc ~T0 @X0 0 e@393 ]
-"1416
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1416: extern volatile unsigned char TRISA __attribute__((address(0x085)));
-[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
-"1478
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1478: extern volatile unsigned char TRISB __attribute__((address(0x086)));
-[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
 "1602
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1602: extern volatile unsigned char TRISD __attribute__((address(0x088)));
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
@@ -67,7 +61,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./LCD4b.h: 55: void Lcd_Init(void);
 [v _Lcd_Init `(v ~T0 @X0 0 ef ]
 "49 slave_DHT11.c
-[; ;slave_DHT11.c: 49:     ANSELH= 0;
+[; ;slave_DHT11.c: 49:     ANSEL = 0;
 [v _separar_digitos8 `(v ~T0 @X0 0 ef2`uc`*uc ]
 "57 ./LCD4b.h
 [; ;./LCD4b.h: 57: void Lcd_Write_Char(char a);
@@ -322,7 +316,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;slave_DHT11.c: 26:     setup();
 [p x CP  =  OFF          ]
 "27
-[; ;slave_DHT11.c: 27:     _delay((unsigned long)((10)*(8000000/4000.0)));
+[; ;slave_DHT11.c: 27:     DHT11_start();
 [p x CPD  =  OFF         ]
 "28
 [; ;slave_DHT11.c: 28:     while(1){
@@ -331,70 +325,42 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;slave_DHT11.c: 29: 
 [p x IESO  =  OFF        ]
 "30
-[; ;slave_DHT11.c: 30: 
+[; ;slave_DHT11.c: 30:         _delay((unsigned long)((2000)*(8000000/4000.0)));
 [p x FCMEN  =  OFF       ]
 "31
-[; ;slave_DHT11.c: 31:        data_ok = DHT11_read_data(&humedad, &temperatura);
+[; ;slave_DHT11.c: 31: 
 [p x LVP  =  OFF          ]
 "34
-[; ;slave_DHT11.c: 34:             LDC_output();
+[; ;slave_DHT11.c: 34: 
 [p x BOR4V  =  BOR40V    ]
 "35
-[; ;slave_DHT11.c: 35:         }
+[; ;slave_DHT11.c: 35:         if(data_ok){
 [p x WRT  =  OFF         ]
 "40
-[; ;slave_DHT11.c: 40:         PORTA = (temperatura & 0xFF00)>>8;
+[; ;slave_DHT11.c: 40:         else {
 [v _data_ok `c ~T0 @X0 1 e ]
 [i _data_ok
--> -> 0 `i `c
+-> -> 1 `i `c
 ]
 "41
-[; ;slave_DHT11.c: 41:         PORTB = (temperatura & 0x00FF);
+[; ;slave_DHT11.c: 41:             Lcd_Set_Cursor(2,1);
 [v _humedad `i ~T0 @X0 1 e ]
 [v _temperatura `i ~T0 @X0 1 e ]
 "42
-[; ;slave_DHT11.c: 42:         _delay((unsigned long)((500)*(8000000/4000.0)));
+[; ;slave_DHT11.c: 42:             Lcd_Clear();
 [v _u_temp `uc ~T0 @X0 -> 3 `i e ]
-[i _u_temp
-:U ..
--> -> 48 `ui `uc
--> -> 48 `ui `uc
--> -> 0 `ui `uc
-..
-]
 "43
-[; ;slave_DHT11.c: 43: 
+[; ;slave_DHT11.c: 43:             Lcd_Write_String("READ ERROR");
 [v _d_temp `uc ~T0 @X0 -> 3 `i e ]
-[i _d_temp
-:U ..
--> -> 48 `ui `uc
--> -> 48 `ui `uc
--> -> 0 `ui `uc
-..
-]
 "44
-[; ;slave_DHT11.c: 44:     }
+[; ;slave_DHT11.c: 44:         }
 [v _u_hum `uc ~T0 @X0 -> 3 `i e ]
-[i _u_hum
-:U ..
--> -> 48 `ui `uc
--> -> 48 `ui `uc
--> -> 0 `ui `uc
-..
-]
 "45
-[; ;slave_DHT11.c: 45: }
+[; ;slave_DHT11.c: 45:     }
 [v _d_hum `uc ~T0 @X0 -> 3 `i e ]
-[i _d_hum
-:U ..
--> -> 48 `ui `uc
--> -> 48 `ui `uc
--> -> 0 `ui `uc
-..
-]
 [v $root$_isr `(v ~T0 @X0 0 e ]
 "53
-[; ;slave_DHT11.c: 53:     TRISB = 0;
+[; ;slave_DHT11.c: 53:     PORTD = 0;
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
@@ -405,7 +371,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
 "62
-[; ;slave_DHT11.c: 62: 
+[; ;slave_DHT11.c: 62: }
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
@@ -414,168 +380,151 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;slave_DHT11.c: 63: 
 [e ( _setup ..  ]
 "64
-[; ;slave_DHT11.c: 64:     Lcd_Init();
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;slave_DHT11.c: 64: void LDC_output(void){
+[e ( _DHT11_start ..  ]
 "65
-[; ;slave_DHT11.c: 65:     _delay((unsigned long)((10)*(8000000/4000.0)));
+[; ;slave_DHT11.c: 65: 
 [e :U 141 ]
 {
-"68
-[; ;slave_DHT11.c: 68: void LDC_output(void){
+"67
+[; ;slave_DHT11.c: 67:     separar_digitos8((temperatura & 0x00FF),d_temp);
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"69
+[; ;slave_DHT11.c: 69:     separar_digitos8((humedad & 0x00FF),d_hum);
 [e = _data_ok ( _DHT11_read_data (2 , &U _humedad &U _temperatura ]
-"70
-[; ;slave_DHT11.c: 70:     separar_digitos8((temperatura & 0xFF00)>>8,u_temp);
+"72
+[; ;slave_DHT11.c: 72:     Lcd_Write_String("T: ");
 [e $ ! != -> _data_ok `i -> 0 `i 143  ]
 {
-"71
-[; ;slave_DHT11.c: 71:     separar_digitos8((temperatura & 0x00FF),d_temp);
+"73
+[; ;slave_DHT11.c: 73:     Lcd_Write_String(u_temp);
+[e ( _Lcd_Clear ..  ]
+"74
+[; ;slave_DHT11.c: 74:     Lcd_Write_Char('.');
 [e ( _LDC_output ..  ]
-"72
-[; ;slave_DHT11.c: 72:     separar_digitos8((humedad & 0xFF00)>>8,u_hum);
+"75
+[; ;slave_DHT11.c: 75:     Lcd_Write_String(d_temp);
 }
 [e $U 144  ]
-"73
-[; ;slave_DHT11.c: 73:     separar_digitos8((humedad & 0x00FF),d_hum);
+"77
+[; ;slave_DHT11.c: 77: 
 [e :U 143 ]
 {
-"74
-[; ;slave_DHT11.c: 74: 
+"78
+[; ;slave_DHT11.c: 78:     Lcd_Set_Cursor(2,1);
 [e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"75
-[; ;slave_DHT11.c: 75:     Lcd_Set_Cursor(1,1);
+"79
+[; ;slave_DHT11.c: 79:     Lcd_Write_String("H:  ");
+[e ( _Lcd_Clear ..  ]
+"80
+[; ;slave_DHT11.c: 80:     Lcd_Write_String(u_hum);
 [e ( _Lcd_Write_String (1 :s 1C ]
-"76
-[; ;slave_DHT11.c: 76:     Lcd_Write_String("T: ");
+"81
+[; ;slave_DHT11.c: 81:     Lcd_Write_String(" %RH");
 }
 [e :U 144 ]
-"77
-[; ;slave_DHT11.c: 77:     Lcd_Write_String(u_temp);
-[e = _PORTA -> >> & -> _temperatura `ui -> 65280 `ui -> 8 `i `uc ]
-"78
-[; ;slave_DHT11.c: 78:     Lcd_Write_Char('.');
-[e = _PORTB -> & _temperatura -> 255 `i `uc ]
-"79
-[; ;slave_DHT11.c: 79:     Lcd_Write_String(d_temp);
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"81
-[; ;slave_DHT11.c: 81: 
+"82
+[; ;slave_DHT11.c: 82: 
 }
 [e :U 140 ]
 [e $U 141  ]
 [e :U 142 ]
-"82
-[; ;slave_DHT11.c: 82:     Lcd_Set_Cursor(2,1);
+"83
+[; ;slave_DHT11.c: 83: }
 [e :UE 139 ]
 }
-"84
-[; ;slave_DHT11.c: 84:     Lcd_Write_String(u_hum);
+"85
+[; ;slave_DHT11.c: 85: void separar_digitos8(uint8_t num, char dig8[]){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"85
-[; ;slave_DHT11.c: 85:     Lcd_Write_Char('.');
-[e = _ANSEL -> -> 0 `i `uc ]
 "86
-[; ;slave_DHT11.c: 86:     Lcd_Write_String(d_hum);
+[; ;slave_DHT11.c: 86:     uint8_t div1,decenas,unidades;
+[e = _ANSEL -> -> 0 `i `uc ]
+"87
+[; ;slave_DHT11.c: 87:     div1 = num / 10;
 [e = _ANSELH -> -> 0 `i `uc ]
-"88
-[; ;slave_DHT11.c: 88: 
-[e = _TRISA -> -> 0 `i `uc ]
 "89
-[; ;slave_DHT11.c: 89: }
-[e = _PORTA -> -> 0 `i `uc ]
+[; ;slave_DHT11.c: 89:     decenas = div1 % 10;
+[e = _TRISD -> -> 0 `i `uc ]
 "90
 [; ;slave_DHT11.c: 90: 
-[e = _TRISB -> -> 0 `i `uc ]
-"91
-[; ;slave_DHT11.c: 91: void separar_digitos8(uint8_t num, char dig8[]){
-[e = _PORTB -> -> 0 `i `uc ]
-"93
-[; ;slave_DHT11.c: 93:     div1 = num / 10;
-[e = _TRISD -> -> 0 `i `uc ]
-"94
-[; ;slave_DHT11.c: 94:     unidades = num % 10;
 [e = _PORTD -> -> 0 `i `uc ]
-"97
-[; ;slave_DHT11.c: 97:     dig8[1] = unidades + 0x30;
+"93
+[; ;slave_DHT11.c: 93: }
 [e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"98
-[; ;slave_DHT11.c: 98:     dig8[0] = decenas + 0x30;
+"94
 [e = _SCS -> -> 1 `i `b ]
-"101
+"97
 [e ( _Lcd_Init ..  ]
-"102
+"98
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"103
+"99
 [e :UE 145 ]
 }
-"105
+"101
 [v _LDC_output `(v ~T0 @X0 1 ef ]
 {
 [e :U _LDC_output ]
 [f ]
-"107
+"103
 [e ( _separar_digitos8 (2 , -> >> & -> _temperatura `ui -> 65280 `ui -> 8 `i `uc &U _u_temp ]
-"108
+"104
 [e ( _separar_digitos8 (2 , -> & _temperatura -> 255 `i `uc &U _d_temp ]
-"109
+"105
 [e ( _separar_digitos8 (2 , -> >> & -> _humedad `ui -> 65280 `ui -> 8 `i `uc &U _u_hum ]
-"110
+"106
 [e ( _separar_digitos8 (2 , -> & _humedad -> 255 `i `uc &U _d_hum ]
-"112
+"108
 [e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"113
+"109
 [e ( _Lcd_Write_String (1 :s 2C ]
-"114
+"110
 [e ( _Lcd_Write_String (1 &U _u_temp ]
-"115
+"111
 [e ( _Lcd_Write_Char (1 -> -> 46 `ui `uc ]
-"116
+"112
 [e ( _Lcd_Write_String (1 &U _d_temp ]
-"117
+"113
 [e ( _Lcd_Write_String (1 :s 3C ]
-"119
+"115
 [e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"120
+"116
 [e ( _Lcd_Write_String (1 :s 4C ]
-"121
+"117
 [e ( _Lcd_Write_String (1 &U _u_hum ]
-"122
-[e ( _Lcd_Write_Char (1 -> -> 46 `ui `uc ]
-"123
-[e ( _Lcd_Write_String (1 &U _d_hum ]
-"124
+"118
 [e ( _Lcd_Write_String (1 :s 5C ]
-"126
+"120
 [e :UE 146 ]
 }
-"128
+"122
 [v _separar_digitos8 `(v ~T0 @X0 1 ef2`uc`*uc ]
 {
 [e :U _separar_digitos8 ]
 [v _num `uc ~T0 @X0 1 r1 ]
 [v _dig8 `*uc ~T0 @X0 1 r2 ]
 [f ]
-"129
+"123
 [v _div1 `uc ~T0 @X0 1 a ]
 [v _decenas `uc ~T0 @X0 1 a ]
 [v _unidades `uc ~T0 @X0 1 a ]
-"130
+"124
 [e = _div1 -> / -> _num `i -> 10 `i `uc ]
-"131
+"125
 [e = _unidades -> % -> _num `i -> 10 `i `uc ]
-"132
+"126
 [e = _decenas -> % -> _div1 `i -> 10 `i `uc ]
-"134
+"128
 [e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + -> _unidades `i -> 48 `i `uc ]
-"135
+"129
 [e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + -> _decenas `i -> 48 `i `uc ]
-"136
+"130
 [e :UE 147 ]
 }
-[a 1C 69 82 82 79 82 32 100 117 114 97 110 116 101 32 108 101 99 116 117 114 97 0 ]
-[a 5C 37 82 72 0 ]
+[a 1C 82 69 65 68 32 69 82 82 79 82 0 ]
+[a 5C 32 37 82 72 0 ]
 [a 3C 39 67 0 ]
 [a 2C 84 58 32 0 ]
-[a 4C 72 58 32 0 ]
+[a 4C 72 58 32 32 0 ]

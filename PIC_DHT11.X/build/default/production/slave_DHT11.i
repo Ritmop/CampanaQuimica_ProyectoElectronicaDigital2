@@ -2681,12 +2681,12 @@ void Lcd_Shift_Left(void);
 
 
 
-int8_t data_ok = 0;
+int8_t data_ok = 1;
 int16_t humedad, temperatura;
-char u_temp[] = {'0','0','\0'};
-char d_temp[] = {'0','0','\0'};
-char u_hum[] = {'0','0','\0'};
-char d_hum[] = {'0','0','\0'};
+char u_temp[3];
+char d_temp[3];
+char u_hum[3];
+char d_hum[3];
 
 void setup(void);
 void LDC_output(void);
@@ -2705,34 +2705,30 @@ void __attribute__((picinterrupt(("")))) isr(void){
 
 int main(void) {
     setup();
-    _delay((unsigned long)((10)*(8000000/4000.0)));
+    DHT11_start();
     while(1){
 
+        _delay((unsigned long)((2000)*(8000000/4000.0)));
 
-       data_ok = DHT11_read_data(&humedad, &temperatura);
+        data_ok = DHT11_read_data(&humedad, &temperatura);
+
 
         if(data_ok){
+            Lcd_Clear();
             LDC_output();
         }
+
         else {
             Lcd_Set_Cursor(2,1);
-            Lcd_Write_String("ERROR durante lectura");
+            Lcd_Clear();
+            Lcd_Write_String("READ ERROR");
         }
-        PORTA = (temperatura & 0xFF00)>>8;
-        PORTB = (temperatura & 0x00FF);
-        _delay((unsigned long)((500)*(8000000/4000.0)));
-
     }
 }
 
 void setup(void){
     ANSEL = 0;
     ANSELH= 0;
-
-    TRISA = 0;
-    PORTA = 0;
-    TRISB = 0;
-    PORTB = 0;
 
     TRISD = 0;
     PORTD = 0;
@@ -2761,11 +2757,9 @@ void LDC_output(void){
     Lcd_Write_String("'C");
 
     Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("H: ");
+    Lcd_Write_String("H:  ");
     Lcd_Write_String(u_hum);
-    Lcd_Write_Char('.');
-    Lcd_Write_String(d_hum);
-    Lcd_Write_String("%RH");
+    Lcd_Write_String(" %RH");
 
 }
 

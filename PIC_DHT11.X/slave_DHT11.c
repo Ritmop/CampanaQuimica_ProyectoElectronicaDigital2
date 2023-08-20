@@ -37,12 +37,12 @@
 /*----------------------- GLOBAL VARIABLES & CONSTANTS -----------------------*/
 #define _XTAL_FREQ 8000000
 
-int8_t data_ok = 0;
+int8_t data_ok = 1;
 int16_t humedad, temperatura;
-char u_temp[] = {'0','0','\0'};
-char d_temp[] = {'0','0','\0'};
-char u_hum[] = {'0','0','\0'};
-char d_hum[] = {'0','0','\0'};
+char u_temp[3];
+char d_temp[3];
+char u_hum[3];
+char d_hum[3];
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
 void LDC_output(void);
@@ -61,34 +61,30 @@ void __interrupt() isr(void){
 /*----------------------------------- MAIN -----------------------------------*/
 int main(void) {
     setup();
-    __delay_ms(10);
+    DHT11_start();  //Prepare DHT11
     while(1){
         //Loop
+        __delay_ms(2000);
+        //Request data to sensor
+        data_ok = DHT11_read_data(&humedad, &temperatura);
         
-       data_ok = DHT11_read_data(&humedad, &temperatura);        
-        
+        //Data request successful 
         if(data_ok){
+            Lcd_Clear();
             LDC_output();
         }
+       //Data request not successful
         else {
             Lcd_Set_Cursor(2,1);
-            Lcd_Write_String("ERROR durante lectura");
-        }
-        PORTA = (temperatura & 0xFF00)>>8;
-        PORTB = (temperatura & 0x00FF);
-        __delay_ms(500);
-      
+            Lcd_Clear();
+            Lcd_Write_String("READ ERROR");
+        }           
     }
 }
 /*-------------------------------- SUBROUTINES -------------------------------*/
 void setup(void){
     ANSEL = 0;
     ANSELH= 0;
-    
-    TRISA = 0;  //Pruebas
-    PORTA = 0;
-    TRISB = 0;  //Pruebas
-    PORTB = 0;
     
     TRISD = 0;  //LCD output
     PORTD = 0;
@@ -117,11 +113,9 @@ void LDC_output(void){
     Lcd_Write_String("'C");
     
     Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("H: ");
+    Lcd_Write_String("H:  ");
     Lcd_Write_String(u_hum);
-    Lcd_Write_Char('.');
-    Lcd_Write_String(d_hum);
-    Lcd_Write_String("%RH");
+    Lcd_Write_String(" %RH");
     
 }
 
