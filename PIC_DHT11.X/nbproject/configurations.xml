@@ -17,6 +17,8 @@
       <itemPath>LCD4b.h</itemPath>
       <itemPath>DHT11.c</itemPath>
       <itemPath>DHT11.h</itemPath>
+      <itemPath>../PIC_MASTER.X/I2C.c</itemPath>
+      <itemPath>../PIC_MASTER.X/I2C.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -27,6 +29,7 @@
   <sourceRootList>
     <Elem>../../../LibreriasPIC</Elem>
     <Elem>.</Elem>
+    <Elem>../PIC_MASTER.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

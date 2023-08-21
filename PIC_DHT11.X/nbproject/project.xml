@@ -11,6 +11,7 @@
             <sourceRootList>
                 <sourceRootElem>../../../LibreriasPIC</sourceRootElem>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../PIC_MASTER.X</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

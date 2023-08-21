@@ -1,9 +1,37 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
+"4281 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4281: extern volatile __bit SSPIF __attribute__((address(0x63)));
+[v _SSPIF `Vb ~T0 @X0 0 e@99 ]
+"3837
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3837: extern volatile __bit CKP __attribute__((address(0xA4)));
+[v _CKP `Vb ~T0 @X0 0 e@164 ]
+"4296
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4296: extern volatile __bit SSPOV __attribute__((address(0xA6)));
+[v _SSPOV `Vb ~T0 @X0 0 e@166 ]
+"4593
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4593: extern volatile __bit WCOL __attribute__((address(0xA7)));
+[v _WCOL `Vb ~T0 @X0 0 e@167 ]
+"843
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 843: extern volatile unsigned char SSPBUF __attribute__((address(0x013)));
+[v _SSPBUF `Vuc ~T0 @X0 0 e@19 ]
+"3867
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3867: extern volatile __bit D_nA __attribute__((address(0x4A5)));
+[v _D_nA `Vb ~T0 @X0 0 e@1189 ]
+"4242
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4242: extern volatile __bit R_nW __attribute__((address(0x4A2)));
+[v _R_nW `Vb ~T0 @X0 0 e@1186 ]
+"3645
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3645: extern volatile __bit BF __attribute__((address(0x4A0)));
+[v _BF `Vb ~T0 @X0 0 e@1184 ]
+[v F36 `(v ~T0 @X0 1 tf1`ul ]
+"12 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\builtins.h
+[v __delay `JF36 ~T0 @X0 0 e ]
+[p i __delay ]
 [p mainexit ]
-"43 slave_MQ2_IR.c
-[; ;slave_MQ2_IR.c: 43:     PORTB = 0;
+"49 slave_MQ2_IR.c
+[; ;slave_MQ2_IR.c: 49:         SSPIF = 0;
 [v _setup `(v ~T0 @X0 0 ef ]
 "13 ./ADC_lib.h
 [; ;./ADC_lib.h: 13: uint16_t adc_read(void);
@@ -11,17 +39,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4086 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4086: extern volatile __bit RA1 __attribute__((address(0x29)));
 [v _RA1 `Vb ~T0 @X0 0 e@41 ]
-"44 slave_MQ2_IR.c
-[; ;slave_MQ2_IR.c: 44: 
-[v _LDC_output `(v ~T0 @X0 0 ef ]
-"228 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+"228
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
 [v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-[v F36 `(v ~T0 @X0 1 tf1`ul ]
-"12 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\builtins.h
-[v __delay `JF36 ~T0 @X0 0 e ]
-[p i __delay ]
-"3387 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+"3387
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
@@ -60,18 +81,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 ./ADC_lib.h
 [; ;./ADC_lib.h: 12: void adc_init(uint8_t J, uint8_t R, uint8_t clock, uint8_t channel);
 [v _adc_init `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
-"55 ./LCD4b.h
-[; ;./LCD4b.h: 55: void Lcd_Init(void);
-[v _Lcd_Init `(v ~T0 @X0 0 ef ]
-"45 slave_MQ2_IR.c
-[; ;slave_MQ2_IR.c: 45:     TRISD = 0;
-[v _separar_digitos8 `(v ~T0 @X0 0 ef2`uc`*uc ]
-"53 ./LCD4b.h
-[; ;./LCD4b.h: 53: void Lcd_Set_Cursor(char a, char b);
-[v _Lcd_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"59
-[; ;./LCD4b.h: 59: void Lcd_Write_String(char *a);
-[v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
+"64 ./I2C.h
+[; ;./I2C.h: 64: void I2C_Slave_Init(uint8_t address);
+[v _I2C_Slave_Init `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -307,209 +319,259 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "22 slave_MQ2_IR.c
-[; ;slave_MQ2_IR.c: 22:     setup();
+[; ;slave_MQ2_IR.c: 22: 
 [p x FOSC  =  INTRC_NOCLKOUT ]
 "23
-[; ;slave_MQ2_IR.c: 23:     while(1){
+[; ;slave_MQ2_IR.c: 23:         if (SSPOV || WCOL ){
 [p x WDTE  =  OFF        ]
 "24
-[; ;slave_MQ2_IR.c: 24: 
+[; ;slave_MQ2_IR.c: 24:             discard = SSPBUF;
 [p x PWRTE  =  OFF       ]
 "25
-[; ;slave_MQ2_IR.c: 25: 
+[; ;slave_MQ2_IR.c: 25:             SSPOV = 0;
 [p x MCLRE  =  OFF       ]
 "26
-[; ;slave_MQ2_IR.c: 26:         MQ2_val = (adc_read()>>8) & 0x00FF;
+[; ;slave_MQ2_IR.c: 26:             WCOL = 0;
 [p x CP  =  OFF          ]
 "27
-[; ;slave_MQ2_IR.c: 27:         IR_sens = RA1;
+[; ;slave_MQ2_IR.c: 27:             CKP = 1;
 [p x CPD  =  OFF         ]
 "28
-[; ;slave_MQ2_IR.c: 28: 
+[; ;slave_MQ2_IR.c: 28:         }
 [p x BOREN  =  OFF       ]
 "29
 [; ;slave_MQ2_IR.c: 29: 
 [p x IESO  =  OFF        ]
 "30
-[; ;slave_MQ2_IR.c: 30:         LDC_output();
+[; ;slave_MQ2_IR.c: 30:         if(!D_nA && !R_nW) {
 [p x FCMEN  =  OFF       ]
 "31
 [; ;slave_MQ2_IR.c: 31: 
 [p x LVP  =  OFF          ]
 "34
-[; ;slave_MQ2_IR.c: 34:     }
+[; ;slave_MQ2_IR.c: 34:             SSPIF = 0;
 [p x BOR4V  =  BOR40V    ]
 "35
-[; ;slave_MQ2_IR.c: 35: }
+[; ;slave_MQ2_IR.c: 35:             CKP = 1;
 [p x WRT  =  OFF         ]
-"39
-[; ;slave_MQ2_IR.c: 39:     ANSELH= 0;
-[v _MQ2_val `uc ~T0 @X0 1 e ]
-"40
-[; ;slave_MQ2_IR.c: 40:     TRISA = 3;
-[v _IR_sens `uc ~T0 @X0 1 e ]
 "41
-[; ;slave_MQ2_IR.c: 41: 
-[v _MQ2_s `uc ~T0 @X0 -> 4 `i e ]
-[i _MQ2_s
-:U ..
--> -> 48 `ui `uc
--> -> 48 `ui `uc
--> -> 48 `ui `uc
--> -> 0 `ui `uc
-..
-]
+[; ;slave_MQ2_IR.c: 41:             discard = SSPBUF;
+[v _discard `uc ~T0 @X0 1 e ]
+"42
+[; ;slave_MQ2_IR.c: 42:             BF = 0;
+[v _send_data `uc ~T0 @X0 1 e ]
+"43
+[; ;slave_MQ2_IR.c: 43:             SSPBUF = send_data;
+[v _request `uc ~T0 @X0 1 e ]
+"45
+[; ;slave_MQ2_IR.c: 45:             _delay((unsigned long)((250)*(8000000/4000000.0)));
+[v _MQ2_val `uc ~T0 @X0 1 e ]
+"46
+[; ;slave_MQ2_IR.c: 46:             while(BF);
+[v _IR_sens `uc ~T0 @X0 1 e ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"49
-[; ;slave_MQ2_IR.c: 49:     OSCCONbits.IRCF = 0b111;
+"55
+[; ;slave_MQ2_IR.c: 55: 
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"51
-[; ;slave_MQ2_IR.c: 51: 
+"56
+[; ;slave_MQ2_IR.c: 56: 
+[e $ ! _SSPIF 139  ]
+{
+"58
+[; ;slave_MQ2_IR.c: 58: int main(void) {
+[e = _CKP -> -> 0 `i `b ]
+"60
+[; ;slave_MQ2_IR.c: 60:     while(1){
+[e $ ! || _SSPOV _WCOL 140  ]
+{
+"61
+[; ;slave_MQ2_IR.c: 61: 
+[e = _discard _SSPBUF ]
+"62
+[; ;slave_MQ2_IR.c: 62: 
+[e = _SSPOV -> -> 0 `i `b ]
+"63
+[; ;slave_MQ2_IR.c: 63:         MQ2_val = (adc_read()>>8) & 0x00FF;
+[e = _WCOL -> -> 0 `i `b ]
+"64
+[; ;slave_MQ2_IR.c: 64:         IR_sens = RA1;
+[e = _CKP -> -> 1 `i `b ]
+"65
+[; ;slave_MQ2_IR.c: 65: 
+}
+[e :U 140 ]
+"67
+[; ;slave_MQ2_IR.c: 67:             case 'G':
+[e $ ! && ! _D_nA ! _R_nW 141  ]
+{
+"69
+[; ;slave_MQ2_IR.c: 69:                 break;
+[e = _discard _SSPBUF ]
+"71
+[; ;slave_MQ2_IR.c: 71:                 send_data = IR_sens;
+[e = _SSPIF -> -> 0 `i `b ]
+"72
+[; ;slave_MQ2_IR.c: 72:                 break;
+[e = _CKP -> -> 1 `i `b ]
+"73
+[; ;slave_MQ2_IR.c: 73:             default:
+[e $U 142  ]
+[e :U 143 ]
+[e :U 142 ]
+[e $ ! _BF 143  ]
+[e :U 144 ]
+"74
+[; ;slave_MQ2_IR.c: 74:                 send_data = 'X';
+[e = _request _SSPBUF ]
+"75
+[; ;slave_MQ2_IR.c: 75:                 break;
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"76
+[; ;slave_MQ2_IR.c: 76:         }
+}
+[e $U 145  ]
+"77
+[; ;slave_MQ2_IR.c: 77: 
+[e :U 141 ]
+[e $ ! && ! _D_nA _R_nW 146  ]
+{
+"78
+[; ;slave_MQ2_IR.c: 78: 
+[e = _discard _SSPBUF ]
+"79
+[; ;slave_MQ2_IR.c: 79: 
+[e = _BF -> -> 0 `i `b ]
+"80
+[; ;slave_MQ2_IR.c: 80: 
+[e = _SSPBUF _send_data ]
+"81
+[; ;slave_MQ2_IR.c: 81:         PORTB = MQ2_val;
+[e = _CKP -> -> 1 `i `b ]
+"82
+[; ;slave_MQ2_IR.c: 82:         _delay((unsigned long)((50)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"83
+[; ;slave_MQ2_IR.c: 83:     }
+[e $U 147  ]
+[e :U 148 ]
+[e :U 147 ]
+[e $ _BF 148  ]
+[e :U 149 ]
+"84
+[; ;slave_MQ2_IR.c: 84: }
+}
+[e :U 146 ]
+[e :U 145 ]
+"86
+[; ;slave_MQ2_IR.c: 86: void setup(void){
+[e = _SSPIF -> -> 0 `i `b ]
+"87
+[; ;slave_MQ2_IR.c: 87:     ANSEL = 1;
+}
+[e :U 139 ]
+"88
+[; ;slave_MQ2_IR.c: 88:     ANSELH= 0;
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"58
-[; ;slave_MQ2_IR.c: 58: }
+"95
+[; ;slave_MQ2_IR.c: 95:     PORTD = 0;
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"59
-[; ;slave_MQ2_IR.c: 59: 
+"96
+[; ;slave_MQ2_IR.c: 96: 
 [e ( _setup ..  ]
-"60
-[; ;slave_MQ2_IR.c: 60: void LDC_output(void){
-[e :U 141 ]
+"97
+[; ;slave_MQ2_IR.c: 97: 
+[e :U 152 ]
 {
-"63
-[; ;slave_MQ2_IR.c: 63:     Lcd_Set_Cursor(1,1);
+"100
+[; ;slave_MQ2_IR.c: 100: 
 [e = _MQ2_val -> & >> ( _adc_read ..  -> 8 `i -> -> 255 `i `ui `uc ]
-"64
-[; ;slave_MQ2_IR.c: 64:     Lcd_Write_String("G: ");
+"101
+[; ;slave_MQ2_IR.c: 101: 
 [e = _IR_sens -> _RA1 `uc ]
-"67
-[; ;slave_MQ2_IR.c: 67:     if(IR_sens)
-[e ( _LDC_output ..  ]
-"69
-[; ;slave_MQ2_IR.c: 69:     else
+"103
+[; ;slave_MQ2_IR.c: 103: 
+[e $U 155  ]
+{
+"104
+[; ;slave_MQ2_IR.c: 104: 
+[e :U 156 ]
+"105
+[; ;slave_MQ2_IR.c: 105:     I2C_Slave_Init(0x20);
+[e = _send_data _MQ2_val ]
+"106
+[; ;slave_MQ2_IR.c: 106: 
+[e $U 154  ]
+"107
+[; ;slave_MQ2_IR.c: 107: 
+[e :U 157 ]
+"108
+[; ;slave_MQ2_IR.c: 108: 
+[e = _send_data _IR_sens ]
+"109
+[; ;slave_MQ2_IR.c: 109: 
+[e $U 154  ]
+"110
+[; ;slave_MQ2_IR.c: 110: }
+[e :U 158 ]
+"111
+[e = _send_data -> -> 88 `ui `uc ]
+"112
+[e $U 154  ]
+"113
+}
+[e $U 154  ]
+[e :U 155 ]
+[e [\ -> _request `i , $ -> -> 71 `ui `i 156
+ , $ -> -> 73 `ui `i 157
+ 158 ]
+[e :U 154 ]
+"118
 [e = _PORTB _MQ2_val ]
-"70
-[; ;slave_MQ2_IR.c: 70:         Lcd_Write_String("PUERTA CERRADA");
+"119
 [e ( __delay (1 -> * -> -> 50 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"71
-[; ;slave_MQ2_IR.c: 71: 
+"120
 }
-[e :U 140 ]
-[e $U 141  ]
-[e :U 142 ]
-"72
-[; ;slave_MQ2_IR.c: 72: }
-[e :UE 139 ]
+[e :U 151 ]
+[e $U 152  ]
+[e :U 153 ]
+"121
+[e :UE 150 ]
 }
-"74
-[; ;slave_MQ2_IR.c: 74: void separar_digitos8(uint8_t num, char dig8[]){
+"123
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"75
-[; ;slave_MQ2_IR.c: 75:     uint8_t div1,div2,div3,centenas,decenas,unidades;
+"124
 [e = _ANSEL -> -> 1 `i `uc ]
-"76
-[; ;slave_MQ2_IR.c: 76:     div1 = num / 10;
+"125
 [e = _ANSELH -> -> 0 `i `uc ]
-"77
-[; ;slave_MQ2_IR.c: 77:     unidades = num % 10;
+"126
 [e = _TRISA -> -> 3 `i `uc ]
-"79
-[; ;slave_MQ2_IR.c: 79:     decenas = div1 % 10;
+"128
 [e = _TRISB -> -> 0 `i `uc ]
-"80
-[; ;slave_MQ2_IR.c: 80:     centenas = div2 % 10;
+"129
 [e = _PORTB -> -> 0 `i `uc ]
-"82
-[; ;slave_MQ2_IR.c: 82:     dig8[2] = unidades + '0';
+"131
 [e = _TRISD -> -> 0 `i `uc ]
-"83
-[; ;slave_MQ2_IR.c: 83:     dig8[1] = decenas + '0';
+"132
 [e = _PORTD -> -> 0 `i `uc ]
-"86
+"135
 [e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"87
+"136
 [e = _SCS -> -> 1 `i `b ]
-"90
+"139
 [e ( _adc_init (4 , , , -> -> 0 `i `uc -> -> 0 `i `uc -> -> 8 `i `uc -> -> 0 `i `uc ]
-"93
-[e ( _Lcd_Init ..  ]
-"94
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"95
-[e :UE 143 ]
+"142
+[e ( _I2C_Slave_Init (1 -> -> 32 `i `uc ]
+"147
+[e :UE 159 ]
 }
-"97
-[v _LDC_output `(v ~T0 @X0 1 ef ]
-{
-[e :U _LDC_output ]
-[f ]
-"98
-[e ( _separar_digitos8 (2 , _MQ2_val &U _MQ2_s ]
-"100
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"101
-[e ( _Lcd_Write_String (1 :s 1C ]
-"102
-[e ( _Lcd_Write_String (1 &U _MQ2_s ]
-"103
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"104
-[e $ ! != -> _IR_sens `i -> 0 `i 145  ]
-"105
-[e ( _Lcd_Write_String (1 :s 2C ]
-[e $U 146  ]
-"106
-[e :U 145 ]
-"107
-[e ( _Lcd_Write_String (1 :s 3C ]
-[e :U 146 ]
-"109
-[e :UE 144 ]
-}
-"111
-[v _separar_digitos8 `(v ~T0 @X0 1 ef2`uc`*uc ]
-{
-[e :U _separar_digitos8 ]
-[v _num `uc ~T0 @X0 1 r1 ]
-[v _dig8 `*uc ~T0 @X0 1 r2 ]
-[f ]
-"112
-[v _div1 `uc ~T0 @X0 1 a ]
-[v _div2 `uc ~T0 @X0 1 a ]
-[v _div3 `uc ~T0 @X0 1 a ]
-[v _centenas `uc ~T0 @X0 1 a ]
-[v _decenas `uc ~T0 @X0 1 a ]
-[v _unidades `uc ~T0 @X0 1 a ]
-"113
-[e = _div1 -> / -> _num `i -> 10 `i `uc ]
-"114
-[e = _unidades -> % -> _num `i -> 10 `i `uc ]
-"115
-[e = _div2 -> / -> _div1 `i -> 10 `i `uc ]
-"116
-[e = _decenas -> % -> _div1 `i -> 10 `i `uc ]
-"117
-[e = _centenas -> % -> _div2 `i -> 10 `i `uc ]
-"119
-[e = *U + _dig8 * -> -> 2 `i `x -> -> # *U _dig8 `i `x -> + -> _unidades `ui -> 48 `ui `uc ]
-"120
-[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + -> _decenas `ui -> 48 `ui `uc ]
-"121
-[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + -> _centenas `ui -> 48 `ui `uc ]
-"122
-[e :UE 147 ]
-}
-[a 2C 80 85 69 82 84 65 32 65 66 73 69 82 84 65 0 ]
-[a 3C 80 85 69 82 84 65 32 67 69 82 82 65 68 65 0 ]
-[a 1C 71 58 32 0 ]

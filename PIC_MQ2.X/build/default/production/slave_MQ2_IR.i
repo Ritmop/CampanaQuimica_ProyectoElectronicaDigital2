@@ -2627,6 +2627,48 @@ extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
 # 15 "slave_MQ2_IR.c" 2
 
+# 1 "./I2C.h" 1
+# 20 "./I2C.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c90\\stdint.h" 1 3
+# 20 "./I2C.h" 2
+# 29 "./I2C.h"
+void I2C_Master_Init(const unsigned long c);
+
+
+
+
+
+
+
+void I2C_Master_Wait(void);
+
+
+
+void I2C_Master_Start(void);
+
+
+
+void I2C_Master_RepeatedStart(void);
+
+
+
+void I2C_Master_Stop(void);
+
+
+
+
+
+void I2C_Master_Write(unsigned d);
+
+
+
+
+unsigned short I2C_Master_Read(unsigned short a);
+
+
+
+void I2C_Slave_Init(uint8_t address);
+# 16 "slave_MQ2_IR.c" 2
 
 # 1 "./ADC_lib.h" 1
 # 12 "./ADC_lib.h"
@@ -2636,26 +2678,6 @@ void adc_sel_channel(uint8_t channel);
 uint8_t adc_get_channel(void);
 # 17 "slave_MQ2_IR.c" 2
 
-# 1 "./LCD4b.h" 1
-# 47 "./LCD4b.h"
-void Lcd_Port(char a);
-
-void Lcd_Cmd(char a);
-
-void Lcd_Clear(void);
-
-void Lcd_Set_Cursor(char a, char b);
-
-void Lcd_Init(void);
-
-void Lcd_Write_Char(char a);
-
-void Lcd_Write_String(char *a);
-
-void Lcd_Shift_Right(void);
-
-void Lcd_Shift_Left(void);
-# 18 "slave_MQ2_IR.c" 2
 
 
 
@@ -2677,18 +2699,55 @@ void Lcd_Shift_Left(void);
 
 
 
+
+
+uint8_t discard;
+uint8_t send_data;
+uint8_t request;
+
 uint8_t MQ2_val;
 uint8_t IR_sens;
-char MQ2_s[] = {'0','0','0','\0'};
+
 
 void setup(void);
-void LDC_output(void);
-void separar_digitos8(uint8_t num, char dig8[]);
+
+
 
 
 
 void __attribute__((picinterrupt(("")))) isr(void){
+    if(SSPIF){
 
+        CKP = 0;
+
+        if (SSPOV || WCOL ){
+            discard = SSPBUF;
+            SSPOV = 0;
+            WCOL = 0;
+            CKP = 1;
+        }
+
+        if(!D_nA && !R_nW) {
+
+            discard = SSPBUF;
+
+            SSPIF = 0;
+            CKP = 1;
+            while(!BF);
+            request = SSPBUF;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+        }
+        else if(!D_nA && R_nW){
+            discard = SSPBUF;
+            BF = 0;
+            SSPBUF = send_data;
+            CKP = 1;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+            while(BF);
+        }
+
+        SSPIF = 0;
+    }
 }
 
 
@@ -2704,8 +2763,20 @@ int main(void) {
         MQ2_val = (adc_read()>>8) & 0x00FF;
         IR_sens = RA1;
 
+        switch(request){
+            case 'G':
+                send_data = MQ2_val;
+                break;
+            case 'I':
+                send_data = IR_sens;
+                break;
+            default:
+                send_data = 'X';
+                break;
+        }
 
-        LDC_output();
+
+
 
         PORTB = MQ2_val;
         _delay((unsigned long)((50)*(8000000/4000.0)));
@@ -2731,33 +2802,9 @@ void setup(void){
     adc_init(0, 0, 8, 0);
 
 
-    Lcd_Init();
-    _delay((unsigned long)((10)*(8000000/4000.0)));
-}
+    I2C_Slave_Init(0x20);
 
-void LDC_output(void){
-    separar_digitos8(MQ2_val, MQ2_s);
 
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("G: ");
-    Lcd_Write_String(MQ2_s);
-    Lcd_Set_Cursor(2,1);
-    if(IR_sens)
-        Lcd_Write_String("PUERTA ABIERTA");
-    else
-        Lcd_Write_String("PUERTA CERRADA");
 
-}
 
-void separar_digitos8(uint8_t num, char dig8[]){
-    uint8_t div1,div2,div3,centenas,decenas,unidades;
-    div1 = num / 10;
-    unidades = num % 10;
-    div2 = div1 / 10;
-    decenas = div1 % 10;
-    centenas = div2 % 10;
-
-    dig8[2] = unidades + '0';
-    dig8[1] = decenas + '0';
-    dig8[0] = centenas + '0';
 }

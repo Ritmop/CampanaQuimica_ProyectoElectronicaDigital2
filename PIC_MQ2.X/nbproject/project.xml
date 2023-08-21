@@ -10,6 +10,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../PIC_MASTER.X</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

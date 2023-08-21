@@ -1,38 +1,62 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
-[p mainexit ]
-"47 slave_DHT11.c
-[; ;slave_DHT11.c: 47: 
-[v _setup `(v ~T0 @X0 0 ef ]
-"24 ./DHT11.h
-[; ;./DHT11.h: 24: void DHT11_start(void);
-[v _DHT11_start `(v ~T0 @X0 0 ef ]
+"4281 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4281: extern volatile __bit SSPIF __attribute__((address(0x63)));
+[v _SSPIF `Vb ~T0 @X0 0 e@99 ]
+"3837
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3837: extern volatile __bit CKP __attribute__((address(0xA4)));
+[v _CKP `Vb ~T0 @X0 0 e@164 ]
+"4296
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4296: extern volatile __bit SSPOV __attribute__((address(0xA6)));
+[v _SSPOV `Vb ~T0 @X0 0 e@166 ]
+"4593
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4593: extern volatile __bit WCOL __attribute__((address(0xA7)));
+[v _WCOL `Vb ~T0 @X0 0 e@167 ]
+"843
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 843: extern volatile unsigned char SSPBUF __attribute__((address(0x013)));
+[v _SSPBUF `Vuc ~T0 @X0 0 e@19 ]
+"3867
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3867: extern volatile __bit D_nA __attribute__((address(0x4A5)));
+[v _D_nA `Vb ~T0 @X0 0 e@1189 ]
+"4242
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4242: extern volatile __bit R_nW __attribute__((address(0x4A2)));
+[v _R_nW `Vb ~T0 @X0 0 e@1186 ]
+"3645
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3645: extern volatile __bit BF __attribute__((address(0x4A0)));
+[v _BF `Vb ~T0 @X0 0 e@1184 ]
 [v F36 `(v ~T0 @X0 1 tf1`ul ]
 "12 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\builtins.h
 [v __delay `JF36 ~T0 @X0 0 e ]
 [p i __delay ]
-"30 ./DHT11.h
+[p mainexit ]
+"52 slave_DHT11.c
+[; ;slave_DHT11.c: 52:         SSPIF = 0;
+[v _setup `(v ~T0 @X0 0 ef ]
+"24 ./DHT11.h
+[; ;./DHT11.h: 24: void DHT11_start(void);
+[v _DHT11_start `(v ~T0 @X0 0 ef ]
+"30
 [; ;./DHT11.h: 30: int8_t DHT11_read_data(int16_t *hum, int16_t *temp);
 [v _DHT11_read_data `(c ~T0 @X0 0 ef2`*i`*i ]
-"51 ./LCD4b.h
-[; ;./LCD4b.h: 51: void Lcd_Clear(void);
-[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
-"48 slave_DHT11.c
-[; ;slave_DHT11.c: 48: void setup(void){
-[v _LDC_output `(v ~T0 @X0 0 ef ]
-"53 ./LCD4b.h
-[; ;./LCD4b.h: 53: void Lcd_Set_Cursor(char a, char b);
-[v _Lcd_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"59
-[; ;./LCD4b.h: 59: void Lcd_Write_String(char *a);
-[v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
-"3387 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+"228 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"166
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
+[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
+"3387
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3449: extern volatile unsigned char ANSELH __attribute__((address(0x189)));
 [v _ANSELH `Vuc ~T0 @X0 0 e@393 ]
+"1416
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1416: extern volatile unsigned char TRISA __attribute__((address(0x085)));
+[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
+"1478
+[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1478: extern volatile unsigned char TRISB __attribute__((address(0x086)));
+[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
 "1602
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 1602: extern volatile unsigned char TRISD __attribute__((address(0x088)));
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
@@ -57,15 +81,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4251
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4251: extern volatile __bit SCS __attribute__((address(0x478)));
 [v _SCS `Vb ~T0 @X0 0 e@1144 ]
-"55 ./LCD4b.h
-[; ;./LCD4b.h: 55: void Lcd_Init(void);
-[v _Lcd_Init `(v ~T0 @X0 0 ef ]
-"49 slave_DHT11.c
-[; ;slave_DHT11.c: 49:     ANSEL = 0;
-[v _separar_digitos8 `(v ~T0 @X0 0 ef2`uc`*uc ]
-"57 ./LCD4b.h
-[; ;./LCD4b.h: 57: void Lcd_Write_Char(char a);
-[v _Lcd_Write_Char `(v ~T0 @X0 0 ef1`uc ]
+"64 ./I2C.h
+[; ;./I2C.h: 64: void I2C_Slave_Init(uint8_t address);
+[v _I2C_Slave_Init `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -301,230 +319,279 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "22 slave_DHT11.c
-[; ;slave_DHT11.c: 22: 
+[; ;slave_DHT11.c: 22:     if(SSPIF){
 [p x FOSC  =  INTRC_NOCLKOUT ]
 "23
 [; ;slave_DHT11.c: 23: 
 [p x WDTE  =  OFF        ]
 "24
-[; ;slave_DHT11.c: 24: 
+[; ;slave_DHT11.c: 24:         CKP = 0;
 [p x PWRTE  =  OFF       ]
 "25
-[; ;slave_DHT11.c: 25: int main(void) {
+[; ;slave_DHT11.c: 25: 
 [p x MCLRE  =  OFF       ]
 "26
-[; ;slave_DHT11.c: 26:     setup();
+[; ;slave_DHT11.c: 26:         if (SSPOV || WCOL ){
 [p x CP  =  OFF          ]
 "27
-[; ;slave_DHT11.c: 27:     DHT11_start();
+[; ;slave_DHT11.c: 27:             discard = SSPBUF;
 [p x CPD  =  OFF         ]
 "28
-[; ;slave_DHT11.c: 28:     while(1){
+[; ;slave_DHT11.c: 28:             SSPOV = 0;
 [p x BOREN  =  OFF       ]
 "29
-[; ;slave_DHT11.c: 29: 
+[; ;slave_DHT11.c: 29:             WCOL = 0;
 [p x IESO  =  OFF        ]
 "30
-[; ;slave_DHT11.c: 30:         _delay((unsigned long)((2000)*(8000000/4000.0)));
+[; ;slave_DHT11.c: 30:             CKP = 1;
 [p x FCMEN  =  OFF       ]
 "31
-[; ;slave_DHT11.c: 31: 
+[; ;slave_DHT11.c: 31:         }
 [p x LVP  =  OFF          ]
 "34
 [; ;slave_DHT11.c: 34: 
 [p x BOR4V  =  BOR40V    ]
 "35
-[; ;slave_DHT11.c: 35:         if(data_ok){
+[; ;slave_DHT11.c: 35:             discard = SSPBUF;
 [p x WRT  =  OFF         ]
-"40
-[; ;slave_DHT11.c: 40:         else {
+"41
+[; ;slave_DHT11.c: 41:             _delay((unsigned long)((250)*(8000000/4000000.0)));
+[v _discard `uc ~T0 @X0 1 e ]
+"42
+[; ;slave_DHT11.c: 42:         }
+[v _send_data `uc ~T0 @X0 1 e ]
+"43
+[; ;slave_DHT11.c: 43:         else if(!D_nA && R_nW){
+[v _request `uc ~T0 @X0 1 e ]
+"45
+[; ;slave_DHT11.c: 45:             BF = 0;
 [v _data_ok `c ~T0 @X0 1 e ]
 [i _data_ok
 -> -> 1 `i `c
 ]
-"41
-[; ;slave_DHT11.c: 41:             Lcd_Set_Cursor(2,1);
+"46
+[; ;slave_DHT11.c: 46:             SSPBUF = send_data;
 [v _humedad `i ~T0 @X0 1 e ]
 [v _temperatura `i ~T0 @X0 1 e ]
-"42
-[; ;slave_DHT11.c: 42:             Lcd_Clear();
-[v _u_temp `uc ~T0 @X0 -> 3 `i e ]
-"43
-[; ;slave_DHT11.c: 43:             Lcd_Write_String("READ ERROR");
-[v _d_temp `uc ~T0 @X0 -> 3 `i e ]
-"44
-[; ;slave_DHT11.c: 44:         }
-[v _u_hum `uc ~T0 @X0 -> 3 `i e ]
-"45
-[; ;slave_DHT11.c: 45:     }
-[v _d_hum `uc ~T0 @X0 -> 3 `i e ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"53
-[; ;slave_DHT11.c: 53:     PORTD = 0;
+"58
+[; ;slave_DHT11.c: 58: 
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"55
-[; ;slave_DHT11.c: 55: 
+"59
+[; ;slave_DHT11.c: 59: 
+[e $ ! _SSPIF 139  ]
+{
+"61
+[; ;slave_DHT11.c: 61: int main(void) {
+[e = _CKP -> -> 0 `i `b ]
+"63
+[; ;slave_DHT11.c: 63:     DHT11_start();
+[e $ ! || _SSPOV _WCOL 140  ]
+{
+"64
+[; ;slave_DHT11.c: 64:     while(1){
+[e = _discard _SSPBUF ]
+"65
+[; ;slave_DHT11.c: 65: 
+[e = _SSPOV -> -> 0 `i `b ]
+"66
+[; ;slave_DHT11.c: 66:         _delay((unsigned long)((100)*(8000000/4000.0)));
+[e = _WCOL -> -> 0 `i `b ]
+"67
+[; ;slave_DHT11.c: 67: 
+[e = _CKP -> -> 1 `i `b ]
+"68
+[; ;slave_DHT11.c: 68:         data_ok = DHT11_read_data(&humedad, &temperatura);
+}
+[e :U 140 ]
+"70
+[; ;slave_DHT11.c: 70: 
+[e $ ! && ! _D_nA ! _R_nW 141  ]
+{
+"72
+[; ;slave_DHT11.c: 72:         switch(request){
+[e = _discard _SSPBUF ]
+"74
+[; ;slave_DHT11.c: 74:                 send_data = (temperatura & 0xFF00)>>8;
+[e = _SSPIF -> -> 0 `i `b ]
+"75
+[; ;slave_DHT11.c: 75:                 break;
+[e = _CKP -> -> 1 `i `b ]
+"76
+[; ;slave_DHT11.c: 76:             case 't':
+[e $U 142  ]
+[e :U 143 ]
+[e :U 142 ]
+[e $ ! _BF 143  ]
+[e :U 144 ]
+"77
+[; ;slave_DHT11.c: 77:                 send_data = (temperatura & 0x00FF);
+[e = _request _SSPBUF ]
+"78
+[; ;slave_DHT11.c: 78:                 break;
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"79
+[; ;slave_DHT11.c: 79:             case 'H':
+}
+[e $U 145  ]
+"80
+[; ;slave_DHT11.c: 80:                 send_data = (humedad & 0xFF00)>>8;
+[e :U 141 ]
+[e $ ! && ! _D_nA _R_nW 146  ]
+{
+"81
+[; ;slave_DHT11.c: 81:                 break;
+[e = _discard _SSPBUF ]
+"82
+[; ;slave_DHT11.c: 82:             case 'h':
+[e = _BF -> -> 0 `i `b ]
+"83
+[; ;slave_DHT11.c: 83:                 send_data = (humedad & 0x00FF);
+[e = _SSPBUF _send_data ]
+"84
+[; ;slave_DHT11.c: 84:                 break;
+[e = _CKP -> -> 1 `i `b ]
+"85
+[; ;slave_DHT11.c: 85:             default:
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"86
+[; ;slave_DHT11.c: 86:                 send_data = 'X';
+[e $U 147  ]
+[e :U 148 ]
+[e :U 147 ]
+[e $ _BF 148  ]
+[e :U 149 ]
+"87
+[; ;slave_DHT11.c: 87:                 break;
+}
+[e :U 146 ]
+[e :U 145 ]
+"89
+[; ;slave_DHT11.c: 89:         PORTA = send_data;
+[e = _SSPIF -> -> 0 `i `b ]
+"90
+}
+[e :U 139 ]
+"91
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"62
-[; ;slave_DHT11.c: 62: }
+"98
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"63
-[; ;slave_DHT11.c: 63: 
+"99
 [e ( _setup ..  ]
-"64
-[; ;slave_DHT11.c: 64: void LDC_output(void){
+"100
 [e ( _DHT11_start ..  ]
-"65
-[; ;slave_DHT11.c: 65: 
-[e :U 141 ]
+"101
+[e :U 152 ]
 {
-"67
-[; ;slave_DHT11.c: 67:     separar_digitos8((temperatura & 0x00FF),d_temp);
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"69
-[; ;slave_DHT11.c: 69:     separar_digitos8((humedad & 0x00FF),d_hum);
+"103
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"105
 [e = _data_ok ( _DHT11_read_data (2 , &U _humedad &U _temperatura ]
-"72
-[; ;slave_DHT11.c: 72:     Lcd_Write_String("T: ");
-[e $ ! != -> _data_ok `i -> 0 `i 143  ]
+"108
+[e = _PORTB _request ]
+"109
+[e $U 155  ]
 {
-"73
-[; ;slave_DHT11.c: 73:     Lcd_Write_String(u_temp);
-[e ( _Lcd_Clear ..  ]
-"74
-[; ;slave_DHT11.c: 74:     Lcd_Write_Char('.');
-[e ( _LDC_output ..  ]
-"75
-[; ;slave_DHT11.c: 75:     Lcd_Write_String(d_temp);
+"110
+[e :U 156 ]
+"111
+[e = _send_data -> >> & -> _temperatura `ui -> 65280 `ui -> 8 `i `uc ]
+"112
+[e $U 154  ]
+"113
+[e :U 157 ]
+"114
+[e = _send_data -> & _temperatura -> 255 `i `uc ]
+"115
+[e $U 154  ]
+"116
+[e :U 158 ]
+"117
+[e = _send_data -> >> & -> _humedad `ui -> 65280 `ui -> 8 `i `uc ]
+"118
+[e $U 154  ]
+"119
+[e :U 159 ]
+"120
+[e = _send_data -> & _humedad -> 255 `i `uc ]
+"121
+[e $U 154  ]
+"122
+[e :U 160 ]
+"123
+[e = _send_data -> -> 88 `ui `uc ]
+"124
+[e $U 154  ]
+"125
 }
-[e $U 144  ]
-"77
-[; ;slave_DHT11.c: 77: 
-[e :U 143 ]
-{
-"78
-[; ;slave_DHT11.c: 78:     Lcd_Set_Cursor(2,1);
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"79
-[; ;slave_DHT11.c: 79:     Lcd_Write_String("H:  ");
-[e ( _Lcd_Clear ..  ]
-"80
-[; ;slave_DHT11.c: 80:     Lcd_Write_String(u_hum);
-[e ( _Lcd_Write_String (1 :s 1C ]
-"81
-[; ;slave_DHT11.c: 81:     Lcd_Write_String(" %RH");
+[e $U 154  ]
+[e :U 155 ]
+[e [\ -> _request `i , $ -> -> 84 `ui `i 156
+ , $ -> -> 116 `ui `i 157
+ , $ -> -> 72 `ui `i 158
+ , $ -> -> 104 `ui `i 159
+ 160 ]
+[e :U 154 ]
+"126
+[e = _PORTA _send_data ]
+"139
+[; ;slave_DHT11.c: 139:     }
 }
-[e :U 144 ]
-"82
-[; ;slave_DHT11.c: 82: 
+[e :U 151 ]
+[e $U 152  ]
+[e :U 153 ]
+"140
+[; ;slave_DHT11.c: 140: }
+[e :UE 150 ]
 }
-[e :U 140 ]
-[e $U 141  ]
-[e :U 142 ]
-"83
-[; ;slave_DHT11.c: 83: }
-[e :UE 139 ]
-}
-"85
-[; ;slave_DHT11.c: 85: void separar_digitos8(uint8_t num, char dig8[]){
+"142
+[; ;slave_DHT11.c: 142: void setup(void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"86
-[; ;slave_DHT11.c: 86:     uint8_t div1,decenas,unidades;
+"143
+[; ;slave_DHT11.c: 143:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"87
-[; ;slave_DHT11.c: 87:     div1 = num / 10;
+"144
+[; ;slave_DHT11.c: 144:     ANSELH= 0;
 [e = _ANSELH -> -> 0 `i `uc ]
-"89
-[; ;slave_DHT11.c: 89:     decenas = div1 % 10;
+"146
+[; ;slave_DHT11.c: 146:     TRISA = 0;
+[e = _TRISA -> -> 0 `i `uc ]
+"147
+[; ;slave_DHT11.c: 147:     PORTA = 0;
+[e = _PORTA -> -> 0 `i `uc ]
+"148
+[; ;slave_DHT11.c: 148:     TRISB = 0;
+[e = _TRISB -> -> 0 `i `uc ]
+"149
+[; ;slave_DHT11.c: 149:     PORTB = 0;
+[e = _PORTB -> -> 0 `i `uc ]
+"151
+[; ;slave_DHT11.c: 151:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"90
-[; ;slave_DHT11.c: 90: 
+"152
+[; ;slave_DHT11.c: 152:     PORTD = 0;
 [e = _PORTD -> -> 0 `i `uc ]
-"93
-[; ;slave_DHT11.c: 93: }
+"155
+[; ;slave_DHT11.c: 155:     OSCCONbits.IRCF = 0b111;
 [e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"94
+"156
+[; ;slave_DHT11.c: 156:     SCS = 1;
 [e = _SCS -> -> 1 `i `b ]
-"97
-[e ( _Lcd_Init ..  ]
-"98
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"99
-[e :UE 145 ]
+"159
+[; ;slave_DHT11.c: 159:     I2C_Slave_Init(0x10);
+[e ( _I2C_Slave_Init (1 -> -> 16 `i `uc ]
+"164
+[; ;slave_DHT11.c: 164: }
+[e :UE 161 ]
 }
-"101
-[v _LDC_output `(v ~T0 @X0 1 ef ]
-{
-[e :U _LDC_output ]
-[f ]
-"103
-[e ( _separar_digitos8 (2 , -> >> & -> _temperatura `ui -> 65280 `ui -> 8 `i `uc &U _u_temp ]
-"104
-[e ( _separar_digitos8 (2 , -> & _temperatura -> 255 `i `uc &U _d_temp ]
-"105
-[e ( _separar_digitos8 (2 , -> >> & -> _humedad `ui -> 65280 `ui -> 8 `i `uc &U _u_hum ]
-"106
-[e ( _separar_digitos8 (2 , -> & _humedad -> 255 `i `uc &U _d_hum ]
-"108
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"109
-[e ( _Lcd_Write_String (1 :s 2C ]
-"110
-[e ( _Lcd_Write_String (1 &U _u_temp ]
-"111
-[e ( _Lcd_Write_Char (1 -> -> 46 `ui `uc ]
-"112
-[e ( _Lcd_Write_String (1 &U _d_temp ]
-"113
-[e ( _Lcd_Write_String (1 :s 3C ]
-"115
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"116
-[e ( _Lcd_Write_String (1 :s 4C ]
-"117
-[e ( _Lcd_Write_String (1 &U _u_hum ]
-"118
-[e ( _Lcd_Write_String (1 :s 5C ]
-"120
-[e :UE 146 ]
-}
-"122
-[v _separar_digitos8 `(v ~T0 @X0 1 ef2`uc`*uc ]
-{
-[e :U _separar_digitos8 ]
-[v _num `uc ~T0 @X0 1 r1 ]
-[v _dig8 `*uc ~T0 @X0 1 r2 ]
-[f ]
-"123
-[v _div1 `uc ~T0 @X0 1 a ]
-[v _decenas `uc ~T0 @X0 1 a ]
-[v _unidades `uc ~T0 @X0 1 a ]
-"124
-[e = _div1 -> / -> _num `i -> 10 `i `uc ]
-"125
-[e = _unidades -> % -> _num `i -> 10 `i `uc ]
-"126
-[e = _decenas -> % -> _div1 `i -> 10 `i `uc ]
-"128
-[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + -> _unidades `i -> 48 `i `uc ]
-"129
-[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + -> _decenas `i -> 48 `i `uc ]
-"130
-[e :UE 147 ]
-}
-[a 1C 82 69 65 68 32 69 82 82 79 82 0 ]
-[a 5C 32 37 82 72 0 ]
-[a 3C 39 67 0 ]
-[a 2C 84 58 32 0 ]
-[a 4C 72 58 32 32 0 ]

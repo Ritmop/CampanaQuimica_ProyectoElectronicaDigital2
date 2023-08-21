@@ -2627,6 +2627,48 @@ extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
 # 15 "slave_DHT11.c" 2
 
+# 1 "./I2C.h" 1
+# 20 "./I2C.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c90\\stdint.h" 1 3
+# 20 "./I2C.h" 2
+# 29 "./I2C.h"
+void I2C_Master_Init(const unsigned long c);
+
+
+
+
+
+
+
+void I2C_Master_Wait(void);
+
+
+
+void I2C_Master_Start(void);
+
+
+
+void I2C_Master_RepeatedStart(void);
+
+
+
+void I2C_Master_Stop(void);
+
+
+
+
+
+void I2C_Master_Write(unsigned d);
+
+
+
+
+unsigned short I2C_Master_Read(unsigned short a);
+
+
+
+void I2C_Slave_Init(uint8_t address);
+# 16 "slave_DHT11.c" 2
 
 # 1 "./DHT11.h" 1
 # 24 "./DHT11.h"
@@ -2639,26 +2681,6 @@ int8_t DHT11_read_byte(void);
 int8_t DHT11_read_data(int16_t *hum, int16_t *temp);
 # 17 "slave_DHT11.c" 2
 
-# 1 "./LCD4b.h" 1
-# 47 "./LCD4b.h"
-void Lcd_Port(char a);
-
-void Lcd_Cmd(char a);
-
-void Lcd_Clear(void);
-
-void Lcd_Set_Cursor(char a, char b);
-
-void Lcd_Init(void);
-
-void Lcd_Write_Char(char a);
-
-void Lcd_Write_String(char *a);
-
-void Lcd_Shift_Right(void);
-
-void Lcd_Shift_Left(void);
-# 18 "slave_DHT11.c" 2
 
 
 
@@ -2681,12 +2703,17 @@ void Lcd_Shift_Left(void);
 
 
 
+
+uint8_t discard;
+uint8_t send_data;
+uint8_t request;
+
 int8_t data_ok = 1;
 int16_t humedad, temperatura;
-char u_temp[3];
-char d_temp[3];
-char u_hum[3];
-char d_hum[3];
+
+
+
+
 
 void setup(void);
 void LDC_output(void);
@@ -2695,7 +2722,38 @@ void separar_digitos8(uint8_t num, char dig8[]);
 
 
 void __attribute__((picinterrupt(("")))) isr(void){
+    if(SSPIF){
 
+        CKP = 0;
+
+        if (SSPOV || WCOL ){
+            discard = SSPBUF;
+            SSPOV = 0;
+            WCOL = 0;
+            CKP = 1;
+        }
+
+        if(!D_nA && !R_nW) {
+
+            discard = SSPBUF;
+
+            SSPIF = 0;
+            CKP = 1;
+            while(!BF);
+            request = SSPBUF;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+        }
+        else if(!D_nA && R_nW){
+            discard = SSPBUF;
+            BF = 0;
+            SSPBUF = send_data;
+            CKP = 1;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+            while(BF);
+        }
+
+        SSPIF = 0;
+    }
 }
 
 
@@ -2708,27 +2766,42 @@ int main(void) {
     DHT11_start();
     while(1){
 
-        _delay((unsigned long)((2000)*(8000000/4000.0)));
+        _delay((unsigned long)((100)*(8000000/4000.0)));
 
         data_ok = DHT11_read_data(&humedad, &temperatura);
 
 
-        if(data_ok){
-            Lcd_Clear();
-            LDC_output();
+        PORTB = request;
+        switch(request){
+            case 'T':
+                send_data = (temperatura & 0xFF00)>>8;
+                break;
+            case 't':
+                send_data = (temperatura & 0x00FF);
+                break;
+            case 'H':
+                send_data = (humedad & 0xFF00)>>8;
+                break;
+            case 'h':
+                send_data = (humedad & 0x00FF);
+                break;
+            default:
+                send_data = 'X';
+                break;
         }
-
-        else {
-            Lcd_Set_Cursor(2,1);
-            Lcd_Clear();
-            Lcd_Write_String("READ ERROR");
-        }
+        PORTA = send_data;
+# 139 "slave_DHT11.c"
     }
 }
 
 void setup(void){
     ANSEL = 0;
     ANSELH= 0;
+
+    TRISA = 0;
+    PORTA = 0;
+    TRISB = 0;
+    PORTB = 0;
 
     TRISD = 0;
     PORTD = 0;
@@ -2738,37 +2811,9 @@ void setup(void){
     SCS = 1;
 
 
-    Lcd_Init();
-    _delay((unsigned long)((10)*(8000000/4000.0)));
-}
+    I2C_Slave_Init(0x10);
 
-void LDC_output(void){
 
-    separar_digitos8((temperatura & 0xFF00)>>8,u_temp);
-    separar_digitos8((temperatura & 0x00FF),d_temp);
-    separar_digitos8((humedad & 0xFF00)>>8,u_hum);
-    separar_digitos8((humedad & 0x00FF),d_hum);
 
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("T: ");
-    Lcd_Write_String(u_temp);
-    Lcd_Write_Char('.');
-    Lcd_Write_String(d_temp);
-    Lcd_Write_String("'C");
 
-    Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("H:  ");
-    Lcd_Write_String(u_hum);
-    Lcd_Write_String(" %RH");
-
-}
-
-void separar_digitos8(uint8_t num, char dig8[]){
-    uint8_t div1,decenas,unidades;
-    div1 = num / 10;
-    unidades = num % 10;
-    decenas = div1 % 10;
-
-    dig8[1] = unidades + 0x30;
-    dig8[0] = decenas + 0x30;
 }
