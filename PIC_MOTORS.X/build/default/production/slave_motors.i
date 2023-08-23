@@ -1,4 +1,4 @@
-# 1 "slave_MQ2.c"
+# 1 "slave_motors.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "slave_MQ2.c" 2
-# 15 "slave_MQ2.c"
+# 1 "slave_motors.c" 2
+# 15 "slave_motors.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,37 +2625,50 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 15 "slave_MQ2.c" 2
+# 15 "slave_motors.c" 2
+
+# 1 "./I2C.h" 1
+# 20 "./I2C.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c90\\stdint.h" 1 3
+# 20 "./I2C.h" 2
+# 29 "./I2C.h"
+void I2C_Master_Init(const unsigned long c);
 
 
-# 1 "./ADC_lib.h" 1
-# 12 "./ADC_lib.h"
-void adc_init(uint8_t J, uint8_t R, uint8_t clock, uint8_t channel);
-uint16_t adc_read(void);
-void adc_sel_channel(uint8_t channel);
-uint8_t adc_get_channel(void);
-# 17 "slave_MQ2.c" 2
 
-# 1 "./LCD4b.h" 1
-# 47 "./LCD4b.h"
-void Lcd_Port(char a);
 
-void Lcd_Cmd(char a);
 
-void Lcd_Clear(void);
 
-void Lcd_Set_Cursor(char a, char b);
 
-void Lcd_Init(void);
+void I2C_Master_Wait(void);
 
-void Lcd_Write_Char(char a);
 
-void Lcd_Write_String(char *a);
 
-void Lcd_Shift_Right(void);
+void I2C_Master_Start(void);
 
-void Lcd_Shift_Left(void);
-# 18 "slave_MQ2.c" 2
+
+
+void I2C_Master_RepeatedStart(void);
+
+
+
+void I2C_Master_Stop(void);
+
+
+
+
+
+void I2C_Master_Write(unsigned d);
+
+
+
+
+unsigned short I2C_Master_Read(unsigned short a);
+
+
+
+void I2C_Slave_Init(uint8_t address);
+# 16 "slave_motors.c" 2
 
 
 
@@ -2677,78 +2690,136 @@ void Lcd_Shift_Left(void);
 
 
 
-uint8_t MQ2_val;
-char MQ2_s[] = {'0','0','0','\0'};
+
+
+
+
+uint8_t discard;
+uint8_t send_data;
+uint8_t readI2C;
+uint8_t TMR0count = 0;
+
+uint8_t servoPos = 2;
+uint8_t stateDC = 0;
+
 
 void setup(void);
-void LDC_output(void);
-void separar_digitos8(uint8_t num, char dig8[]);
+void initPWM(void);
+void angle_to_PWM(uint8_t angle);
+
+uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint8_t max2);
 
 
 
-void __attribute__((picinterrupt(("")))) isr(void){
 
+void __attribute__((picinterrupt(("")))) isr (void){
+    if(SSPIF){
+        CKP = 0;
+
+        if (SSPOV || WCOL ){
+            RC0 = 1;
+            discard = SSPBUF;
+            SSPOV = 0;
+            WCOL = 0;
+            CKP = 1;
+        }
+
+        if(!D_nA && !R_nW) {
+            _delay((unsigned long)((7)*(8000000/4000000.0)));
+            discard = SSPBUF;
+            _delay((unsigned long)((2)*(8000000/4000000.0)));
+            SSPIF = 0;
+            CKP = 1;
+            while(!BF);
+            readI2C = SSPBUF;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+        }
+        else if(!D_nA && R_nW){
+            discard = SSPBUF;
+            BF = 0;
+            SSPBUF = send_data;
+            CKP = 1;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+            while(BF);
+        }
+
+        SSPIF = 0;
+    }
+
+    if(T0IF){
+        TMR0count++;
+        TMR0 = 131;
+        T0IF = 0;
+    }
 }
-
-
-
-
-
-
+# 107 "slave_motors.c"
 int main(void) {
     setup();
     while(1){
 
 
-        MQ2_val = (adc_read()>>8) & 0x00FF;
 
-        LDC_output();
+        PORTA = readI2C;
+        servoPos = readI2C & 0x0F;
+        PORTB = TMR0count;
+        angle_to_PWM(servoPos);
 
-        PORTB = MQ2_val;
-        _delay((unsigned long)((50)*(8000000/4000.0)));
+
+        if((readI2C & 0xF0) == 0x10)
+            RC0 = 1;
+        else
+            RC0 = 0;
     }
 }
 
 void setup(void){
-    ANSEL = 1;
-    ANSELH= 0;
-    TRISA = 1;
 
+    ANSEL = 0;
+    ANSELH= 0;
+
+    TRISA = 0;
+    PORTA = 0;
     TRISB = 0;
     PORTB = 0;
 
-    TRISD = 0;
-    PORTD = 0;
+    TRISC0 = 0;
+    TRISC2 = 0;
+    RC0 = 0;
+    RC2 = 0;
 
 
     OSCCONbits.IRCF = 0b111;
     SCS = 1;
 
 
-    adc_init(0, 0, 8, 0);
+    I2C_Slave_Init(0x30);
 
 
-    Lcd_Init();
-    _delay((unsigned long)((10)*(8000000/4000.0)));
+    initPWM();
 }
 
-void LDC_output(void){
-    separar_digitos8(MQ2_val, MQ2_s);
+void initPWM(void){
 
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("G: ");
-    Lcd_Write_String(MQ2_s);
+    T0CS = 0;
+    PSA = 0;
+    OPTION_REGbits.PS = 0b010;
+    T0IE = 1;
+    T0IF = 0;
+    GIE = 1;
+    TMR0 = 131;
 }
 
-void separar_digitos8(uint8_t num, char dig8[]){
-    uint8_t div1,div2,div3,centenas,decenas,unidades;
-    div1 = num / 10;
-    unidades = num % 10;
-    div2 = div1 / 10;
-    decenas = div1 % 10;
-    centenas = div2 % 10;
+uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint8_t max2){
+    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
+}
 
-    dig8[2] = unidades + '0';
-    dig8[1] = decenas + '0';
-    dig8[0] = centenas + '0';
+void angle_to_PWM(uint8_t position){
+
+    if(TMR0count >= 40){
+        TMR0count = 0;
+        RC2 = 1;
+    }
+    else if (TMR0count == position){
+        RC2 = 0;
+    }
 }

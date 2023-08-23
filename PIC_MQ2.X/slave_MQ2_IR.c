@@ -37,16 +37,20 @@
 /*----------------------- GLOBAL VARIABLES & CONSTANTS -----------------------*/
 #define _XTAL_FREQ      8000000
 #define address_MQ2_IR  0x20
+#define MQ2chan     0   //AN0
+#define LM35chan    1   //AN1
 
 uint8_t discard;
 uint8_t send_data;
 uint8_t request;
 
 uint8_t MQ2_val;    //MQ2 read value
+uint8_t LM35_val;    //LM35 read value
 uint8_t IR_sens;    //IR sensor
 //char MQ2_s[] = {'0','0','0','\0'};
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
+uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint16_t max2);
 //void LDC_output(void);
 //void separar_digitos8(uint8_t num, char dig8[]);
 /*------------------------------- RESET VECTOR -------------------------------*/
@@ -97,39 +101,46 @@ int main(void) {
     while(1){
         //Loop
         //Read sensors value
-        MQ2_val = (adc_read()>>8) & 0x00FF; //Read MQ2 analog value
-        IR_sens = RA1;   //Read IR digital value
+        if(adc_get_channel() == MQ2chan){
+            MQ2_val = (adc_read()>>8) & 0x00FF; //Read MQ2 analog value
+            adc_sel_channel(LM35chan);  //Switch channel
+        }
+        else if (adc_get_channel() == LM35chan){
+            LM35_val = (adc_read()>>8) & 0x00FF; //Read LM35 analog value 
+            adc_sel_channel(MQ2chan);   //Switch channel
+        }
+        PORTB = LM35_val;
+                
+        IR_sens = RA2;   //Read IR digital value
         
         switch(request){
             case 'G':   //Gas
                 send_data = MQ2_val;
                 break;
+            case 'T':   //Temperature
+                send_data = LM35_val;
+                break;
             case 'I':   //Infrared
                 send_data = IR_sens;
                 break;            
             default:
-                send_data = 'X';
+                send_data = 0xFF;
                 break;
         }
         
         //Display data
         //LDC_output();
-        
-        PORTB = MQ2_val;
-        __delay_ms(50);
+        __delay_ms(10);
     }
 }
 /*-------------------------------- SUBROUTINES -------------------------------*/
 void setup(void){
-    ANSEL = 1;  //RA0 as analog (AN0)
+    ANSEL = 3;  //RA0 & RA1 as analog (AN0)
     ANSELH= 0;
-    TRISA = 3;  //AN0 & RA1 as input
+    TRISA = 255;  //PORTA as input
     
-    TRISB = 0;  //Pruebas
+    TRISB = 0;
     PORTB = 0;
-    
-    TRISD = 0;  //LCD output
-    PORTD = 0;
     
     //OSCILLATOR CONFIG
     OSCCONbits.IRCF = 0b111;  //Internal clock frequency 8MHz
@@ -172,3 +183,7 @@ void setup(void){
 //    dig8[1] = decenas  + '0';
 //    dig8[0] = centenas + '0';
 //}
+
+uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint16_t max2){
+    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
+}

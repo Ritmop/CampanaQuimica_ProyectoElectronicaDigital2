@@ -2708,22 +2708,29 @@ void Lcd_Shift_Left(void);
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
-# 44 "master.c"
+# 46 "master.c"
 uint8_t u_temp,d_temp,u_hum,d_hum,gas,ired;
-char Su_temp[3];
+uint8_t tempC, gasPPM;
+char Su_temp[4];
 char Sd_temp[3];
 char Su_hum[3];
 char Sd_hum[3];
 char Sgas[4];
 char Sired[2];
 
+uint8_t counter;
+uint8_t servoPos = 180;
+uint8_t motorCon;
+
 void setup(void);
 void requestTemp(void);
 void requestHum(void);
 void requestGas(void);
 void requestIR(void);
+void writeMotors(void);
 void LDC_output(void);
-void separar_digitos8(uint8_t num, char dig8[]);
+void num_to_string(uint16_t num, char dig8[], uint8_t len);
+uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2);
 
 
 
@@ -2740,12 +2747,20 @@ int main(void) {
     setup();
     while(1){
 
+        if (counter >= 10){
+            requestHum();
+            counter = 0;
+        }
         requestTemp();
-        requestHum();
         requestGas();
         requestIR();
+
+        writeMotors();
+
         LDC_output();
-        _delay((unsigned long)((2500)*(8000000/4000.0)));
+
+        _delay((unsigned long)((250)*(8000000/4000.0)));
+        counter++;
     }
 }
 
@@ -2772,80 +2787,104 @@ void setup(void){
 }
 
 void requestTemp(void){
-
     I2C_Master_Start();
-    I2C_Master_Write(0x10 +0);
+    I2C_Master_Write(0x20 +0);
     I2C_Master_Write('T');
-    _delay((unsigned long)((200)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x10 +1);
+    I2C_Master_Write(0x20 +1);
     u_temp = I2C_Master_Read(0);
     I2C_Master_Stop();
-    _delay((unsigned long)((500)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
 
-
-    I2C_Master_Start();
-    I2C_Master_Write(0x10 +0);
-    I2C_Master_Write('t');
-    _delay((unsigned long)((200)*(8000000/4000.0)));
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x10 +1);
-    d_temp = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((500)*(8000000/4000.0)));
+    tempC = map(u_temp,0,77,0,150);
 }
 
 void requestHum(void){
-
     I2C_Master_Start();
     I2C_Master_Write(0x10 +0);
     I2C_Master_Write('H');
-    _delay((unsigned long)((200)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x10 +1);
     u_hum = I2C_Master_Read(0);
     I2C_Master_Stop();
-    _delay((unsigned long)((500)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
 }
 
 void requestGas(void){
     I2C_Master_Start();
     I2C_Master_Write(0x20 +0);
     I2C_Master_Write('G');
-    _delay((unsigned long)((200)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x20 +1);
     gas = I2C_Master_Read(0);
     I2C_Master_Stop();
-    _delay((unsigned long)((500)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
+
+    gasPPM = map(gas,0,255,0,800);
 }
 
 void requestIR(void){
     I2C_Master_Start();
     I2C_Master_Write(0x20 +0);
     I2C_Master_Write('I');
-    _delay((unsigned long)((200)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x20 +1);
     ired = I2C_Master_Read(0);
     I2C_Master_Stop();
-    _delay((unsigned long)((500)*(8000000/4000.0)));
+    _delay((unsigned long)((20)*(8000000/4000.0)));
+}
+
+void writeMotors(void){
+
+    if(u_temp > 80 && gas > 100)
+        motorCon |= 0x10;
+
+    else
+        motorCon &= 0x0F;
+
+
+
+    switch(servoPos){
+        case 0:
+            motorCon &= 0xF2;
+            break;
+        case 90:
+            motorCon &= 0xF3;
+            break;
+        case 180:
+            motorCon &= 0xF4;
+            break;
+        default:
+            motorCon &= 0xF2;
+            break;
+    }
+
+
+    I2C_Master_Start();
+    I2C_Master_Write(0x30 +0);
+    I2C_Master_Write(motorCon);
+    I2C_Master_Stop();
+    _delay((unsigned long)((20)*(8000000/4000.0)));
 }
 
 void LDC_output(void){
+    Lcd_Clear();
 
-    separar_digitos8(u_temp,Su_temp);
-    separar_digitos8(d_temp,Sd_temp);
-    separar_digitos8(u_hum,Su_hum);
+    num_to_string(tempC,Su_temp,3);
+    num_to_string(u_hum,Su_hum,2);
+    num_to_string(gasPPM,Sgas,3);
+    num_to_string(ired,Sired,1);
 
-    separar_digitos8(gas,Sgas);
-    separar_digitos8(ired,Sired);
 
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("T:");
     Lcd_Write_String(Su_temp);
-    Lcd_Write_Char('.');
-    Lcd_Write_String(Sd_temp);
+
+
     Lcd_Write_String("'C");
 
     Lcd_Set_Cursor(2,1);
@@ -2853,33 +2892,46 @@ void LDC_output(void){
     Lcd_Write_String(Su_hum);
     Lcd_Write_String("%RH");
 
-    Lcd_Set_Cursor(1,12);
+    Lcd_Set_Cursor(1,9);
     Lcd_Write_String("G:");
     Lcd_Write_String(Sgas);
+    Lcd_Write_String("ppm");
 
-    Lcd_Set_Cursor(2,12);
+    Lcd_Set_Cursor(2,9);
     Lcd_Write_String("IR:");
     Lcd_Write_String(Sired);
 }
 
-void separar_digitos8(uint8_t num, char dig8[]){
-    uint8_t div1,div2,centenas,decenas,unidades;
+void num_to_string(uint16_t num, char dig8[], uint8_t len){
+    uint16_t div1,div2,div3,miles,centenas,decenas,unidades;
     div1 = num / 10;
     unidades = num % 10;
-    decenas = div1 % 10;
     div2 = div1 / 10;
+    decenas = div1 % 10;
+    div3 = div2 / 10;
     centenas = div2 % 10;
+    miles = div3 % 10;
 
-    if(decenas == 0){
+    if(len == 1){
         dig8[0] = unidades + '0';
     }
-    else if(centenas == 0){
+    else if(len == 2){
         dig8[1] = unidades + '0';
         dig8[0] = decenas + '0';
     }
-    else{
+    else if (len == 3){
         dig8[2] = unidades + '0';
         dig8[1] = decenas + '0';
         dig8[0] = centenas + '0';
     }
+    else if (len == 4){
+        dig8[3] = unidades + '0';
+        dig8[2] = decenas + '0';
+        dig8[1] = centenas + '0';
+        dig8[0] = miles + '0';
+    }
+}
+
+uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2){
+    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
 }

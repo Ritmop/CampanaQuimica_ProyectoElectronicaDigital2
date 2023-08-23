@@ -2708,12 +2708,14 @@ uint8_t discard;
 uint8_t send_data;
 uint8_t request;
 
-int8_t data_ok = 1;
+int8_t data_ok;
 int16_t humedad, temperatura;
 
 
 
 
+
+uint8_t counter = 250;
 
 void setup(void);
 void LDC_output(void);
@@ -2764,14 +2766,19 @@ void __attribute__((picinterrupt(("")))) isr(void){
 int main(void) {
     setup();
     DHT11_start();
+    _delay((unsigned long)((20)*(8000000/4000.0)));
+    DHT11_start();
+    _delay((unsigned long)((20)*(8000000/4000.0)));
     while(1){
 
-        _delay((unsigned long)((100)*(8000000/4000.0)));
-
-        data_ok = DHT11_read_data(&humedad, &temperatura);
 
 
-        PORTB = request;
+        if(counter >= 250){
+            data_ok = DHT11_read_data(&humedad, &temperatura);
+            counter = 0;
+        }
+
+
         switch(request){
             case 'T':
                 send_data = (temperatura & 0xFF00)>>8;
@@ -2786,25 +2793,19 @@ int main(void) {
                 send_data = (humedad & 0x00FF);
                 break;
             default:
-                send_data = 'X';
+                send_data = 0xFF;
                 break;
         }
-        PORTA = send_data;
-# 139 "slave_DHT11.c"
+
+        counter++;
+        _delay((unsigned long)((10)*(8000000/4000.0)));
+# 150 "slave_DHT11.c"
     }
 }
 
 void setup(void){
     ANSEL = 0;
     ANSELH= 0;
-
-    TRISA = 0;
-    PORTA = 0;
-    TRISB = 0;
-    PORTB = 0;
-
-    TRISD = 0;
-    PORTD = 0;
 
 
     OSCCONbits.IRCF = 0b111;

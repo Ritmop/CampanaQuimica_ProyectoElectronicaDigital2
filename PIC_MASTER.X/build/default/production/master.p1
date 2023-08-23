@@ -2,23 +2,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
 [p mainexit ]
-"52 master.c
-[; ;master.c: 52: void setup(void);
+"59 master.c
+[; ;master.c: 59: void setup(void);
 [v _setup `(v ~T0 @X0 0 ef ]
-"53
-[; ;master.c: 53: void requestTemp(void);
-[v _requestTemp `(v ~T0 @X0 0 ef ]
-"54
-[; ;master.c: 54: void requestHum(void);
+"61
+[; ;master.c: 61: void requestHum(void);
 [v _requestHum `(v ~T0 @X0 0 ef ]
-"55
-[; ;master.c: 55: void requestGas(void);
+"60
+[; ;master.c: 60: void requestTemp(void);
+[v _requestTemp `(v ~T0 @X0 0 ef ]
+"62
+[; ;master.c: 62: void requestGas(void);
 [v _requestGas `(v ~T0 @X0 0 ef ]
-"56
-[; ;master.c: 56: void requestIR(void);
+"63
+[; ;master.c: 63: void requestIR(void);
 [v _requestIR `(v ~T0 @X0 0 ef ]
-"57
-[; ;master.c: 57: void LDC_output(void);
+"64
+[; ;master.c: 64: void writeMotors(void);
+[v _writeMotors `(v ~T0 @X0 0 ef ]
+"65
+[; ;master.c: 65: void LDC_output(void);
 [v _LDC_output `(v ~T0 @X0 0 ef ]
 [v F36 `(v ~T0 @X0 1 tf1`ul ]
 "12 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\builtins.h
@@ -81,18 +84,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "49
 [; ;./I2C.h: 49: void I2C_Master_Stop(void);
 [v _I2C_Master_Stop `(v ~T0 @X0 0 ef ]
-"58 master.c
-[; ;master.c: 58: void separar_digitos8(uint8_t num, char dig8[]);
-[v _separar_digitos8 `(v ~T0 @X0 0 ef2`uc`*uc ]
+"67 master.c
+[; ;master.c: 67: uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2);
+[v _map `(ui ~T0 @X0 0 ef5`uc`uc`uc`uc`f ]
+"51 ./LCD4b.h
+[; ;./LCD4b.h: 51: void Lcd_Clear(void);
+[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
+"66 master.c
+[; ;master.c: 66: void num_to_string(uint16_t num, char dig8[], uint8_t len);
+[v _num_to_string `(v ~T0 @X0 0 ef3`ui`*uc`uc ]
 "53 ./LCD4b.h
 [; ;./LCD4b.h: 53: void Lcd_Set_Cursor(char a, char b);
 [v _Lcd_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
 "59
 [; ;./LCD4b.h: 59: void Lcd_Write_String(char *a);
 [v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
-"57
-[; ;./LCD4b.h: 57: void Lcd_Write_Char(char a);
-[v _Lcd_Write_Char `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -351,457 +357,608 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x BOR4V  =  BOR40V    ]
 "34
 [p x WRT  =  OFF         ]
-"44
-[; ;master.c: 44: uint8_t u_temp,d_temp,u_hum,d_hum,gas,ired;
+"46
+[; ;master.c: 46: uint8_t u_temp,d_temp,u_hum,d_hum,gas,ired;
 [v _u_temp `uc ~T0 @X0 1 e ]
 [v _d_temp `uc ~T0 @X0 1 e ]
 [v _u_hum `uc ~T0 @X0 1 e ]
 [v _d_hum `uc ~T0 @X0 1 e ]
 [v _gas `uc ~T0 @X0 1 e ]
 [v _ired `uc ~T0 @X0 1 e ]
-"45
-[; ;master.c: 45: char Su_temp[3];
-[v _Su_temp `uc ~T0 @X0 -> 3 `i e ]
-"46
-[; ;master.c: 46: char Sd_temp[3];
-[v _Sd_temp `uc ~T0 @X0 -> 3 `i e ]
 "47
-[; ;master.c: 47: char Su_hum[3];
-[v _Su_hum `uc ~T0 @X0 -> 3 `i e ]
+[; ;master.c: 47: uint8_t tempC, gasPPM;
+[v _tempC `uc ~T0 @X0 1 e ]
+[v _gasPPM `uc ~T0 @X0 1 e ]
 "48
-[; ;master.c: 48: char Sd_hum[3];
-[v _Sd_hum `uc ~T0 @X0 -> 3 `i e ]
+[; ;master.c: 48: char Su_temp[4];
+[v _Su_temp `uc ~T0 @X0 -> 4 `i e ]
 "49
-[; ;master.c: 49: char Sgas[4];
-[v _Sgas `uc ~T0 @X0 -> 4 `i e ]
+[; ;master.c: 49: char Sd_temp[3];
+[v _Sd_temp `uc ~T0 @X0 -> 3 `i e ]
 "50
-[; ;master.c: 50: char Sired[2];
+[; ;master.c: 50: char Su_hum[3];
+[v _Su_hum `uc ~T0 @X0 -> 3 `i e ]
+"51
+[; ;master.c: 51: char Sd_hum[3];
+[v _Sd_hum `uc ~T0 @X0 -> 3 `i e ]
+"52
+[; ;master.c: 52: char Sgas[4];
+[v _Sgas `uc ~T0 @X0 -> 4 `i e ]
+"53
+[; ;master.c: 53: char Sired[2];
 [v _Sired `uc ~T0 @X0 -> 2 `i e ]
+"55
+[; ;master.c: 55: uint8_t counter;
+[v _counter `uc ~T0 @X0 1 e ]
+"56
+[; ;master.c: 56: uint8_t servoPos = 180;
+[v _servoPos `uc ~T0 @X0 1 e ]
+[i _servoPos
+-> -> 180 `i `uc
+]
+"57
+[; ;master.c: 57: uint8_t motorCon;
+[v _motorCon `uc ~T0 @X0 1 e ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"62
-[; ;master.c: 62: void __attribute__((picinterrupt(("")))) isr(void){
+"71
+[; ;master.c: 71: void __attribute__((picinterrupt(("")))) isr(void){
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"64
-[; ;master.c: 64: }
+"73
+[; ;master.c: 73: }
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"71
-[; ;master.c: 71: int main(void) {
+"80
+[; ;master.c: 80: int main(void) {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"72
-[; ;master.c: 72:     setup();
+"81
+[; ;master.c: 81:     setup();
 [e ( _setup ..  ]
-"73
-[; ;master.c: 73:     while(1){
+"82
+[; ;master.c: 82:     while(1){
 [e :U 141 ]
 {
-"75
-[; ;master.c: 75:         requestTemp();
-[e ( _requestTemp ..  ]
-"76
-[; ;master.c: 76:         requestHum();
+"84
+[; ;master.c: 84:         if (counter >= 10){
+[e $ ! >= -> _counter `i -> 10 `i 143  ]
+{
+"85
+[; ;master.c: 85:             requestHum();
 [e ( _requestHum ..  ]
-"77
-[; ;master.c: 77:         requestGas();
+"86
+[; ;master.c: 86:             counter = 0;
+[e = _counter -> -> 0 `i `uc ]
+"87
+[; ;master.c: 87:         }
+}
+[e :U 143 ]
+"88
+[; ;master.c: 88:         requestTemp();
+[e ( _requestTemp ..  ]
+"89
+[; ;master.c: 89:         requestGas();
 [e ( _requestGas ..  ]
-"78
-[; ;master.c: 78:         requestIR();
+"90
+[; ;master.c: 90:         requestIR();
 [e ( _requestIR ..  ]
-"79
-[; ;master.c: 79:         LDC_output();
+"92
+[; ;master.c: 92:         writeMotors();
+[e ( _writeMotors ..  ]
+"94
+[; ;master.c: 94:         LDC_output();
 [e ( _LDC_output ..  ]
-"80
-[; ;master.c: 80:         _delay((unsigned long)((2500)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"81
-[; ;master.c: 81:     }
+"96
+[; ;master.c: 96:         _delay((unsigned long)((250)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"97
+[; ;master.c: 97:         counter++;
+[e ++ _counter -> -> 1 `i `uc ]
+"98
+[; ;master.c: 98:     }
 }
 [e :U 140 ]
 [e $U 141  ]
 [e :U 142 ]
-"82
-[; ;master.c: 82: }
+"99
+[; ;master.c: 99: }
 [e :UE 139 ]
 }
-"84
-[; ;master.c: 84: void setup(void){
+"101
+[; ;master.c: 101: void setup(void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"85
-[; ;master.c: 85:     ANSEL = 0;
+"102
+[; ;master.c: 102:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"86
-[; ;master.c: 86:     ANSELH= 0;
-[e = _ANSELH -> -> 0 `i `uc ]
-"88
-[; ;master.c: 88:     TRISA = 0;
-[e = _TRISA -> -> 0 `i `uc ]
-"89
-[; ;master.c: 89:     PORTA = 0;
-[e = _PORTA -> -> 0 `i `uc ]
-"91
-[; ;master.c: 91:     TRISD = 0;
-[e = _TRISD -> -> 0 `i `uc ]
-"92
-[; ;master.c: 92:     PORTD = 0;
-[e = _PORTD -> -> 0 `i `uc ]
-"95
-[; ;master.c: 95:     OSCCONbits.IRCF = 0b111;
-[e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"96
-[; ;master.c: 96:     SCS = 1;
-[e = _SCS -> -> 1 `i `b ]
-"99
-[; ;master.c: 99:     Lcd_Init();
-[e ( _Lcd_Init ..  ]
-"100
-[; ;master.c: 100:     _delay((unsigned long)((10)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "103
-[; ;master.c: 103:     I2C_Master_Init(100000);
-[e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
-"104
-[; ;master.c: 104: }
-[e :UE 143 ]
-}
+[; ;master.c: 103:     ANSELH= 0;
+[e = _ANSELH -> -> 0 `i `uc ]
+"105
+[; ;master.c: 105:     TRISA = 0;
+[e = _TRISA -> -> 0 `i `uc ]
 "106
-[; ;master.c: 106: void requestTemp(void){
+[; ;master.c: 106:     PORTA = 0;
+[e = _PORTA -> -> 0 `i `uc ]
+"108
+[; ;master.c: 108:     TRISD = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+"109
+[; ;master.c: 109:     PORTD = 0;
+[e = _PORTD -> -> 0 `i `uc ]
+"112
+[; ;master.c: 112:     OSCCONbits.IRCF = 0b111;
+[e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
+"113
+[; ;master.c: 113:     SCS = 1;
+[e = _SCS -> -> 1 `i `b ]
+"116
+[; ;master.c: 116:     Lcd_Init();
+[e ( _Lcd_Init ..  ]
+"117
+[; ;master.c: 117:     _delay((unsigned long)((10)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"120
+[; ;master.c: 120:     I2C_Master_Init(100000);
+[e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
+"121
+[; ;master.c: 121: }
+[e :UE 144 ]
+}
+"123
+[; ;master.c: 123: void requestTemp(void){
 [v _requestTemp `(v ~T0 @X0 1 ef ]
 {
 [e :U _requestTemp ]
 [f ]
-"108
-[; ;master.c: 108:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"109
-[; ;master.c: 109:     I2C_Master_Write(0x10 +0);
-[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 0 `i `ui ]
-"110
-[; ;master.c: 110:     I2C_Master_Write('T');
-[e ( _I2C_Master_Write (1 -> 84 `ui ]
-"111
-[; ;master.c: 111:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"112
-[; ;master.c: 112:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"113
-[; ;master.c: 113:     I2C_Master_Write(0x10 +1);
-[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 1 `i `ui ]
-"114
-[; ;master.c: 114:     u_temp = I2C_Master_Read(0);
-[e = _u_temp -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"115
-[; ;master.c: 115:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"116
-[; ;master.c: 116:     _delay((unsigned long)((500)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"119
-[; ;master.c: 119:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"120
-[; ;master.c: 120:     I2C_Master_Write(0x10 +0);
-[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 0 `i `ui ]
-"121
-[; ;master.c: 121:     I2C_Master_Write('t');
-[e ( _I2C_Master_Write (1 -> 116 `ui ]
-"122
-[; ;master.c: 122:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"123
-[; ;master.c: 123:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
 "124
-[; ;master.c: 124:     I2C_Master_Write(0x10 +1);
-[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 1 `i `ui ]
+[; ;master.c: 124:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "125
-[; ;master.c: 125:     d_temp = I2C_Master_Read(0);
-[e = _d_temp -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+[; ;master.c: 125:     I2C_Master_Write(0x20 +0);
+[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 0 `i `ui ]
 "126
-[; ;master.c: 126:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
+[; ;master.c: 126:     I2C_Master_Write('T');
+[e ( _I2C_Master_Write (1 -> 84 `ui ]
 "127
-[; ;master.c: 127:     _delay((unsigned long)((500)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;master.c: 127:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "128
-[; ;master.c: 128: }
-[e :UE 144 ]
-}
+[; ;master.c: 128:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
+"129
+[; ;master.c: 129:     I2C_Master_Write(0x20 +1);
+[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 1 `i `ui ]
 "130
-[; ;master.c: 130: void requestHum(void){
+[; ;master.c: 130:     u_temp = I2C_Master_Read(0);
+[e = _u_temp -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"131
+[; ;master.c: 131:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"132
+[; ;master.c: 132:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"134
+[; ;master.c: 134:     tempC = map(u_temp,0,77,0,150);
+[e = _tempC -> ( _map (4 , , , , _u_temp -> -> 0 `i `uc -> -> 77 `i `uc -> -> 0 `i `uc -> -> 150 `i `f `uc ]
+"135
+[; ;master.c: 135: }
+[e :UE 145 ]
+}
+"137
+[; ;master.c: 137: void requestHum(void){
 [v _requestHum `(v ~T0 @X0 1 ef ]
 {
 [e :U _requestHum ]
 [f ]
-"132
-[; ;master.c: 132:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"133
-[; ;master.c: 133:     I2C_Master_Write(0x10 +0);
-[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 0 `i `ui ]
-"134
-[; ;master.c: 134:     I2C_Master_Write('H');
-[e ( _I2C_Master_Write (1 -> 72 `ui ]
-"135
-[; ;master.c: 135:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"136
-[; ;master.c: 136:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"137
-[; ;master.c: 137:     I2C_Master_Write(0x10 +1);
-[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 1 `i `ui ]
 "138
-[; ;master.c: 138:     u_hum = I2C_Master_Read(0);
-[e = _u_hum -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+[; ;master.c: 138:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "139
-[; ;master.c: 139:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
+[; ;master.c: 139:     I2C_Master_Write(0x10 +0);
+[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 0 `i `ui ]
 "140
-[; ;master.c: 140:     _delay((unsigned long)((500)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;master.c: 140:     I2C_Master_Write('H');
+[e ( _I2C_Master_Write (1 -> 72 `ui ]
 "141
-[; ;master.c: 141: }
-[e :UE 145 ]
-}
+[; ;master.c: 141:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"142
+[; ;master.c: 142:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
 "143
-[; ;master.c: 143: void requestGas(void){
+[; ;master.c: 143:     I2C_Master_Write(0x10 +1);
+[e ( _I2C_Master_Write (1 -> + -> 16 `i -> 1 `i `ui ]
+"144
+[; ;master.c: 144:     u_hum = I2C_Master_Read(0);
+[e = _u_hum -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"145
+[; ;master.c: 145:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"146
+[; ;master.c: 146:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"147
+[; ;master.c: 147: }
+[e :UE 146 ]
+}
+"149
+[; ;master.c: 149: void requestGas(void){
 [v _requestGas `(v ~T0 @X0 1 ef ]
 {
 [e :U _requestGas ]
 [f ]
-"144
-[; ;master.c: 144:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"145
-[; ;master.c: 145:     I2C_Master_Write(0x20 +0);
-[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 0 `i `ui ]
-"146
-[; ;master.c: 146:     I2C_Master_Write('G');
-[e ( _I2C_Master_Write (1 -> 71 `ui ]
-"147
-[; ;master.c: 147:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"148
-[; ;master.c: 148:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"149
-[; ;master.c: 149:     I2C_Master_Write(0x20 +1);
-[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 1 `i `ui ]
 "150
-[; ;master.c: 150:     gas = I2C_Master_Read(0);
-[e = _gas -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+[; ;master.c: 150:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "151
-[; ;master.c: 151:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
+[; ;master.c: 151:     I2C_Master_Write(0x20 +0);
+[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 0 `i `ui ]
 "152
-[; ;master.c: 152:     _delay((unsigned long)((500)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;master.c: 152:     I2C_Master_Write('G');
+[e ( _I2C_Master_Write (1 -> 71 `ui ]
 "153
-[; ;master.c: 153: }
-[e :UE 146 ]
-}
+[; ;master.c: 153:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"154
+[; ;master.c: 154:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
 "155
-[; ;master.c: 155: void requestIR(void){
+[; ;master.c: 155:     I2C_Master_Write(0x20 +1);
+[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 1 `i `ui ]
+"156
+[; ;master.c: 156:     gas = I2C_Master_Read(0);
+[e = _gas -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"157
+[; ;master.c: 157:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"158
+[; ;master.c: 158:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"160
+[; ;master.c: 160:     gasPPM = map(gas,0,255,0,800);
+[e = _gasPPM -> ( _map (4 , , , , _gas -> -> 0 `i `uc -> -> 255 `i `uc -> -> 0 `i `uc -> -> 800 `i `f `uc ]
+"161
+[; ;master.c: 161: }
+[e :UE 147 ]
+}
+"163
+[; ;master.c: 163: void requestIR(void){
 [v _requestIR `(v ~T0 @X0 1 ef ]
 {
 [e :U _requestIR ]
 [f ]
-"156
-[; ;master.c: 156:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"157
-[; ;master.c: 157:     I2C_Master_Write(0x20 +0);
-[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 0 `i `ui ]
-"158
-[; ;master.c: 158:     I2C_Master_Write('I');
-[e ( _I2C_Master_Write (1 -> 73 `ui ]
-"159
-[; ;master.c: 159:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"160
-[; ;master.c: 160:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"161
-[; ;master.c: 161:     I2C_Master_Write(0x20 +1);
-[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 1 `i `ui ]
-"162
-[; ;master.c: 162:     ired = I2C_Master_Read(0);
-[e = _ired -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"163
-[; ;master.c: 163:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
 "164
-[; ;master.c: 164:     _delay((unsigned long)((500)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;master.c: 164:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
 "165
-[; ;master.c: 165: }
-[e :UE 147 ]
-}
+[; ;master.c: 165:     I2C_Master_Write(0x20 +0);
+[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 0 `i `ui ]
+"166
+[; ;master.c: 166:     I2C_Master_Write('I');
+[e ( _I2C_Master_Write (1 -> 73 `ui ]
 "167
-[; ;master.c: 167: void LDC_output(void){
+[; ;master.c: 167:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"168
+[; ;master.c: 168:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
+"169
+[; ;master.c: 169:     I2C_Master_Write(0x20 +1);
+[e ( _I2C_Master_Write (1 -> + -> 32 `i -> 1 `i `ui ]
+"170
+[; ;master.c: 170:     ired = I2C_Master_Read(0);
+[e = _ired -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"171
+[; ;master.c: 171:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"172
+[; ;master.c: 172:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"173
+[; ;master.c: 173: }
+[e :UE 148 ]
+}
+"175
+[; ;master.c: 175: void writeMotors(void){
+[v _writeMotors `(v ~T0 @X0 1 ef ]
+{
+[e :U _writeMotors ]
+[f ]
+"177
+[; ;master.c: 177:     if(u_temp > 80 && gas > 100)
+[e $ ! && > -> _u_temp `i -> 80 `i > -> _gas `i -> 100 `i 150  ]
+"178
+[; ;master.c: 178:         motorCon |= 0x10;
+[e =| _motorCon -> -> 16 `i `uc ]
+[e $U 151  ]
+"180
+[; ;master.c: 180:     else
+[e :U 150 ]
+"181
+[; ;master.c: 181:         motorCon &= 0x0F;
+[e =& _motorCon -> -> 15 `i `uc ]
+[e :U 151 ]
+"185
+[; ;master.c: 185:     switch(servoPos){
+[e $U 153  ]
+{
+"186
+[; ;master.c: 186:         case 0:
+[e :U 154 ]
+"187
+[; ;master.c: 187:             motorCon &= 0xF2;
+[e =& _motorCon -> -> 242 `i `uc ]
+"188
+[; ;master.c: 188:             break;
+[e $U 152  ]
+"189
+[; ;master.c: 189:         case 90:
+[e :U 155 ]
+"190
+[; ;master.c: 190:             motorCon &= 0xF3;
+[e =& _motorCon -> -> 243 `i `uc ]
+"191
+[; ;master.c: 191:             break;
+[e $U 152  ]
+"192
+[; ;master.c: 192:         case 180:
+[e :U 156 ]
+"193
+[; ;master.c: 193:             motorCon &= 0xF4;
+[e =& _motorCon -> -> 244 `i `uc ]
+"194
+[; ;master.c: 194:             break;
+[e $U 152  ]
+"195
+[; ;master.c: 195:         default:
+[e :U 157 ]
+"196
+[; ;master.c: 196:             motorCon &= 0xF2;
+[e =& _motorCon -> -> 242 `i `uc ]
+"197
+[; ;master.c: 197:             break;
+[e $U 152  ]
+"198
+[; ;master.c: 198:     }
+}
+[e $U 152  ]
+[e :U 153 ]
+[e [\ -> _servoPos `i , $ -> 0 `i 154
+ , $ -> 90 `i 155
+ , $ -> 180 `i 156
+ 157 ]
+[e :U 152 ]
+"201
+[; ;master.c: 201:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"202
+[; ;master.c: 202:     I2C_Master_Write(0x30 +0);
+[e ( _I2C_Master_Write (1 -> + -> 48 `i -> 0 `i `ui ]
+"203
+[; ;master.c: 203:     I2C_Master_Write(motorCon);
+[e ( _I2C_Master_Write (1 -> _motorCon `ui ]
+"204
+[; ;master.c: 204:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"205
+[; ;master.c: 205:     _delay((unsigned long)((20)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"206
+[; ;master.c: 206: }
+[e :UE 149 ]
+}
+"208
+[; ;master.c: 208: void LDC_output(void){
 [v _LDC_output `(v ~T0 @X0 1 ef ]
 {
 [e :U _LDC_output ]
 [f ]
-"169
-[; ;master.c: 169:     separar_digitos8(u_temp,Su_temp);
-[e ( _separar_digitos8 (2 , _u_temp &U _Su_temp ]
-"170
-[; ;master.c: 170:     separar_digitos8(d_temp,Sd_temp);
-[e ( _separar_digitos8 (2 , _d_temp &U _Sd_temp ]
-"171
-[; ;master.c: 171:     separar_digitos8(u_hum,Su_hum);
-[e ( _separar_digitos8 (2 , _u_hum &U _Su_hum ]
-"173
-[; ;master.c: 173:     separar_digitos8(gas,Sgas);
-[e ( _separar_digitos8 (2 , _gas &U _Sgas ]
-"174
-[; ;master.c: 174:     separar_digitos8(ired,Sired);
-[e ( _separar_digitos8 (2 , _ired &U _Sired ]
-"176
-[; ;master.c: 176:     Lcd_Set_Cursor(1,1);
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"177
-[; ;master.c: 177:     Lcd_Write_String("T:");
-[e ( _Lcd_Write_String (1 :s 1C ]
-"178
-[; ;master.c: 178:     Lcd_Write_String(Su_temp);
-[e ( _Lcd_Write_String (1 &U _Su_temp ]
-"179
-[; ;master.c: 179:     Lcd_Write_Char('.');
-[e ( _Lcd_Write_Char (1 -> -> 46 `ui `uc ]
-"180
-[; ;master.c: 180:     Lcd_Write_String(Sd_temp);
-[e ( _Lcd_Write_String (1 &U _Sd_temp ]
-"181
-[; ;master.c: 181:     Lcd_Write_String("'C");
-[e ( _Lcd_Write_String (1 :s 2C ]
-"183
-[; ;master.c: 183:     Lcd_Set_Cursor(2,1);
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"184
-[; ;master.c: 184:     Lcd_Write_String("H:");
-[e ( _Lcd_Write_String (1 :s 3C ]
-"185
-[; ;master.c: 185:     Lcd_Write_String(Su_hum);
-[e ( _Lcd_Write_String (1 &U _Su_hum ]
-"186
-[; ;master.c: 186:     Lcd_Write_String("%RH");
-[e ( _Lcd_Write_String (1 :s 4C ]
-"188
-[; ;master.c: 188:     Lcd_Set_Cursor(1,12);
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 12 `i `uc ]
-"189
-[; ;master.c: 189:     Lcd_Write_String("G:");
-[e ( _Lcd_Write_String (1 :s 5C ]
-"190
-[; ;master.c: 190:     Lcd_Write_String(Sgas);
-[e ( _Lcd_Write_String (1 &U _Sgas ]
-"192
-[; ;master.c: 192:     Lcd_Set_Cursor(2,12);
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 12 `i `uc ]
-"193
-[; ;master.c: 193:     Lcd_Write_String("IR:");
-[e ( _Lcd_Write_String (1 :s 6C ]
-"194
-[; ;master.c: 194:     Lcd_Write_String(Sired);
-[e ( _Lcd_Write_String (1 &U _Sired ]
-"195
-[; ;master.c: 195: }
-[e :UE 148 ]
-}
-"197
-[; ;master.c: 197: void separar_digitos8(uint8_t num, char dig8[]){
-[v _separar_digitos8 `(v ~T0 @X0 1 ef2`uc`*uc ]
-{
-[e :U _separar_digitos8 ]
-[v _num `uc ~T0 @X0 1 r1 ]
-[v _dig8 `*uc ~T0 @X0 1 r2 ]
-[f ]
-"198
-[; ;master.c: 198:     uint8_t div1,div2,centenas,decenas,unidades;
-[v _div1 `uc ~T0 @X0 1 a ]
-[v _div2 `uc ~T0 @X0 1 a ]
-[v _centenas `uc ~T0 @X0 1 a ]
-[v _decenas `uc ~T0 @X0 1 a ]
-[v _unidades `uc ~T0 @X0 1 a ]
-"199
-[; ;master.c: 199:     div1 = num / 10;
-[e = _div1 -> / -> _num `i -> 10 `i `uc ]
-"200
-[; ;master.c: 200:     unidades = num % 10;
-[e = _unidades -> % -> _num `i -> 10 `i `uc ]
-"201
-[; ;master.c: 201:     decenas = div1 % 10;
-[e = _decenas -> % -> _div1 `i -> 10 `i `uc ]
-"202
-[; ;master.c: 202:     div2 = div1 / 10;
-[e = _div2 -> / -> _div1 `i -> 10 `i `uc ]
-"203
-[; ;master.c: 203:     centenas = div2 % 10;
-[e = _centenas -> % -> _div2 `i -> 10 `i `uc ]
-"205
-[; ;master.c: 205:     if(decenas == 0){
-[e $ ! == -> _decenas `i -> 0 `i 150  ]
-{
-"206
-[; ;master.c: 206:         dig8[0] = unidades + '0';
-[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + -> _unidades `ui -> 48 `ui `uc ]
-"207
-[; ;master.c: 207:     }
-}
-[e $U 151  ]
-"208
-[; ;master.c: 208:     else if(centenas == 0){
-[e :U 150 ]
-[e $ ! == -> _centenas `i -> 0 `i 152  ]
-{
 "209
-[; ;master.c: 209:         dig8[1] = unidades + '0';
-[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + -> _unidades `ui -> 48 `ui `uc ]
-"210
-[; ;master.c: 210:         dig8[0] = decenas + '0';
-[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + -> _decenas `ui -> 48 `ui `uc ]
+[; ;master.c: 209:     Lcd_Clear();
+[e ( _Lcd_Clear ..  ]
 "211
-[; ;master.c: 211:     }
-}
-[e $U 153  ]
+[; ;master.c: 211:     num_to_string(tempC,Su_temp,3);
+[e ( _num_to_string (3 , , -> _tempC `ui &U _Su_temp -> -> 3 `i `uc ]
 "212
-[; ;master.c: 212:     else{
-[e :U 152 ]
-{
+[; ;master.c: 212:     num_to_string(u_hum,Su_hum,2);
+[e ( _num_to_string (3 , , -> _u_hum `ui &U _Su_hum -> -> 2 `i `uc ]
 "213
-[; ;master.c: 213:         dig8[2] = unidades + '0';
-[e = *U + _dig8 * -> -> 2 `i `x -> -> # *U _dig8 `i `x -> + -> _unidades `ui -> 48 `ui `uc ]
+[; ;master.c: 213:     num_to_string(gasPPM,Sgas,3);
+[e ( _num_to_string (3 , , -> _gasPPM `ui &U _Sgas -> -> 3 `i `uc ]
 "214
-[; ;master.c: 214:         dig8[1] = decenas + '0';
-[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + -> _decenas `ui -> 48 `ui `uc ]
-"215
-[; ;master.c: 215:         dig8[0] = centenas + '0';
-[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + -> _centenas `ui -> 48 `ui `uc ]
-"216
-[; ;master.c: 216:     }
-}
-[e :U 153 ]
-[e :U 151 ]
+[; ;master.c: 214:     num_to_string(ired,Sired,1);
+[e ( _num_to_string (3 , , -> _ired `ui &U _Sired -> -> 1 `i `uc ]
 "217
-[; ;master.c: 217: }
-[e :UE 149 ]
+[; ;master.c: 217:     Lcd_Set_Cursor(1,1);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+"218
+[; ;master.c: 218:     Lcd_Write_String("T:");
+[e ( _Lcd_Write_String (1 :s 1C ]
+"219
+[; ;master.c: 219:     Lcd_Write_String(Su_temp);
+[e ( _Lcd_Write_String (1 &U _Su_temp ]
+"222
+[; ;master.c: 222:     Lcd_Write_String("'C");
+[e ( _Lcd_Write_String (1 :s 2C ]
+"224
+[; ;master.c: 224:     Lcd_Set_Cursor(2,1);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"225
+[; ;master.c: 225:     Lcd_Write_String("H:");
+[e ( _Lcd_Write_String (1 :s 3C ]
+"226
+[; ;master.c: 226:     Lcd_Write_String(Su_hum);
+[e ( _Lcd_Write_String (1 &U _Su_hum ]
+"227
+[; ;master.c: 227:     Lcd_Write_String("%RH");
+[e ( _Lcd_Write_String (1 :s 4C ]
+"229
+[; ;master.c: 229:     Lcd_Set_Cursor(1,9);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 9 `i `uc ]
+"230
+[; ;master.c: 230:     Lcd_Write_String("G:");
+[e ( _Lcd_Write_String (1 :s 5C ]
+"231
+[; ;master.c: 231:     Lcd_Write_String(Sgas);
+[e ( _Lcd_Write_String (1 &U _Sgas ]
+"232
+[; ;master.c: 232:     Lcd_Write_String("ppm");
+[e ( _Lcd_Write_String (1 :s 6C ]
+"234
+[; ;master.c: 234:     Lcd_Set_Cursor(2,9);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 9 `i `uc ]
+"235
+[; ;master.c: 235:     Lcd_Write_String("IR:");
+[e ( _Lcd_Write_String (1 :s 7C ]
+"236
+[; ;master.c: 236:     Lcd_Write_String(Sired);
+[e ( _Lcd_Write_String (1 &U _Sired ]
+"237
+[; ;master.c: 237: }
+[e :UE 158 ]
 }
+"239
+[; ;master.c: 239: void num_to_string(uint16_t num, char dig8[], uint8_t len){
+[v _num_to_string `(v ~T0 @X0 1 ef3`ui`*uc`uc ]
+{
+[e :U _num_to_string ]
+[v _num `ui ~T0 @X0 1 r1 ]
+[v _dig8 `*uc ~T0 @X0 1 r2 ]
+[v _len `uc ~T0 @X0 1 r3 ]
+[f ]
+"240
+[; ;master.c: 240:     uint16_t div1,div2,div3,miles,centenas,decenas,unidades;
+[v _div1 `ui ~T0 @X0 1 a ]
+[v _div2 `ui ~T0 @X0 1 a ]
+[v _div3 `ui ~T0 @X0 1 a ]
+[v _miles `ui ~T0 @X0 1 a ]
+[v _centenas `ui ~T0 @X0 1 a ]
+[v _decenas `ui ~T0 @X0 1 a ]
+[v _unidades `ui ~T0 @X0 1 a ]
+"241
+[; ;master.c: 241:     div1 = num / 10;
+[e = _div1 / _num -> -> 10 `i `ui ]
+"242
+[; ;master.c: 242:     unidades = num % 10;
+[e = _unidades % _num -> -> 10 `i `ui ]
+"243
+[; ;master.c: 243:     div2 = div1 / 10;
+[e = _div2 / _div1 -> -> 10 `i `ui ]
+"244
+[; ;master.c: 244:     decenas = div1 % 10;
+[e = _decenas % _div1 -> -> 10 `i `ui ]
+"245
+[; ;master.c: 245:     div3 = div2 / 10;
+[e = _div3 / _div2 -> -> 10 `i `ui ]
+"246
+[; ;master.c: 246:     centenas = div2 % 10;
+[e = _centenas % _div2 -> -> 10 `i `ui ]
+"247
+[; ;master.c: 247:     miles = div3 % 10;
+[e = _miles % _div3 -> -> 10 `i `ui ]
+"249
+[; ;master.c: 249:     if(len == 1){
+[e $ ! == -> _len `i -> 1 `i 160  ]
+{
+"250
+[; ;master.c: 250:         dig8[0] = unidades + '0';
+[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + _unidades -> 48 `ui `uc ]
+"251
+[; ;master.c: 251:     }
+}
+[e $U 161  ]
+"252
+[; ;master.c: 252:     else if(len == 2){
+[e :U 160 ]
+[e $ ! == -> _len `i -> 2 `i 162  ]
+{
+"253
+[; ;master.c: 253:         dig8[1] = unidades + '0';
+[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + _unidades -> 48 `ui `uc ]
+"254
+[; ;master.c: 254:         dig8[0] = decenas + '0';
+[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + _decenas -> 48 `ui `uc ]
+"255
+[; ;master.c: 255:     }
+}
+[e $U 163  ]
+"256
+[; ;master.c: 256:     else if (len == 3){
+[e :U 162 ]
+[e $ ! == -> _len `i -> 3 `i 164  ]
+{
+"257
+[; ;master.c: 257:         dig8[2] = unidades + '0';
+[e = *U + _dig8 * -> -> 2 `i `x -> -> # *U _dig8 `i `x -> + _unidades -> 48 `ui `uc ]
+"258
+[; ;master.c: 258:         dig8[1] = decenas + '0';
+[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + _decenas -> 48 `ui `uc ]
+"259
+[; ;master.c: 259:         dig8[0] = centenas + '0';
+[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + _centenas -> 48 `ui `uc ]
+"260
+[; ;master.c: 260:     }
+}
+[e $U 165  ]
+"261
+[; ;master.c: 261:     else if (len == 4){
+[e :U 164 ]
+[e $ ! == -> _len `i -> 4 `i 166  ]
+{
+"262
+[; ;master.c: 262:         dig8[3] = unidades + '0';
+[e = *U + _dig8 * -> -> 3 `i `x -> -> # *U _dig8 `i `x -> + _unidades -> 48 `ui `uc ]
+"263
+[; ;master.c: 263:         dig8[2] = decenas + '0';
+[e = *U + _dig8 * -> -> 2 `i `x -> -> # *U _dig8 `i `x -> + _decenas -> 48 `ui `uc ]
+"264
+[; ;master.c: 264:         dig8[1] = centenas + '0';
+[e = *U + _dig8 * -> -> 1 `i `x -> -> # *U _dig8 `i `x -> + _centenas -> 48 `ui `uc ]
+"265
+[; ;master.c: 265:         dig8[0] = miles + '0';
+[e = *U + _dig8 * -> -> 0 `i `x -> -> # *U _dig8 `i `x -> + _miles -> 48 `ui `uc ]
+"266
+[; ;master.c: 266:     }
+}
+[e :U 166 ]
+[e :U 165 ]
+[e :U 163 ]
+[e :U 161 ]
+"267
+[; ;master.c: 267: }
+[e :UE 159 ]
+}
+"269
+[; ;master.c: 269: uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2){
+[v _map `(ui ~T0 @X0 1 ef5`uc`uc`uc`uc`f ]
+{
+[e :U _map ]
+[v _val `uc ~T0 @X0 1 r1 ]
+[v _min1 `uc ~T0 @X0 1 r2 ]
+[v _max1 `uc ~T0 @X0 1 r3 ]
+[v _min2 `uc ~T0 @X0 1 r4 ]
+[v _max2 `f ~T0 @X0 1 r5 ]
+[f ]
+"270
+[; ;master.c: 270:     return ((val-min1)*(max2-min2)/(max1-min1))+min2;
+[e ) -> + / * -> - -> _val `i -> _min1 `i `f - _max2 -> -> _min2 `i `f -> - -> _max1 `i -> _min1 `i `f -> -> _min2 `i `f `ui ]
+[e $UE 167  ]
+"271
+[; ;master.c: 271: }
+[e :UE 167 ]
+}
+[a 6C 112 112 109 0 ]
 [a 4C 37 82 72 0 ]
 [a 2C 39 67 0 ]
 [a 1C 84 58 0 ]
-[a 6C 73 82 58 0 ]
+[a 7C 73 82 58 0 ]
 [a 3C 72 58 0 ]
 [a 5C 71 58 0 ]

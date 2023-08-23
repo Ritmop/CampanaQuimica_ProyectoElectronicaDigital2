@@ -42,12 +42,14 @@ uint8_t discard;
 uint8_t send_data;
 uint8_t request;
 
-int8_t data_ok = 1;
+int8_t data_ok;
 int16_t humedad, temperatura;
 //char u_temp[3];
 //char d_temp[3];
 //char u_hum[3];
 //char d_hum[3];
+
+uint8_t counter = 250;    //Contador para lectura de sensores lentos
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
 void LDC_output(void);
@@ -98,14 +100,19 @@ void __interrupt() isr(void){
 int main(void) {
     setup();
     DHT11_start();  //Prepare DHT11
+    __delay_ms(20);
+    DHT11_start();  //Prepare DHT11
+    __delay_ms(20);
     while(1){
         //Loop
-        __delay_ms(100);
-        //Request data to sensor
-        data_ok = DHT11_read_data(&humedad, &temperatura);
+        
+        //Request data to sensor every 2500ms (2.5s)
+        if(counter >= 250){
+            data_ok = DHT11_read_data(&humedad, &temperatura);
+            counter = 0;
+        }        
         
         //Prepare requested data
-        PORTB = request;
         switch(request){
             case 'T':   //Entero temperatura
                 send_data = (temperatura & 0xFF00)>>8;
@@ -120,10 +127,14 @@ int main(void) {
                 send_data = (humedad & 0x00FF);
                 break;
             default:
-                send_data = 'X';
+                send_data = 0xFF;
                 break;
         }
-        PORTA = send_data;
+
+        counter++;
+        __delay_ms(10);
+        
+        
         
 //        //Data request successful 
 //        if(data_ok){
@@ -142,14 +153,6 @@ int main(void) {
 void setup(void){
     ANSEL = 0;
     ANSELH= 0;
-    
-    TRISA = 0;
-    PORTA = 0;
-    TRISB = 0;
-    PORTB = 0;
-    
-    TRISD = 0;  //LCD output
-    PORTD = 0;
     
     //OSCILLATOR CONFIG
     OSCCONbits.IRCF = 0b111;  //Internal clock frequency 8MHz

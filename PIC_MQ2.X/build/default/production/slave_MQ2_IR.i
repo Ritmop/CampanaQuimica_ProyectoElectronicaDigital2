@@ -2701,15 +2701,19 @@ uint8_t adc_get_channel(void);
 
 
 
+
+
 uint8_t discard;
 uint8_t send_data;
 uint8_t request;
 
 uint8_t MQ2_val;
+uint8_t LM35_val;
 uint8_t IR_sens;
 
 
 void setup(void);
+uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint16_t max2);
 
 
 
@@ -2760,39 +2764,46 @@ int main(void) {
     while(1){
 
 
-        MQ2_val = (adc_read()>>8) & 0x00FF;
-        IR_sens = RA1;
+        if(adc_get_channel() == 0){
+            MQ2_val = (adc_read()>>8) & 0x00FF;
+            adc_sel_channel(1);
+        }
+        else if (adc_get_channel() == 1){
+            LM35_val = (adc_read()>>8) & 0x00FF;
+            adc_sel_channel(0);
+        }
+        PORTB = LM35_val;
+
+        IR_sens = RA2;
 
         switch(request){
             case 'G':
                 send_data = MQ2_val;
                 break;
+            case 'T':
+                send_data = LM35_val;
+                break;
             case 'I':
                 send_data = IR_sens;
                 break;
             default:
-                send_data = 'X';
+                send_data = 0xFF;
                 break;
         }
 
 
 
-
-        PORTB = MQ2_val;
-        _delay((unsigned long)((50)*(8000000/4000.0)));
+        _delay((unsigned long)((10)*(8000000/4000.0)));
     }
 }
 
 void setup(void){
-    ANSEL = 1;
+    ANSEL = 3;
     ANSELH= 0;
-    TRISA = 3;
+    TRISA = 255;
 
     TRISB = 0;
     PORTB = 0;
-
-    TRISD = 0;
-    PORTD = 0;
 
 
     OSCCONbits.IRCF = 0b111;
@@ -2807,4 +2818,8 @@ void setup(void){
 
 
 
+}
+# 187 "slave_MQ2_IR.c"
+uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint16_t max2){
+    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
 }
