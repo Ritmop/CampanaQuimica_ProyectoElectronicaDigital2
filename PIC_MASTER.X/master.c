@@ -5,7 +5,10 @@
  *Compiler: XC8 (v2.41)
  * 
  * Program: Master PIC
- * Hardware: 
+ * Hardware:
+ *          4.7kOhm pull-up resistors in SCL and SDA pins.
+ *          LCD in PORTD
+ *          SCL and SDA 
  * 
  * Created: Aug 20, 2023
  * Last updated:
@@ -40,21 +43,22 @@
 #define address_motors  0x30
 #define read  1
 #define write 0
-#define thresTemp       80  //Temperature threshold (°C)
-#define thresGas        100 //Gas threshold
+#define thresTemp       30  //Temperature threshold (°C)
+#define thresGas        400 //Gas threshold (PPM)
 
-uint8_t u_temp,d_temp,u_hum,d_hum,gas,ired;    //Sensors data
-uint8_t tempC, gasPPM;
-char Su_temp[4];    //Sensor data as strings
-char Sd_temp[3];
-char Su_hum[3];
-char Sd_hum[3];
-char Sgas[4];
-char Sired[2];
+uint8_t n_temp,n_hum,n_gas,n_ired;    //Sensors data as numbers
 
-uint8_t counter;    //Contador para lectura de sensores lentos
+uint8_t  tempC;     //Sensor data convertion
+uint16_t gasPPM;
+
+char S_temp[4];    //Sensor data as strings
+char S_hum [3];
+char S_gas [4];
+char S_ired[2];
+
+uint8_t counter;    //Slow-rate sensor read counter
 uint8_t servoPos = 180;   //Servo position
-uint8_t motorCon;   //Motor control (High nibble: motor DC, Low nibble: Servo)
+uint8_t motorCon;   //Motor control (High nibble: DC motor, Low nibble: Servo)
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
 void requestTemp(void);
@@ -63,8 +67,9 @@ void requestGas(void);
 void requestIR(void);
 void writeMotors(void);
 void LDC_output(void);
+
 void num_to_string(uint16_t num, char dig8[], uint8_t len);
-uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2);
+uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2);
 /*------------------------------- RESET VECTOR -------------------------------*/
 
 /*----------------------------- INTERRUPT VECTOR -----------------------------*/
@@ -81,7 +86,7 @@ int main(void) {
     setup();
     while(1){
         //Loop
-        if (counter >= 10){ //Request every 2500 ms (2.5 s)
+        if (counter >= 15){ //Request every 3000 ms (3 s)
             requestHum();           
             counter = 0;
         }
@@ -93,7 +98,7 @@ int main(void) {
         
         LDC_output();
         
-        __delay_ms(250);
+        __delay_ms(200);
         counter++;
     }
 }
@@ -127,11 +132,11 @@ void requestTemp(void){
     __delay_ms(20);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(address_MQ2_IR+read);
-    u_temp = I2C_Master_Read(0);
+    n_temp = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);    
-    //Convertir valor analogico a grados centígrados
-    tempC = map(u_temp,0,77,0,150);
+    //Map analog value to Celsius
+    tempC = map(n_temp,0,77,0,150);
 }
 
 void requestHum(void){
@@ -141,7 +146,7 @@ void requestHum(void){
     __delay_ms(20);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(address_DHT11+read);
-    u_hum = I2C_Master_Read(0);
+    n_hum = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);
 }
@@ -153,11 +158,11 @@ void requestGas(void){
     __delay_ms(20);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(address_MQ2_IR+read);
-    gas = I2C_Master_Read(0);
+    n_gas = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);    
-    //Convertir valor analogico a ppm
-    gasPPM = map(gas,0,255,0,800);
+    //Map analog value to PPM
+    gasPPM = map(n_gas,0,255,100,800);
 }
 
 void requestIR(void){
@@ -167,33 +172,32 @@ void requestIR(void){
     __delay_ms(20);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(address_MQ2_IR+read);
-    ired = I2C_Master_Read(0);
+    n_ired = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);
 }
 
 void writeMotors(void){
     //Check conditions for water pump
-    if(u_temp > thresTemp && gas > thresGas)
+    if(tempC > thresTemp && gasPPM > thresGas)
         motorCon |= 0x10;   //Set DC, copy Servo
-    
     else
         motorCon &= 0x0F;   //Reset DC, copy Servo
     
     //Update servo position
-    //Position = 2 ? 0deg, 3 ? 90deg, 4 ? 180deg
+    //Position = 2 -> 0deg, 3 -> 90deg, 4 -> 180deg
     switch(servoPos){
         case 0:
-            motorCon &= 0xF2;   //Copy DC, set servo
+            motorCon |= 0x02;   //Copy DC, set servo
             break;
         case 90:
-            motorCon &= 0xF3;   //Copy DC, set servo
+            motorCon |= 0x03;   //Copy DC, set servo
             break;
         case 180:
-            motorCon &= 0xF4;   //Copy DC, set servo
+            motorCon |= 0x04;   //Copy DC, set servo
             break;
         default:
-            motorCon &= 0xF2;   //Default position 0 deg
+            motorCon |= 0x02;   //Default position 0 deg
             break;
     }
     
@@ -207,33 +211,32 @@ void writeMotors(void){
 
 void LDC_output(void){
     Lcd_Clear();
-    //Integer to string conversion
-    num_to_string(tempC,Su_temp,3);
-    num_to_string(u_hum,Su_hum,2);
-    num_to_string(gasPPM,Sgas,3);
-    num_to_string(ired,Sired,1);
+    //Number to string conversion
+    num_to_string(tempC,S_temp,3);
+    num_to_string(n_hum,S_hum,2);
+    num_to_string(gasPPM,S_gas,3);
+    num_to_string(n_ired,S_ired,1);
     
     //Display in LCD
+    //Temperature (°C)
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("T:");
-    Lcd_Write_String(Su_temp);
-    //Lcd_Write_Char('.');
-    //Lcd_Write_String(Sd_temp);
-    Lcd_Write_String("'C");
-    
+    Lcd_Write_String(S_temp);
+    Lcd_Write_String("^C");
+    //Humidity (%RH)
     Lcd_Set_Cursor(2,1);
     Lcd_Write_String("H:");
-    Lcd_Write_String(Su_hum);
+    Lcd_Write_String(S_hum);
     Lcd_Write_String("%RH");
-    
+    //Gas (ppm)
     Lcd_Set_Cursor(1,9);
     Lcd_Write_String("G:");
-    Lcd_Write_String(Sgas);    
+    Lcd_Write_String(S_gas);    
     Lcd_Write_String("ppm");
-    
+    //Infrared (Digital)
     Lcd_Set_Cursor(2,9);
     Lcd_Write_String("IR:");
-    Lcd_Write_String(Sired);
+    Lcd_Write_String(S_ired);
 }
 
 void num_to_string(uint16_t num, char dig8[], uint8_t len){
@@ -258,14 +261,8 @@ void num_to_string(uint16_t num, char dig8[], uint8_t len){
         dig8[1] = decenas  + '0';
         dig8[0] = centenas + '0';
     }
-    else if (len == 4){
-        dig8[3] = unidades + '0';
-        dig8[2] = decenas  + '0';
-        dig8[1] = centenas + '0';
-        dig8[0] = miles    + '0';
-    }
 }
 
-uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2){
+uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2){
     return ((val-min1)*(max2-min2)/(max1-min1))+min2;
 }

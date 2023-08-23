@@ -2709,14 +2709,15 @@ void Lcd_Shift_Left(void);
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
 # 46 "master.c"
-uint8_t u_temp,d_temp,u_hum,d_hum,gas,ired;
-uint8_t tempC, gasPPM;
-char Su_temp[4];
-char Sd_temp[3];
-char Su_hum[3];
-char Sd_hum[3];
-char Sgas[4];
-char Sired[2];
+uint8_t n_temp,n_hum,n_gas,n_ired;
+
+uint8_t tempC;
+uint16_t gasPPM;
+
+char S_temp[4];
+char S_hum [3];
+char S_gas [4];
+char S_ired[2];
 
 uint8_t counter;
 uint8_t servoPos = 180;
@@ -2729,8 +2730,9 @@ void requestGas(void);
 void requestIR(void);
 void writeMotors(void);
 void LDC_output(void);
+
 void num_to_string(uint16_t num, char dig8[], uint8_t len);
-uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2);
+uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2);
 
 
 
@@ -2747,7 +2749,7 @@ int main(void) {
     setup();
     while(1){
 
-        if (counter >= 10){
+        if (counter >= 15){
             requestHum();
             counter = 0;
         }
@@ -2759,7 +2761,7 @@ int main(void) {
 
         LDC_output();
 
-        _delay((unsigned long)((250)*(8000000/4000.0)));
+        _delay((unsigned long)((200)*(8000000/4000.0)));
         counter++;
     }
 }
@@ -2793,11 +2795,11 @@ void requestTemp(void){
     _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x20 +1);
-    u_temp = I2C_Master_Read(0);
+    n_temp = I2C_Master_Read(0);
     I2C_Master_Stop();
     _delay((unsigned long)((20)*(8000000/4000.0)));
 
-    tempC = map(u_temp,0,77,0,150);
+    tempC = map(n_temp,0,77,0,150);
 }
 
 void requestHum(void){
@@ -2807,7 +2809,7 @@ void requestHum(void){
     _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x10 +1);
-    u_hum = I2C_Master_Read(0);
+    n_hum = I2C_Master_Read(0);
     I2C_Master_Stop();
     _delay((unsigned long)((20)*(8000000/4000.0)));
 }
@@ -2819,11 +2821,11 @@ void requestGas(void){
     _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x20 +1);
-    gas = I2C_Master_Read(0);
+    n_gas = I2C_Master_Read(0);
     I2C_Master_Stop();
     _delay((unsigned long)((20)*(8000000/4000.0)));
 
-    gasPPM = map(gas,0,255,0,800);
+    gasPPM = map(n_gas,0,255,100,800);
 }
 
 void requestIR(void){
@@ -2833,16 +2835,15 @@ void requestIR(void){
     _delay((unsigned long)((20)*(8000000/4000.0)));
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0x20 +1);
-    ired = I2C_Master_Read(0);
+    n_ired = I2C_Master_Read(0);
     I2C_Master_Stop();
     _delay((unsigned long)((20)*(8000000/4000.0)));
 }
 
 void writeMotors(void){
 
-    if(u_temp > 80 && gas > 100)
+    if(tempC > 30 && gasPPM > 400)
         motorCon |= 0x10;
-
     else
         motorCon &= 0x0F;
 
@@ -2850,16 +2851,16 @@ void writeMotors(void){
 
     switch(servoPos){
         case 0:
-            motorCon &= 0xF2;
+            motorCon |= 0x02;
             break;
         case 90:
-            motorCon &= 0xF3;
+            motorCon |= 0x03;
             break;
         case 180:
-            motorCon &= 0xF4;
+            motorCon |= 0x04;
             break;
         default:
-            motorCon &= 0xF2;
+            motorCon |= 0x02;
             break;
     }
 
@@ -2874,32 +2875,31 @@ void writeMotors(void){
 void LDC_output(void){
     Lcd_Clear();
 
-    num_to_string(tempC,Su_temp,3);
-    num_to_string(u_hum,Su_hum,2);
-    num_to_string(gasPPM,Sgas,3);
-    num_to_string(ired,Sired,1);
+    num_to_string(tempC,S_temp,3);
+    num_to_string(n_hum,S_hum,2);
+    num_to_string(gasPPM,S_gas,3);
+    num_to_string(n_ired,S_ired,1);
+
 
 
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("T:");
-    Lcd_Write_String(Su_temp);
-
-
-    Lcd_Write_String("'C");
+    Lcd_Write_String(S_temp);
+    Lcd_Write_String("^C");
 
     Lcd_Set_Cursor(2,1);
     Lcd_Write_String("H:");
-    Lcd_Write_String(Su_hum);
+    Lcd_Write_String(S_hum);
     Lcd_Write_String("%RH");
 
     Lcd_Set_Cursor(1,9);
     Lcd_Write_String("G:");
-    Lcd_Write_String(Sgas);
+    Lcd_Write_String(S_gas);
     Lcd_Write_String("ppm");
 
     Lcd_Set_Cursor(2,9);
     Lcd_Write_String("IR:");
-    Lcd_Write_String(Sired);
+    Lcd_Write_String(S_ired);
 }
 
 void num_to_string(uint16_t num, char dig8[], uint8_t len){
@@ -2924,14 +2924,8 @@ void num_to_string(uint16_t num, char dig8[], uint8_t len){
         dig8[1] = decenas + '0';
         dig8[0] = centenas + '0';
     }
-    else if (len == 4){
-        dig8[3] = unidades + '0';
-        dig8[2] = decenas + '0';
-        dig8[1] = centenas + '0';
-        dig8[0] = miles + '0';
-    }
 }
 
-uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, float max2){
+uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2){
     return ((val-min1)*(max2-min2)/(max1-min1))+min2;
 }

@@ -6,6 +6,8 @@
  * 
  * Program: Slave PIC for DHT11 sensor
  * Hardware: 
+ *          SCL and SDA connected to Master.
+ * 
  * 
  * Created: Aug 18, 2023
  * Last updated:
@@ -44,10 +46,6 @@ uint8_t request;
 
 int8_t data_ok;
 int16_t humedad, temperatura;
-//char u_temp[3];
-//char d_temp[3];
-//char u_hum[3];
-//char d_hum[3];
 
 uint8_t counter = 250;    //Contador para lectura de sensores lentos
 /*-------------------------------- PROTOTYPES --------------------------------*/
@@ -100,9 +98,7 @@ void __interrupt() isr(void){
 int main(void) {
     setup();
     DHT11_start();  //Prepare DHT11
-    __delay_ms(20);
-    DHT11_start();  //Prepare DHT11
-    __delay_ms(20);
+    __delay_ms(100);
     while(1){
         //Loop
         
@@ -132,21 +128,7 @@ int main(void) {
         }
 
         counter++;
-        __delay_ms(10);
-        
-        
-        
-//        //Data request successful 
-//        if(data_ok){
-//            Lcd_Clear();
-//            LDC_output();
-//        }
-//       //Data request not successful
-//        else {
-//            Lcd_Set_Cursor(2,1);
-//            Lcd_Clear();
-//            Lcd_Write_String("READ ERROR");
-//        }           
+        __delay_ms(10);       
     }
 }
 /*-------------------------------- SUBROUTINES -------------------------------*/
@@ -160,39 +142,4 @@ void setup(void){
     
     //Initialize I2C Com    
     I2C_Slave_Init(address_DHT11);
-    
-//    //Initialize LCB 4bit mode
-//    Lcd_Init();
-//    __delay_ms(10);
 }
-//
-//void LDC_output(void){
-//    //Separar enteros y decimales
-//    separar_digitos8((temperatura & 0xFF00)>>8,u_temp);
-//    separar_digitos8((temperatura & 0x00FF),d_temp);
-//    separar_digitos8((humedad & 0xFF00)>>8,u_hum);
-//    separar_digitos8((humedad & 0x00FF),d_hum);
-//    
-//    Lcd_Set_Cursor(1,1);
-//    Lcd_Write_String("T: ");
-//    Lcd_Write_String(u_temp);
-//    Lcd_Write_Char('.');
-//    Lcd_Write_String(d_temp);
-//    Lcd_Write_String("'C");
-//    
-//    Lcd_Set_Cursor(2,1);
-//    Lcd_Write_String("H:  ");
-//    Lcd_Write_String(u_hum);
-//    Lcd_Write_String(" %RH");
-//    
-//}
-//
-//void separar_digitos8(uint8_t num, char dig8[]){
-//    uint8_t div1,decenas,unidades;
-//    div1 = num / 10;
-//    unidades = num % 10;
-//    decenas = div1 % 10;    
-//    
-//    dig8[1] = unidades + 0x30;
-//    dig8[0] = decenas  + 0x30;
-//}

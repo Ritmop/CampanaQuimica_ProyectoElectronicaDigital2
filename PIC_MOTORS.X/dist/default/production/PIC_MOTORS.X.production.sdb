@@ -5,12 +5,8 @@
 [d frameptr 0 ]
 "5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\__lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
-"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
-"15 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\Umul16.c
-[v ___wmul __wmul `(ui  1 e 2 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\Umul8_16.c
 [v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
 "6 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\pic\__eeprom.c
@@ -23,25 +19,23 @@
 [v _I2C_Slave_Init I2C_Slave_Init `(v  1 e 1 0 ]
 "59 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MOTORS.X\slave_motors.c
 [v _isr isr `II(v  1 e 1 0 ]
-"107
+"108
 [v _main main `(i  1 e 2 0 ]
-"126
+"128
 [v _setup setup `(v  1 e 1 0 ]
 "152
 [v _initPWM initPWM `(v  1 e 1 0 ]
-"167
+"163
 [v _angle_to_PWM angle_to_PWM `(v  1 e 1 0 ]
 "59 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
 "166
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
-"228
-[v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
-[s S95 . 1 `uc 1 PS 1 0 :3:0 
+[s S93 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -49,17 +43,15 @@
 `uc 1 nRBPU 1 0 :1:7 
 ]
 "1366
-[s S102 . 1 `uc 1 PS0 1 0 :1:0 
+[s S100 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 ]
-[u S106 . 1 `S95 1 . 1 0 `S102 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES106  1 e 1 @129 ]
+[u S104 . 1 `S93 1 . 1 0 `S100 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES104  1 e 1 @129 ]
 "1416
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
-"1478
-[v _TRISB TRISB `VEuc  1 e 1 @134 ]
-[s S164 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S158 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -69,25 +61,25 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1557
-[u S173 . 1 `S164 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES173  1 e 1 @135 ]
-[s S57 . 1 `uc 1 SCS 1 0 :1:0 
+[u S167 . 1 `S158 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES167  1 e 1 @135 ]
+[s S55 . 1 `uc 1 SCS 1 0 :1:0 
 `uc 1 LTS 1 0 :1:1 
 `uc 1 HTS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 ]
 "1882
-[s S63 . 1 `uc 1 . 1 0 :4:0 
+[s S61 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 IRCF0 1 0 :1:4 
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S68 . 1 `S57 1 . 1 0 `S63 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES68  1 e 1 @143 ]
+[u S66 . 1 `S55 1 . 1 0 `S61 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES66  1 e 1 @143 ]
 "1979
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
-[s S185 . 1 `uc 1 SEN 1 0 :1:0 
+[s S179 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -97,8 +89,8 @@
 `uc 1 GCEN 1 0 :1:7 
 ]
 "1996
-[u S194 . 1 `S185 1 . 1 0 ]
-[v _SSPCON2bits SSPCON2bits `VES194  1 e 1 @145 ]
+[u S188 . 1 `S179 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES188  1 e 1 @145 ]
 "2048
 [v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
 "2177
@@ -157,14 +149,14 @@
 [v _readI2C readI2C `uc  1 e 1 0 ]
 "44
 [v _TMR0count TMR0count `uc  1 e 1 0 ]
-"46
+"47
 [v _servoPos servoPos `uc  1 e 1 0 ]
-"107
+"108
 [v _main main `(i  1 e 2 0 ]
 {
-"124
-} 0
 "126
+} 0
+"128
 [v _setup setup `(v  1 e 1 0 ]
 {
 "150
@@ -183,17 +175,17 @@
 [v I2C_Slave_Init@address address `uc  1 a 1 4 ]
 "105
 } 0
-"167 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MOTORS.X\slave_motors.c
+"163 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MOTORS.X\slave_motors.c
 [v _angle_to_PWM angle_to_PWM `(v  1 e 1 0 ]
 {
 [v angle_to_PWM@position position `uc  1 a 1 wreg ]
 [v angle_to_PWM@position position `uc  1 a 1 wreg ]
-"169
+"165
 [v angle_to_PWM@position position `uc  1 a 1 4 ]
 "176
 } 0
 "59
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"98
+"99
 } 0

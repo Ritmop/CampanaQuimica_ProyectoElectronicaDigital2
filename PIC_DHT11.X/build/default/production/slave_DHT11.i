@@ -2711,10 +2711,6 @@ uint8_t request;
 int8_t data_ok;
 int16_t humedad, temperatura;
 
-
-
-
-
 uint8_t counter = 250;
 
 void setup(void);
@@ -2766,9 +2762,7 @@ void __attribute__((picinterrupt(("")))) isr(void){
 int main(void) {
     setup();
     DHT11_start();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-    DHT11_start();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
+    _delay((unsigned long)((100)*(8000000/4000.0)));
     while(1){
 
 
@@ -2799,7 +2793,6 @@ int main(void) {
 
         counter++;
         _delay((unsigned long)((10)*(8000000/4000.0)));
-# 150 "slave_DHT11.c"
     }
 }
 
@@ -2813,8 +2806,4 @@ void setup(void){
 
 
     I2C_Slave_Init(0x10);
-
-
-
-
 }

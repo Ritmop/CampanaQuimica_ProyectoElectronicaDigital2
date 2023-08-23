@@ -42,16 +42,16 @@ uint8_t discard;
 uint8_t send_data;
 uint8_t readI2C;
 uint8_t TMR0count = 0;
+uint8_t TMR0count2 = 0;
 
 uint8_t servoPos = 2;
+uint8_t prevPos = 0;
 uint8_t stateDC = 0;
         
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
 void initPWM(void);
 void angle_to_PWM(uint8_t angle);
-
-uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint8_t max2);
 
 /*------------------------------- RESET VECTOR -------------------------------*/
 
@@ -92,6 +92,7 @@ void __interrupt() isr (void){
     
     if(T0IF){
         TMR0count++;
+//        TMR0count2++;
         TMR0 = TMR0_n;
         T0IF = 0;
     }
@@ -112,8 +113,9 @@ int main(void) {
         //Servo position
         PORTA = readI2C;
         servoPos = readI2C & 0x0F;
-        PORTB = TMR0count;
-        angle_to_PWM(servoPos);
+        
+//        if(servoPos != prevPos)
+            angle_to_PWM(servoPos); 
         
         //DC motor state
         if((readI2C & 0xF0) == 0x10)
@@ -130,8 +132,6 @@ void setup(void){
     
     TRISA = 0;
     PORTA = 0;
-    TRISB = 0;
-    PORTB = 0;
     
     TRISC0 = 0;
     TRISC2 = 0;
@@ -160,10 +160,6 @@ void initPWM(void){
     TMR0 = TMR0_n;
 }
 
-uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint8_t max2){
-    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
-}
-
 void angle_to_PWM(uint8_t position){
     //Position = 2 ? 0deg, 3 ? 90deg, 4 ? 180deg
     if(TMR0count >= 40){
@@ -171,6 +167,10 @@ void angle_to_PWM(uint8_t position){
         servoPin = 1;
     }
     else if (TMR0count == position){                        
-        servoPin = 0;
+        servoPin = 0;           
     }
+//    if(TMR0count2 >= 200){ //Send 5 pulses
+//        TMR0count2 = 0;
+//        //prevPos = servoPos; //Update last position
+//    }
 }

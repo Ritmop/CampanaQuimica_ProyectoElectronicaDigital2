@@ -308,8 +308,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../PIC_MASTER.X/I2C.c: 19:     SSPCON2 = 0;
 [e = _SSPCON2 -> -> 0 `i `uc ]
 "20
-[; ;../PIC_MASTER.X/I2C.c: 20:     SSPADD = (500000/(4*c))-1;
-[e = _SSPADD -> - / -> -> 500000 `l `ul * -> -> -> 4 `i `l `ul _c -> -> -> 1 `i `l `ul `uc ]
+[; ;../PIC_MASTER.X/I2C.c: 20:     SSPADD = (8000000/(4*c))-1;
+[e = _SSPADD -> - / -> -> 8000000 `l `ul * -> -> -> 4 `i `l `ul _c -> -> -> 1 `i `l `ul `uc ]
 "21
 [; ;../PIC_MASTER.X/I2C.c: 21:     SSPSTAT = 0;
 [e = _SSPSTAT -> -> 0 `i `uc ]

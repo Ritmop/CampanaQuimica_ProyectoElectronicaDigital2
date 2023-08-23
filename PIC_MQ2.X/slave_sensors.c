@@ -1,5 +1,5 @@
 /* 
- * File:   slave_MQ2_IR.c
+ * File:   slave_sensors.c
  * Device: PIC16F887
  * Author: Judah Pérez - 21536
  *Compiler: XC8 (v2.41)

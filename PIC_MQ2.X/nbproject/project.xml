@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>PIC_MQ2_IR</name>
+            <name>PIC_SENSORS</name>
             <creation-uuid>e8b0002a-0fe9-4a3a-860d-1cb9a9be36aa</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>

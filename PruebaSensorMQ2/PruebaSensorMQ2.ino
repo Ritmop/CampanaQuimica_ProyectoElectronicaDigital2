@@ -1,12 +1,11 @@
 #define         MQ1                       (A0)     //define la entrada analogica para el sensor
 #define         RL_VALOR             (5)     //define el valor de la resistencia mde carga en kilo ohms
-#define         RAL       (9.83)  // resistencia del sensor en el aire limpio / RO, que se deriva de la tabla de la hoja de datos
+#define         RAL       (9.83)  // resistencia del sensor en el aire limpio / RO, que se deriva de la                                             tabla de la hoja de datos
 #define         GAS_LP                      (0)
 String inputstring = "";                                                        //Cadena recibida desde el PC
 float           LPCurve[3]  =  {2.3,0.21,-0.47};
 float           Ro           =  10;
 void setup(){
-  //pinMode(A0,INPUT);
 Serial.begin(9600);                                                                  //Inicializa Serial a 9600 baudios
  Serial.println("Iniciando ...");
    //configuracion del sensor
@@ -22,6 +21,8 @@ Serial.begin(9600);                                                             
 void loop()
 {
    Serial.print("LP:");
+   Serial.print(analogRead(A0)*255/1023);
+   Serial.print("    ");
    Serial.print(porcentaje_gas(lecturaMQ(MQ1)/Ro,GAS_LP) );
    Serial.print( "ppm" );
    Serial.print("    ");

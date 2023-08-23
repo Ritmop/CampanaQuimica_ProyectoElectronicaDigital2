@@ -2698,16 +2698,16 @@ uint8_t discard;
 uint8_t send_data;
 uint8_t readI2C;
 uint8_t TMR0count = 0;
+uint8_t TMR0count2 = 0;
 
 uint8_t servoPos = 2;
+uint8_t prevPos = 0;
 uint8_t stateDC = 0;
 
 
 void setup(void);
 void initPWM(void);
 void angle_to_PWM(uint8_t angle);
-
-uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint8_t max2);
 
 
 
@@ -2748,11 +2748,12 @@ void __attribute__((picinterrupt(("")))) isr (void){
 
     if(T0IF){
         TMR0count++;
+
         TMR0 = 131;
         T0IF = 0;
     }
 }
-# 107 "slave_motors.c"
+# 108 "slave_motors.c"
 int main(void) {
     setup();
     while(1){
@@ -2761,8 +2762,9 @@ int main(void) {
 
         PORTA = readI2C;
         servoPos = readI2C & 0x0F;
-        PORTB = TMR0count;
-        angle_to_PWM(servoPos);
+
+
+            angle_to_PWM(servoPos);
 
 
         if((readI2C & 0xF0) == 0x10)
@@ -2779,8 +2781,6 @@ void setup(void){
 
     TRISA = 0;
     PORTA = 0;
-    TRISB = 0;
-    PORTB = 0;
 
     TRISC0 = 0;
     TRISC2 = 0;
@@ -2809,10 +2809,6 @@ void initPWM(void){
     TMR0 = 131;
 }
 
-uint8_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, uint8_t max2){
-    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
-}
-
 void angle_to_PWM(uint8_t position){
 
     if(TMR0count >= 40){
@@ -2822,4 +2818,8 @@ void angle_to_PWM(uint8_t position){
     else if (TMR0count == position){
         RC2 = 0;
     }
+
+
+
+
 }

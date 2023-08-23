@@ -30,8 +30,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v __delay `JF36 ~T0 @X0 0 e ]
 [p i __delay ]
 [p mainexit ]
-"54 slave_DHT11.c
-[; ;slave_DHT11.c: 54:         SSPIF = 0;
+"50 slave_DHT11.c
+[; ;slave_DHT11.c: 50:         SSPIF = 0;
 [v _setup `(v ~T0 @X0 0 ef ]
 "24 ./DHT11.h
 [; ;./DHT11.h: 24: void DHT11_start(void);
@@ -301,233 +301,237 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "22 slave_DHT11.c
-[; ;slave_DHT11.c: 22: 
+[; ;slave_DHT11.c: 22:         CKP = 0;
 [p x FOSC  =  INTRC_NOCLKOUT ]
 "23
-[; ;slave_DHT11.c: 23: void __attribute__((picinterrupt(("")))) isr(void){
+[; ;slave_DHT11.c: 23: 
 [p x WDTE  =  OFF        ]
 "24
-[; ;slave_DHT11.c: 24:     if(SSPIF){
+[; ;slave_DHT11.c: 24:         if (SSPOV || WCOL ){
 [p x PWRTE  =  OFF       ]
 "25
-[; ;slave_DHT11.c: 25: 
+[; ;slave_DHT11.c: 25:             discard = SSPBUF;
 [p x MCLRE  =  OFF       ]
 "26
-[; ;slave_DHT11.c: 26:         CKP = 0;
+[; ;slave_DHT11.c: 26:             SSPOV = 0;
 [p x CP  =  OFF          ]
 "27
-[; ;slave_DHT11.c: 27: 
+[; ;slave_DHT11.c: 27:             WCOL = 0;
 [p x CPD  =  OFF         ]
 "28
-[; ;slave_DHT11.c: 28:         if (SSPOV || WCOL ){
+[; ;slave_DHT11.c: 28:             CKP = 1;
 [p x BOREN  =  OFF       ]
 "29
-[; ;slave_DHT11.c: 29:             discard = SSPBUF;
+[; ;slave_DHT11.c: 29:         }
 [p x IESO  =  OFF        ]
 "30
-[; ;slave_DHT11.c: 30:             SSPOV = 0;
+[; ;slave_DHT11.c: 30: 
 [p x FCMEN  =  OFF       ]
 "31
-[; ;slave_DHT11.c: 31:             WCOL = 0;
+[; ;slave_DHT11.c: 31:         if(!D_nA && !R_nW) {
 [p x LVP  =  OFF          ]
 "34
 [; ;slave_DHT11.c: 34: 
 [p x BOR4V  =  BOR40V    ]
 "35
-[; ;slave_DHT11.c: 35:         if(!D_nA && !R_nW) {
+[; ;slave_DHT11.c: 35:             SSPIF = 0;
 [p x WRT  =  OFF         ]
 "41
-[; ;slave_DHT11.c: 41:             while(!BF);
+[; ;slave_DHT11.c: 41:         else if(!D_nA && R_nW){
 [v _discard `uc ~T0 @X0 1 e ]
 "42
-[; ;slave_DHT11.c: 42:             request = SSPBUF;
+[; ;slave_DHT11.c: 42:             discard = SSPBUF;
 [v _send_data `uc ~T0 @X0 1 e ]
 "43
-[; ;slave_DHT11.c: 43:             _delay((unsigned long)((250)*(8000000/4000000.0)));
+[; ;slave_DHT11.c: 43:             BF = 0;
 [v _request `uc ~T0 @X0 1 e ]
 "45
-[; ;slave_DHT11.c: 45:         else if(!D_nA && R_nW){
+[; ;slave_DHT11.c: 45:             CKP = 1;
 [v _data_ok `c ~T0 @X0 1 e ]
 "46
-[; ;slave_DHT11.c: 46:             discard = SSPBUF;
+[; ;slave_DHT11.c: 46:             _delay((unsigned long)((250)*(8000000/4000000.0)));
 [v _humedad `i ~T0 @X0 1 e ]
 [v _temperatura `i ~T0 @X0 1 e ]
-"52
-[; ;slave_DHT11.c: 52:         }
+"48
+[; ;slave_DHT11.c: 48:         }
 [v _counter `uc ~T0 @X0 1 e ]
 [i _counter
 -> -> 250 `i `uc
 ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"60
-[; ;slave_DHT11.c: 60: 
+"56
+[; ;slave_DHT11.c: 56: 
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"61
-[; ;slave_DHT11.c: 61: 
+"57
+[; ;slave_DHT11.c: 57: 
 [e $ ! _SSPIF 139  ]
 {
-"63
-[; ;slave_DHT11.c: 63: int main(void) {
+"59
+[; ;slave_DHT11.c: 59: int main(void) {
 [e = _CKP -> -> 0 `i `b ]
-"65
-[; ;slave_DHT11.c: 65:     DHT11_start();
+"61
+[; ;slave_DHT11.c: 61:     DHT11_start();
 [e $ ! || _SSPOV _WCOL 140  ]
 {
-"66
-[; ;slave_DHT11.c: 66:     _delay((unsigned long)((20)*(8000000/4000.0)));
+"62
+[; ;slave_DHT11.c: 62:     _delay((unsigned long)((100)*(8000000/4000.0)));
 [e = _discard _SSPBUF ]
-"67
-[; ;slave_DHT11.c: 67:     DHT11_start();
+"63
+[; ;slave_DHT11.c: 63:     while(1){
 [e = _SSPOV -> -> 0 `i `b ]
-"68
-[; ;slave_DHT11.c: 68:     _delay((unsigned long)((20)*(8000000/4000.0)));
+"64
+[; ;slave_DHT11.c: 64: 
 [e = _WCOL -> -> 0 `i `b ]
-"69
-[; ;slave_DHT11.c: 69:     while(1){
+"65
+[; ;slave_DHT11.c: 65: 
 [e = _CKP -> -> 1 `i `b ]
-"70
-[; ;slave_DHT11.c: 70: 
+"66
+[; ;slave_DHT11.c: 66: 
 }
 [e :U 140 ]
-"72
-[; ;slave_DHT11.c: 72: 
+"68
+[; ;slave_DHT11.c: 68:             data_ok = DHT11_read_data(&humedad, &temperatura);
 [e $ ! && ! _D_nA ! _R_nW 141  ]
 {
-"74
-[; ;slave_DHT11.c: 74:             data_ok = DHT11_read_data(&humedad, &temperatura);
+"70
+[; ;slave_DHT11.c: 70:         }
 [e = _discard _SSPBUF ]
-"76
-[; ;slave_DHT11.c: 76:         }
+"72
+[; ;slave_DHT11.c: 72: 
 [e = _SSPIF -> -> 0 `i `b ]
-"77
-[; ;slave_DHT11.c: 77: 
+"73
+[; ;slave_DHT11.c: 73:         switch(request){
 [e = _CKP -> -> 1 `i `b ]
-"78
-[; ;slave_DHT11.c: 78: 
+"74
+[; ;slave_DHT11.c: 74:             case 'T':
 [e $U 142  ]
 [e :U 143 ]
 [e :U 142 ]
 [e $ ! _BF 143  ]
 [e :U 144 ]
-"79
-[; ;slave_DHT11.c: 79:         switch(request){
+"75
+[; ;slave_DHT11.c: 75:                 send_data = (temperatura & 0xFF00)>>8;
 [e = _request _SSPBUF ]
-"80
-[; ;slave_DHT11.c: 80:             case 'T':
+"76
+[; ;slave_DHT11.c: 76:                 break;
 [e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"81
-[; ;slave_DHT11.c: 81:                 send_data = (temperatura & 0xFF00)>>8;
+"77
+[; ;slave_DHT11.c: 77:             case 't':
 }
 [e $U 145  ]
-"82
-[; ;slave_DHT11.c: 82:                 break;
+"78
+[; ;slave_DHT11.c: 78:                 send_data = (temperatura & 0x00FF);
 [e :U 141 ]
 [e $ ! && ! _D_nA _R_nW 146  ]
 {
-"83
-[; ;slave_DHT11.c: 83:             case 't':
+"79
+[; ;slave_DHT11.c: 79:                 break;
 [e = _discard _SSPBUF ]
-"84
-[; ;slave_DHT11.c: 84:                 send_data = (temperatura & 0x00FF);
+"80
+[; ;slave_DHT11.c: 80:             case 'H':
 [e = _BF -> -> 0 `i `b ]
-"85
-[; ;slave_DHT11.c: 85:                 break;
+"81
+[; ;slave_DHT11.c: 81:                 send_data = (humedad & 0xFF00)>>8;
 [e = _SSPBUF _send_data ]
-"86
-[; ;slave_DHT11.c: 86:             case 'H':
+"82
+[; ;slave_DHT11.c: 82:                 break;
 [e = _CKP -> -> 1 `i `b ]
-"87
-[; ;slave_DHT11.c: 87:                 send_data = (humedad & 0xFF00)>>8;
+"83
+[; ;slave_DHT11.c: 83:             case 'h':
 [e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"88
-[; ;slave_DHT11.c: 88:                 break;
+"84
+[; ;slave_DHT11.c: 84:                 send_data = (humedad & 0x00FF);
 [e $U 147  ]
 [e :U 148 ]
 [e :U 147 ]
 [e $ _BF 148  ]
 [e :U 149 ]
-"89
-[; ;slave_DHT11.c: 89:             case 'h':
+"85
+[; ;slave_DHT11.c: 85:                 break;
 }
 [e :U 146 ]
 [e :U 145 ]
-"91
-[; ;slave_DHT11.c: 91:                 break;
+"87
+[; ;slave_DHT11.c: 87:                 send_data = 0xFF;
 [e = _SSPIF -> -> 0 `i `b ]
-"92
-[; ;slave_DHT11.c: 92:             default:
+"88
+[; ;slave_DHT11.c: 88:                 break;
 }
 [e :U 139 ]
-"93
-[; ;slave_DHT11.c: 93:                 send_data = 0xFF;
+"89
+[; ;slave_DHT11.c: 89:         }
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"100
+"96
+[; ;slave_DHT11.c: 96: void setup(void){
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"101
+"97
+[; ;slave_DHT11.c: 97:     ANSEL = 0;
 [e ( _setup ..  ]
-"102
+"98
+[; ;slave_DHT11.c: 98:     ANSELH= 0;
 [e ( _DHT11_start ..  ]
-"103
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"104
-[e ( _DHT11_start ..  ]
-"105
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"106
+"99
+[; ;slave_DHT11.c: 99: 
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"100
+[; ;slave_DHT11.c: 100: 
 [e :U 152 ]
 {
-"110
+"104
+[; ;slave_DHT11.c: 104: 
 [e $ ! >= -> _counter `i -> 250 `i 154  ]
 {
-"111
+"105
+[; ;slave_DHT11.c: 105:     I2C_Slave_Init(0x10);
 [e = _data_ok ( _DHT11_read_data (2 , &U _humedad &U _temperatura ]
-"112
+"106
+[; ;slave_DHT11.c: 106: }
 [e = _counter -> -> 0 `i `uc ]
-"113
+"107
 }
 [e :U 154 ]
-"116
+"110
 [e $U 156  ]
 {
-"117
+"111
 [e :U 157 ]
-"118
+"112
 [e = _send_data -> >> & -> _temperatura `ui -> 65280 `ui -> 8 `i `uc ]
+"113
+[e $U 155  ]
+"114
+[e :U 158 ]
+"115
+[e = _send_data -> & _temperatura -> 255 `i `uc ]
+"116
+[e $U 155  ]
+"117
+[e :U 159 ]
+"118
+[e = _send_data -> >> & -> _humedad `ui -> 65280 `ui -> 8 `i `uc ]
 "119
 [e $U 155  ]
 "120
-[e :U 158 ]
+[e :U 160 ]
 "121
-[e = _send_data -> & _temperatura -> 255 `i `uc ]
+[e = _send_data -> & _humedad -> 255 `i `uc ]
 "122
 [e $U 155  ]
 "123
-[e :U 159 ]
+[e :U 161 ]
 "124
-[e = _send_data -> >> & -> _humedad `ui -> 65280 `ui -> 8 `i `uc ]
+[e = _send_data -> -> 255 `i `uc ]
 "125
 [e $U 155  ]
 "126
-[e :U 160 ]
-"127
-[e = _send_data -> & _humedad -> 255 `i `uc ]
-"128
-[e $U 155  ]
-"129
-[e :U 161 ]
-"130
-[e = _send_data -> -> 255 `i `uc ]
-"131
-[e $U 155  ]
-"132
 }
 [e $U 155  ]
 [e :U 156 ]
@@ -537,42 +541,33 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> -> 104 `ui `i 160
  161 ]
 [e :U 155 ]
-"134
+"128
 [e ++ _counter -> -> 1 `i `uc ]
-"135
+"129
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"150
-[; ;slave_DHT11.c: 150:     }
+"130
 }
 [e :U 151 ]
 [e $U 152  ]
 [e :U 153 ]
-"151
-[; ;slave_DHT11.c: 151: }
+"131
 [e :UE 150 ]
 }
-"153
-[; ;slave_DHT11.c: 153: void setup(void){
+"133
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"154
-[; ;slave_DHT11.c: 154:     ANSEL = 0;
+"134
 [e = _ANSEL -> -> 0 `i `uc ]
-"155
-[; ;slave_DHT11.c: 155:     ANSELH= 0;
+"135
 [e = _ANSELH -> -> 0 `i `uc ]
-"158
-[; ;slave_DHT11.c: 158:     OSCCONbits.IRCF = 0b111;
+"138
 [e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"159
-[; ;slave_DHT11.c: 159:     SCS = 1;
+"139
 [e = _SCS -> -> 1 `i `b ]
-"162
-[; ;slave_DHT11.c: 162:     I2C_Slave_Init(0x10);
+"142
 [e ( _I2C_Slave_Init (1 -> -> 16 `i `uc ]
-"167
-[; ;slave_DHT11.c: 167: }
+"143
 [e :UE 162 ]
 }
