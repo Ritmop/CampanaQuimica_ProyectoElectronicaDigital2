@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "master.c" 2
-# 18 "master.c"
+# 19 "master.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,7 +2625,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 18 "master.c" 2
+# 19 "master.c" 2
 
 # 1 "./I2C.h" 1
 # 20 "./I2C.h"
@@ -2668,7 +2668,7 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 19 "master.c" 2
+# 20 "master.c" 2
 
 # 1 "./LCD4b.h" 1
 # 47 "./LCD4b.h"
@@ -2689,7 +2689,7 @@ void Lcd_Write_String(char *a);
 void Lcd_Shift_Right(void);
 
 void Lcd_Shift_Left(void);
-# 20 "master.c" 2
+# 21 "master.c" 2
 
 # 1 "./UART.h" 1
 # 17 "./UART.h"
@@ -2698,7 +2698,7 @@ void UART_TX_config(long baudrate);
 void UART_write_char(char c);
 void UART_write_string(char *s);
 char UART_read_char();
-# 21 "master.c" 2
+# 22 "master.c" 2
 
 
 
@@ -2717,7 +2717,7 @@ char UART_read_char();
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
-# 50 "master.c"
+# 54 "master.c"
 uint8_t n_temp,n_hum,n_gas,n_ired;
 
 uint8_t tempC;
@@ -2729,16 +2729,21 @@ char S_gas [4];
 char S_ired[2];
 
 uint8_t counter;
-uint8_t servoPos = 180;
+uint8_t servoPos;
 uint8_t motorCon;
 
+
 void setup(void);
+
 void requestTemp(void);
 void requestHum(void);
 void requestGas(void);
 void requestIR(void);
+
 void writeMotors(void);
+
 void LDC_output(void);
+
 void sendDataUART(void);
 
 void num_to_string(uint16_t num, char dig8[], uint8_t len);
@@ -2746,10 +2751,13 @@ uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2);
 
 
 
+
 void __attribute__((picinterrupt(("")))) isr(void){
-
+    if(RCIF){
+        servoPos = UART_read_char();
+        RCIF = 0;
+    }
 }
-
 
 
 
@@ -2774,8 +2782,8 @@ int main(void) {
         LDC_output();
         sendDataUART();
 
-        _delay((unsigned long)((100)*(8000000/4000.0)));
         counter++;
+        _delay((unsigned long)((100)*(8000000/4000.0)));
     }
 }
 
@@ -2798,11 +2806,12 @@ void setup(void){
     I2C_Master_Init(100000);
 
 
-
+    UART_RX_config(9600);
     UART_TX_config(9600);
 }
 
 void requestTemp(void){
+
     I2C_Master_Start();
     I2C_Master_Write(0x20 +0);
     I2C_Master_Write('T');
@@ -2817,6 +2826,7 @@ void requestTemp(void){
 }
 
 void requestHum(void){
+
     I2C_Master_Start();
     I2C_Master_Write(0x10 +0);
     I2C_Master_Write('H');
@@ -2829,6 +2839,7 @@ void requestHum(void){
 }
 
 void requestGas(void){
+
     I2C_Master_Start();
     I2C_Master_Write(0x20 +0);
     I2C_Master_Write('G');
@@ -2843,6 +2854,7 @@ void requestGas(void){
 }
 
 void requestIR(void){
+
     I2C_Master_Start();
     I2C_Master_Write(0x20 +0);
     I2C_Master_Write('I');
@@ -2856,21 +2868,22 @@ void requestIR(void){
 
 void writeMotors(void){
 
-    if(tempC > 50 || gasPPM > 400)
+    if(tempC > 50 && gasPPM > 400)
         motorCon |= 0x10;
     else
         motorCon &= 0x0F;
 
 
 
+    motorCon &= 0xF0;
     switch(servoPos){
-        case 0:
+        case '0':
             motorCon |= 0x02;
             break;
-        case 90:
+        case '1':
             motorCon |= 0x03;
             break;
-        case 180:
+        case '2':
             motorCon |= 0x04;
             break;
         default:
@@ -2895,7 +2908,6 @@ void LDC_output(void){
     num_to_string(n_ired,S_ired,1);
 
 
-
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("T:");
     Lcd_Write_String(S_temp);
@@ -2916,8 +2928,8 @@ void LDC_output(void){
     Lcd_Write_String(S_ired);
 }
 
-
 void sendDataUART(void){
+
     UART_write_char('\n');
     UART_write_char(tempC);
     UART_write_char(' ');

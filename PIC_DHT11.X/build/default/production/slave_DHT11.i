@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "slave_DHT11.c" 2
-# 15 "slave_DHT11.c"
+# 17 "slave_DHT11.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,7 +2625,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 15 "slave_DHT11.c" 2
+# 17 "slave_DHT11.c" 2
 
 # 1 "./I2C.h" 1
 # 20 "./I2C.h"
@@ -2668,7 +2668,7 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 16 "slave_DHT11.c" 2
+# 18 "slave_DHT11.c" 2
 
 # 1 "./DHT11.h" 1
 # 24 "./DHT11.h"
@@ -2679,8 +2679,7 @@ void DHT11_response(void);
 int8_t DHT11_read_byte(void);
 
 int8_t DHT11_read_data(int16_t *hum, int16_t *temp);
-# 17 "slave_DHT11.c" 2
-
+# 19 "slave_DHT11.c" 2
 
 
 
@@ -2704,6 +2703,7 @@ int8_t DHT11_read_data(int16_t *hum, int16_t *temp);
 
 
 
+
 uint8_t discard;
 uint8_t send_data;
 uint8_t request;
@@ -2713,9 +2713,9 @@ int16_t humedad, temperatura;
 
 uint8_t counter = 250;
 
+
 void setup(void);
-void LDC_output(void);
-void separar_digitos8(uint8_t num, char dig8[]);
+
 
 
 
@@ -2753,7 +2753,6 @@ void __attribute__((picinterrupt(("")))) isr(void){
         SSPIF = 0;
     }
 }
-
 
 
 

@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "slave_motors.c" 2
-# 15 "slave_motors.c"
+# 18 "slave_motors.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,7 +2625,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 15 "slave_motors.c" 2
+# 18 "slave_motors.c" 2
 
 # 1 "./I2C.h" 1
 # 20 "./I2C.h"
@@ -2668,7 +2668,7 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 16 "slave_motors.c" 2
+# 19 "slave_motors.c" 2
 
 
 
@@ -2694,6 +2694,7 @@ void I2C_Slave_Init(uint8_t address);
 
 
 
+
 uint8_t discard;
 uint8_t send_data;
 uint8_t readI2C;
@@ -2701,8 +2702,6 @@ uint8_t TMR0count = 0;
 uint8_t TMR0count2 = 0;
 
 uint8_t servoPos = 2;
-uint8_t prevPos = 0;
-uint8_t stateDC = 0;
 
 
 void setup(void);
@@ -2717,7 +2716,6 @@ void __attribute__((picinterrupt(("")))) isr (void){
         CKP = 0;
 
         if (SSPOV || WCOL ){
-            RC0 = 1;
             discard = SSPBUF;
             SSPOV = 0;
             WCOL = 0;
@@ -2753,18 +2751,16 @@ void __attribute__((picinterrupt(("")))) isr (void){
         T0IF = 0;
     }
 }
-# 108 "slave_motors.c"
+# 109 "slave_motors.c"
 int main(void) {
     setup();
     while(1){
 
 
 
-        PORTA = readI2C;
         servoPos = readI2C & 0x0F;
 
-
-            angle_to_PWM(servoPos);
+        angle_to_PWM(servoPos);
 
 
         if((readI2C & 0xF0) == 0x10)
@@ -2779,12 +2775,9 @@ void setup(void){
     ANSEL = 0;
     ANSELH= 0;
 
-    TRISA = 0;
-    PORTA = 0;
-
     TRISC0 = 0;
-    TRISC2 = 0;
     RC0 = 0;
+    TRISC2 = 0;
     RC2 = 0;
 
 
@@ -2818,8 +2811,4 @@ void angle_to_PWM(uint8_t position){
     else if (TMR0count == position){
         RC2 = 0;
     }
-
-
-
-
 }

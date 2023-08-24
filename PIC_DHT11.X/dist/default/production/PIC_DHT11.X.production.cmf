@@ -29,7 +29,7 @@ bssBANK0 BANK0 1 20 20 B 1 1
 dataCOMMON COMMON 1 79 79 1 1 1
 bssCOMMON COMMON 1 77 77 2 1 1
 config CONFIG 4 2007 2007 2 2 1
-$C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+$C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 reset_vec CODE 0 0 0 3 2 1
 end_init CODE 0 C C 3 2 1
 config CONFIG 4 2007 2007 2 2 1
@@ -78,53 +78,53 @@ STRING 1E3-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\PIC_DHT11.X.production.o
-F cinit CODE >980:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-F cinit CODE >983:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-F cinit CODE >1024:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-14 cinit CODE >1025:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-15 cinit CODE >1029:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-16 cinit CODE >1030:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-17 cinit CODE >1031:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-18 cinit CODE >1032:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-19 cinit CODE >1033:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-1A cinit CODE >1034:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-1B cinit CODE >1035:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-1C cinit CODE >1036:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-1D cinit CODE >1037:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-1E cinit CODE >1038:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-1F cinit CODE >1039:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-20 cinit CODE >1042:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-21 cinit CODE >1043:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-22 cinit CODE >1049:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-22 cinit CODE >1051:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-23 cinit CODE >1052:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
-4 intentry CODE >56:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-106 text7 CODE >56:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-106 text7 CODE >57:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-10C text7 CODE >59:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-10D text7 CODE >61:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-115 text7 CODE >62:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-117 text7 CODE >63:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-118 text7 CODE >64:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-119 text7 CODE >65:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-11A text7 CODE >68:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-124 text7 CODE >70:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-128 text7 CODE >72:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-129 text7 CODE >73:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-12A text7 CODE >74:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-130 text7 CODE >75:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-134 text7 CODE >76:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-139 text7 CODE >77:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-13A text7 CODE >78:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-142 text7 CODE >79:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-146 text7 CODE >80:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-149 text7 CODE >81:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-14D text7 CODE >82:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-14E text7 CODE >83:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-153 text7 CODE >84:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-159 text7 CODE >85:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+F cinit CODE >980:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+F cinit CODE >983:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+F cinit CODE >1024:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+14 cinit CODE >1025:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+15 cinit CODE >1029:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+16 cinit CODE >1030:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+17 cinit CODE >1031:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+18 cinit CODE >1032:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+19 cinit CODE >1033:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+1A cinit CODE >1034:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+1B cinit CODE >1035:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+1C cinit CODE >1036:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+1D cinit CODE >1037:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+1E cinit CODE >1038:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+1F cinit CODE >1039:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+20 cinit CODE >1042:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+21 cinit CODE >1043:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+22 cinit CODE >1049:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+22 cinit CODE >1051:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+23 cinit CODE >1052:C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_1.s
+4 intentry CODE >58:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+106 text7 CODE >58:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+106 text7 CODE >59:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+10C text7 CODE >61:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+10D text7 CODE >63:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+115 text7 CODE >64:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+117 text7 CODE >65:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+118 text7 CODE >66:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+119 text7 CODE >67:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+11A text7 CODE >70:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+124 text7 CODE >72:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+128 text7 CODE >74:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+129 text7 CODE >75:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+12A text7 CODE >76:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+130 text7 CODE >77:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+134 text7 CODE >78:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+139 text7 CODE >79:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+13A text7 CODE >80:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+142 text7 CODE >81:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+146 text7 CODE >82:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+149 text7 CODE >83:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+14D text7 CODE >84:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+14E text7 CODE >85:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+153 text7 CODE >86:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
 159 text7 CODE >87:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-15C text7 CODE >89:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+159 text7 CODE >89:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+15C text7 CODE >91:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
 163 text6 CODE >30:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\DHT11.c
 163 text6 CODE >33:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\DHT11.c
 164 text6 CODE >34:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\DHT11.c
@@ -181,39 +181,39 @@ F cinit CODE >1024:C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_1.s
 1BC text2 CODE >103:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2/PIC_MASTER.X/I2C.c
 1BF text2 CODE >104:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2/PIC_MASTER.X/I2C.c
 1C2 text2 CODE >105:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2/PIC_MASTER.X/I2C.c
-1C3 text1 CODE >133:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
 1C3 text1 CODE >134:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-1C6 text1 CODE >135:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-1C7 text1 CODE >138:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-1CB text1 CODE >139:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-1CC text1 CODE >142:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-1D2 text1 CODE >143:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-A0 maintext CODE >96:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+1C3 text1 CODE >135:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+1C6 text1 CODE >136:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+1C7 text1 CODE >139:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+1CB text1 CODE >140:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+1CC text1 CODE >143:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+1D2 text1 CODE >144:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
 A0 maintext CODE >97:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-A5 maintext CODE >98:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-AA maintext CODE >99:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-B9 maintext CODE >104:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-BB maintext CODE >104:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-BF maintext CODE >105:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-CA maintext CODE >106:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-CC maintext CODE >112:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-CE maintext CODE >113:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-CF maintext CODE >115:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-D1 maintext CODE >116:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-D2 maintext CODE >118:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-D4 maintext CODE >119:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-D5 maintext CODE >121:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-D7 maintext CODE >122:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-D8 maintext CODE >124:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-DA maintext CODE >125:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-DB maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-E2 maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-E7 maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-EA maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-ED maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-F0 maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-F3 maintext CODE >128:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
-F7 maintext CODE >129:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+A0 maintext CODE >98:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+A5 maintext CODE >99:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+AA maintext CODE >100:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+B9 maintext CODE >105:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+BB maintext CODE >105:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+BF maintext CODE >106:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+CA maintext CODE >107:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+CC maintext CODE >113:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+CE maintext CODE >114:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+CF maintext CODE >116:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+D1 maintext CODE >117:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+D2 maintext CODE >119:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+D4 maintext CODE >120:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+D5 maintext CODE >122:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+D7 maintext CODE >123:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+D8 maintext CODE >125:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+DA maintext CODE >126:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+DB maintext CODE >127:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+E2 maintext CODE >127:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+E7 maintext CODE >127:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+EA maintext CODE >127:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+ED maintext CODE >127:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+F0 maintext CODE >127:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+F3 maintext CODE >129:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
+F7 maintext CODE >130:C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_DHT11.X\slave_DHT11.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -240,21 +240,21 @@ _D_nA 4A5 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
 _PEIE 5E 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
 _R_nW 4A2 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
 _WCOL A7 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+___sp 0 0 STACK 2 stack C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 _bits 20 0 BANK0 1 bssBANK0 dist/default/production\PIC_DHT11.X.production.o
 _main 140 0 CODE 0 maintext dist/default/production\PIC_DHT11.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
-start 18 0 CODE 0 init C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+start 18 0 CODE 0 init C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 DHT11_read_byte@i 74 0 COMMON 1 cstackCOMMON dist/default/production\PIC_DHT11.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
 __HdataCOMMON 0 0 ABS 0 dataCOMMON -
-intlevel0 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _data_ok 25 0 BANK0 1 bssBANK0 dist/default/production\PIC_DHT11.X.production.o
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
@@ -269,8 +269,8 @@ __LdataCOMMON 0 0 ABS 0 dataCOMMON -
 _discard 26 0 BANK0 1 bssBANK0 dist/default/production\PIC_DHT11.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 _send_data 78 0 COMMON 1 bssCOMMON dist/default/production\PIC_DHT11.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
-___stacklo 0 0 ABS 0 - C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+___stackhi 0 0 ABS 0 - C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
+___stacklo 0 0 ABS 0 - C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 _I2C_Slave_Init 352 0 CODE 0 text2 dist/default/production\PIC_DHT11.X.production.o
 __LidataCOMMON 0 0 ABS 0 idataCOMMON -
 start_initialization 1E 0 CODE 0 cinit dist/default/production\PIC_DHT11.X.production.o
@@ -283,7 +283,7 @@ _TRISC3 43B 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
 _TRISD0 440 0 ABS 0 - dist/default/production\PIC_DHT11.X.production.o
 _request 77 0 COMMON 1 bssCOMMON dist/default/production\PIC_DHT11.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+___int_sp 0 0 STACK 2 stack C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -341,7 +341,7 @@ __HidataCOMMON 0 0 ABS 0 idataCOMMON -
 __end_of_isr 2C6 0 CODE 0 text7 dist/default/production\PIC_DHT11.X.production.o
 __end_of_DHT11_start 352 0 CODE 0 text4 dist/default/production\PIC_DHT11.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\judah\AppData\Local\Temp\xcAsb2c.\driver_tmp_12.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\judah\AppData\Local\Temp\xcAs7uo.\driver_tmp_12.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 __end_of_DHT11_response 3C4 0 CODE 0 text5 dist/default/production\PIC_DHT11.X.production.o
 __pmaintext 140 0 CODE 0 maintext dist/default/production\PIC_DHT11.X.production.o

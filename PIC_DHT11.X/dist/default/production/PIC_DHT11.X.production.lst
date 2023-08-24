@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.41 build 20230208172133 
-                                                                                               Wed Aug 23 08:35:49 2023
+                                                                                               Thu Aug 24 17:06:03 2023
 
 Microchip MPLAB XC8 C Compiler v2.41 (Free license) build 20230208172133 Og1 
      1                           	processor	16F887
@@ -642,7 +642,7 @@ Microchip MPLAB XC8 C Compiler v2.41 (Free license) build 20230208172133 Og1
    628 ;;
    629 ;; *************** function _main *****************
    630 ;; Defined at:
-   631 ;;		line 96 in file "slave_DHT11.c"
+   631 ;;		line 97 in file "slave_DHT11.c"
    632 ;; Parameters:    Size  Location     Type
    633 ;;		None
    634 ;; Auto vars:     Size  Location     Type
@@ -679,14 +679,14 @@ Microchip MPLAB XC8 C Compiler v2.41 (Free license) build 20230208172133 Og1
    665                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
    666                           
    667                           
-   668                           ;slave_DHT11.c: 97:     ANSEL = 0;
+   668                           ;slave_DHT11.c: 98:     ANSELH= 0;
    669     00A0  120A  118A  21C3  120A  118A  	fcall	_setup
    670                           
-   671                           ;slave_DHT11.c: 98:     ANSELH= 0;
+   671                           ;slave_DHT11.c: 99: 
    672     00A5  120A  118A  218E  120A  118A  	fcall	_DHT11_start
    673     00AA                     l1346:
    674                           
-   675                           ;slave_DHT11.c: 99: 
+   675                           ;slave_DHT11.c: 100: 
    676     00AA  3002               	movlw	2
    677     00AB  1283               	bcf	3,5	;RP0=0, select bank0
    678     00AC  1303               	bcf	3,6	;RP1=0, select bank0
@@ -705,7 +705,7 @@ Microchip MPLAB XC8 C Compiler v2.41 (Free license) build 20230208172133 Og1
    691     00B8  28B9               	nop2
    692     00B9                     l1348:
    693                           
-   694                           ;slave_DHT11.c: 104: 
+   694                           ;slave_DHT11.c: 105:     I2C_Slave_Init(0x10);
    695     00B9  30FA               	movlw	250
    696     00BA  0279               	subwf	_counter,w
    697     00BB  1C03               	skipc
@@ -716,7 +716,7 @@ Microchip MPLAB XC8 C Compiler v2.41 (Free license) build 20230208172133 Og1
    702     00BF                     u580:
    703     00BF                     l1350:
    704                           
-   705                           ;slave_DHT11.c: 105:     I2C_Slave_Init(0x10);
+   705                           ;slave_DHT11.c: 106: }
    706     00BF  3027               	movlw	(low (_temperatura| 0))& (0+255)
    707     00C0  00F6               	movwf	DHT11_read_data@temp
    708     00C1  3029               	movlw	(low (_humedad| 0))& (0+255)
@@ -725,983 +725,981 @@ Microchip MPLAB XC8 C Compiler v2.41 (Free license) build 20230208172133 Og1
    711     00C8  1303               	bcf	3,6	;RP1=0, select bank0
    712     00C9  00A5               	movwf	_data_ok
    713     00CA                     l1352:
-   714                           
-   715                           ;slave_DHT11.c: 106: }
-   716     00CA  01F9               	clrf	_counter
-   717     00CB  28DB               	goto	l1366
-   718     00CC                     l1354:
-   719     00CC  0828               	movf	_temperatura+1,w
-   720     00CD  00F8               	movwf	_send_data
-   721     00CE  28F3               	goto	l1368
-   722     00CF                     l1356:
-   723     00CF  0827               	movf	_temperatura,w
-   724     00D0  00F8               	movwf	_send_data
-   725     00D1  28F3               	goto	l1368
-   726     00D2                     l1358:
-   727     00D2  082A               	movf	_humedad+1,w
-   728     00D3  00F8               	movwf	_send_data
-   729     00D4  28F3               	goto	l1368
-   730     00D5                     l1360:
-   731     00D5  0829               	movf	_humedad,w
-   732     00D6  00F8               	movwf	_send_data
-   733     00D7  28F3               	goto	l1368
-   734     00D8                     l1362:
-   735     00D8  30FF               	movlw	255
-   736     00D9  00F8               	movwf	_send_data
-   737     00DA  28F3               	goto	l1368
-   738     00DB                     l1366:
-   739     00DB  0877               	movf	_request,w
-   740     00DC  1283               	bcf	3,5	;RP0=0, select bank0
-   741     00DD  1303               	bcf	3,6	;RP1=0, select bank0
-   742     00DE  00B1               	movwf	??_main
-   743     00DF  01B2               	clrf	??_main+1
-   744                           
-   745                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+   714     00CA  01F9               	clrf	_counter
+   715     00CB  28DB               	goto	l1366
+   716     00CC                     l1354:
+   717     00CC  0828               	movf	_temperatura+1,w
+   718     00CD  00F8               	movwf	_send_data
+   719     00CE  28F3               	goto	l1368
+   720     00CF                     l1356:
+   721     00CF  0827               	movf	_temperatura,w
+   722     00D0  00F8               	movwf	_send_data
+   723     00D1  28F3               	goto	l1368
+   724     00D2                     l1358:
+   725     00D2  082A               	movf	_humedad+1,w
+   726     00D3  00F8               	movwf	_send_data
+   727     00D4  28F3               	goto	l1368
+   728     00D5                     l1360:
+   729     00D5  0829               	movf	_humedad,w
+   730     00D6  00F8               	movwf	_send_data
+   731     00D7  28F3               	goto	l1368
+   732     00D8                     l1362:
+   733     00D8  30FF               	movlw	255
+   734     00D9  00F8               	movwf	_send_data
+   735     00DA  28F3               	goto	l1368
+   736     00DB                     l1366:
+   737     00DB  0877               	movf	_request,w
+   738     00DC  1283               	bcf	3,5	;RP0=0, select bank0
+   739     00DD  1303               	bcf	3,6	;RP1=0, select bank0
+   740     00DE  00B1               	movwf	??_main
+   741     00DF  01B2               	clrf	??_main+1
+   742                           
+   743                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
       +                          itches
-   746                           ; Switch size 1, requested type "simple"
-   747                           ; Number of cases is 1, Range of values is 0 to 0
-   748                           ; switch strategies available:
-   749                           ; Name         Instructions Cycles
-   750                           ; simple_byte            4     3 (average)
-   751                           ; direct_byte           11     8 (fixed)
-   752                           ; jumptable            260     6 (fixed)
-   753                           ;	Chosen strategy is simple_byte
-   754     00E0  0832               	movf	??_main+1,w
-   755     00E1  3A00               	xorlw	0	; case 0
-   756     00E2  1903               	skipnz
-   757     00E3  28E5               	goto	l1408
-   758     00E4  28D8               	goto	l1362
-   759     00E5                     l1408:
-   760                           
-   761                           ; Switch size 1, requested type "simple"
-   762                           ; Number of cases is 4, Range of values is 72 to 116
-   763                           ; switch strategies available:
-   764                           ; Name         Instructions Cycles
-   765                           ; simple_byte           13     7 (average)
-   766                           ; direct_byte          146    11 (fixed)
-   767                           ; jumptable            263     9 (fixed)
-   768                           ;	Chosen strategy is simple_byte
-   769     00E5  0831               	movf	??_main,w
-   770     00E6  3A48               	xorlw	72	; case 72
-   771     00E7  1903               	skipnz
-   772     00E8  28D2               	goto	l1358
-   773     00E9  3A1C               	xorlw	28	; case 84
-   774     00EA  1903               	skipnz
-   775     00EB  28CC               	goto	l1354
-   776     00EC  3A3C               	xorlw	60	; case 104
-   777     00ED  1903               	skipnz
-   778     00EE  28D5               	goto	l1360
-   779     00EF  3A1C               	xorlw	28	; case 116
-   780     00F0  1903               	skipnz
-   781     00F1  28CF               	goto	l1356
-   782     00F2  28D8               	goto	l1362
-   783     00F3                     l1368:
-   784     00F3  3001               	movlw	1
-   785     00F4  00FF               	movwf	btemp+1
-   786     00F5  087F               	movf	btemp+1,w
-   787     00F6  07F9               	addwf	_counter,f
-   788     00F7                     l1370:
-   789     00F7  301A               	movlw	26
-   790     00F8  1283               	bcf	3,5	;RP0=0, select bank0
-   791     00F9  1303               	bcf	3,6	;RP1=0, select bank0
-   792     00FA  00B2               	movwf	??_main+1
-   793     00FB  30F7               	movlw	247
-   794     00FC  00B1               	movwf	??_main
-   795     00FD                     u607:
-   796     00FD  0BB1               	decfsz	??_main,f
-   797     00FE  28FD               	goto	u607
-   798     00FF  0BB2               	decfsz	??_main+1,f
-   799     0100  28FD               	goto	u607
-   800     0101  2902               	nop2
-   801     0102  28B9               	goto	l1348
-   802     0103  120A  118A  280C   	ljmp	start
-   803     0106                     __end_of_main:
-   804                           
-   805                           	psect	text1
-   806     01C3                     __ptext1:	
-   807 ;; *************** function _setup *****************
-   808 ;; Defined at:
-   809 ;;		line 133 in file "slave_DHT11.c"
-   810 ;; Parameters:    Size  Location     Type
+   744                           ; Switch size 1, requested type "simple"
+   745                           ; Number of cases is 1, Range of values is 0 to 0
+   746                           ; switch strategies available:
+   747                           ; Name         Instructions Cycles
+   748                           ; simple_byte            4     3 (average)
+   749                           ; direct_byte           11     8 (fixed)
+   750                           ; jumptable            260     6 (fixed)
+   751                           ;	Chosen strategy is simple_byte
+   752     00E0  0832               	movf	??_main+1,w
+   753     00E1  3A00               	xorlw	0	; case 0
+   754     00E2  1903               	skipnz
+   755     00E3  28E5               	goto	l1408
+   756     00E4  28D8               	goto	l1362
+   757     00E5                     l1408:
+   758                           
+   759                           ; Switch size 1, requested type "simple"
+   760                           ; Number of cases is 4, Range of values is 72 to 116
+   761                           ; switch strategies available:
+   762                           ; Name         Instructions Cycles
+   763                           ; simple_byte           13     7 (average)
+   764                           ; direct_byte          146    11 (fixed)
+   765                           ; jumptable            263     9 (fixed)
+   766                           ;	Chosen strategy is simple_byte
+   767     00E5  0831               	movf	??_main,w
+   768     00E6  3A48               	xorlw	72	; case 72
+   769     00E7  1903               	skipnz
+   770     00E8  28D2               	goto	l1358
+   771     00E9  3A1C               	xorlw	28	; case 84
+   772     00EA  1903               	skipnz
+   773     00EB  28CC               	goto	l1354
+   774     00EC  3A3C               	xorlw	60	; case 104
+   775     00ED  1903               	skipnz
+   776     00EE  28D5               	goto	l1360
+   777     00EF  3A1C               	xorlw	28	; case 116
+   778     00F0  1903               	skipnz
+   779     00F1  28CF               	goto	l1356
+   780     00F2  28D8               	goto	l1362
+   781     00F3                     l1368:
+   782     00F3  3001               	movlw	1
+   783     00F4  00FF               	movwf	btemp+1
+   784     00F5  087F               	movf	btemp+1,w
+   785     00F6  07F9               	addwf	_counter,f
+   786     00F7                     l1370:
+   787     00F7  301A               	movlw	26
+   788     00F8  1283               	bcf	3,5	;RP0=0, select bank0
+   789     00F9  1303               	bcf	3,6	;RP1=0, select bank0
+   790     00FA  00B2               	movwf	??_main+1
+   791     00FB  30F7               	movlw	247
+   792     00FC  00B1               	movwf	??_main
+   793     00FD                     u607:
+   794     00FD  0BB1               	decfsz	??_main,f
+   795     00FE  28FD               	goto	u607
+   796     00FF  0BB2               	decfsz	??_main+1,f
+   797     0100  28FD               	goto	u607
+   798     0101  2902               	nop2
+   799     0102  28B9               	goto	l1348
+   800     0103  120A  118A  280C   	ljmp	start
+   801     0106                     __end_of_main:
+   802                           
+   803                           	psect	text1
+   804     01C3                     __ptext1:	
+   805 ;; *************** function _setup *****************
+   806 ;; Defined at:
+   807 ;;		line 134 in file "slave_DHT11.c"
+   808 ;; Parameters:    Size  Location     Type
+   809 ;;		None
+   810 ;; Auto vars:     Size  Location     Type
    811 ;;		None
-   812 ;; Auto vars:     Size  Location     Type
-   813 ;;		None
-   814 ;; Return value:  Size  Location     Type
-   815 ;;                  1    wreg      void 
-   816 ;; Registers used:
-   817 ;;		wreg, status,2, status,0, pclath, cstack
-   818 ;; Tracked objects:
-   819 ;;		On entry : 0/0
-   820 ;;		On exit  : 0/0
-   821 ;;		Unchanged: 0/0
-   822 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   823 ;;      Params:         0       0       0       0       0
-   824 ;;      Locals:         0       0       0       0       0
-   825 ;;      Temps:          0       0       0       0       0
-   826 ;;      Totals:         0       0       0       0       0
-   827 ;;Total ram usage:        0 bytes
-   828 ;; Hardware stack levels used: 1
-   829 ;; Hardware stack levels required when called: 2
-   830 ;; This function calls:
-   831 ;;		_I2C_Slave_Init
-   832 ;; This function is called by:
-   833 ;;		_main
-   834 ;; This function uses a non-reentrant model
-   835 ;;
-   836                           
-   837     01C3                     _setup:	
-   838                           ;psect for function _setup
-   839                           
-   840     01C3                     l1174:	
-   841                           ;incstack = 0
-   842                           ; Regs used in _setup: [wreg+status,2+status,0+pclath+cstack]
-   843                           
-   844     01C3  1683               	bsf	3,5	;RP0=1, select bank3
-   845     01C4  1703               	bsf	3,6	;RP1=1, select bank3
-   846     01C5  0188               	clrf	8	;volatile
-   847     01C6  0189               	clrf	9	;volatile
-   848     01C7                     l1176:
-   849     01C7  3070               	movlw	112
-   850     01C8  1683               	bsf	3,5	;RP0=1, select bank1
-   851     01C9  1303               	bcf	3,6	;RP1=0, select bank1
-   852     01CA  048F               	iorwf	15,f	;volatile
-   853     01CB                     l1178:
-   854     01CB  140F               	bsf	15,0	;volatile
-   855     01CC                     l1180:
-   856     01CC  3010               	movlw	16
-   857     01CD  120A  118A  21A9  120A  118A  	fcall	_I2C_Slave_Init
-   858     01D2                     l85:
-   859     01D2  0008               	return
-   860     01D3                     __end_of_setup:
-   861                           
-   862                           	psect	text2
-   863     01A9                     __ptext2:	
-   864 ;; *************** function _I2C_Slave_Init *****************
-   865 ;; Defined at:
-   866 ;;		line 93 in file "../PIC_MASTER.X/I2C.c"
-   867 ;; Parameters:    Size  Location     Type
-   868 ;;  address         1    wreg     unsigned char 
-   869 ;; Auto vars:     Size  Location     Type
-   870 ;;  address         1    3[COMMON] unsigned char 
-   871 ;; Return value:  Size  Location     Type
-   872 ;;                  1    wreg      void 
-   873 ;; Registers used:
-   874 ;;		wreg
-   875 ;; Tracked objects:
-   876 ;;		On entry : 0/0
-   877 ;;		On exit  : 0/0
-   878 ;;		Unchanged: 0/0
-   879 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   880 ;;      Params:         0       0       0       0       0
-   881 ;;      Locals:         1       0       0       0       0
-   882 ;;      Temps:          0       0       0       0       0
-   883 ;;      Totals:         1       0       0       0       0
-   884 ;;Total ram usage:        1 bytes
-   885 ;; Hardware stack levels used: 1
-   886 ;; Hardware stack levels required when called: 1
-   887 ;; This function calls:
-   888 ;;		Nothing
-   889 ;; This function is called by:
-   890 ;;		_setup
-   891 ;; This function uses a non-reentrant model
-   892 ;;
-   893                           
-   894     01A9                     _I2C_Slave_Init:	
-   895                           ;psect for function _I2C_Slave_Init
-   896                           
-   897                           
-   898                           ;incstack = 0
-   899                           ; Regs used in _I2C_Slave_Init: [wreg]
-   900                           ;I2C_Slave_Init@address stored from wreg
-   901     01A9  00F3               	movwf	I2C_Slave_Init@address
-   902     01AA                     l1136:
-   903                           
-   904                           ;../PIC_MASTER.X/I2C.c: 93: void I2C_Slave_Init(uint8_t address);../PIC_MASTER.X/I2C.c: 
+   812 ;; Return value:  Size  Location     Type
+   813 ;;                  1    wreg      void 
+   814 ;; Registers used:
+   815 ;;		wreg, status,2, status,0, pclath, cstack
+   816 ;; Tracked objects:
+   817 ;;		On entry : 0/0
+   818 ;;		On exit  : 0/0
+   819 ;;		Unchanged: 0/0
+   820 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   821 ;;      Params:         0       0       0       0       0
+   822 ;;      Locals:         0       0       0       0       0
+   823 ;;      Temps:          0       0       0       0       0
+   824 ;;      Totals:         0       0       0       0       0
+   825 ;;Total ram usage:        0 bytes
+   826 ;; Hardware stack levels used: 1
+   827 ;; Hardware stack levels required when called: 2
+   828 ;; This function calls:
+   829 ;;		_I2C_Slave_Init
+   830 ;; This function is called by:
+   831 ;;		_main
+   832 ;; This function uses a non-reentrant model
+   833 ;;
+   834                           
+   835     01C3                     _setup:	
+   836                           ;psect for function _setup
+   837                           
+   838     01C3                     l1174:	
+   839                           ;incstack = 0
+   840                           ; Regs used in _setup: [wreg+status,2+status,0+pclath+cstack]
+   841                           
+   842     01C3  1683               	bsf	3,5	;RP0=1, select bank3
+   843     01C4  1703               	bsf	3,6	;RP1=1, select bank3
+   844     01C5  0188               	clrf	8	;volatile
+   845     01C6  0189               	clrf	9	;volatile
+   846     01C7                     l1176:
+   847     01C7  3070               	movlw	112
+   848     01C8  1683               	bsf	3,5	;RP0=1, select bank1
+   849     01C9  1303               	bcf	3,6	;RP1=0, select bank1
+   850     01CA  048F               	iorwf	15,f	;volatile
+   851     01CB                     l1178:
+   852     01CB  140F               	bsf	15,0	;volatile
+   853     01CC                     l1180:
+   854     01CC  3010               	movlw	16
+   855     01CD  120A  118A  21A9  120A  118A  	fcall	_I2C_Slave_Init
+   856     01D2                     l85:
+   857     01D2  0008               	return
+   858     01D3                     __end_of_setup:
+   859                           
+   860                           	psect	text2
+   861     01A9                     __ptext2:	
+   862 ;; *************** function _I2C_Slave_Init *****************
+   863 ;; Defined at:
+   864 ;;		line 93 in file "../PIC_MASTER.X/I2C.c"
+   865 ;; Parameters:    Size  Location     Type
+   866 ;;  address         1    wreg     unsigned char 
+   867 ;; Auto vars:     Size  Location     Type
+   868 ;;  address         1    3[COMMON] unsigned char 
+   869 ;; Return value:  Size  Location     Type
+   870 ;;                  1    wreg      void 
+   871 ;; Registers used:
+   872 ;;		wreg
+   873 ;; Tracked objects:
+   874 ;;		On entry : 0/0
+   875 ;;		On exit  : 0/0
+   876 ;;		Unchanged: 0/0
+   877 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   878 ;;      Params:         0       0       0       0       0
+   879 ;;      Locals:         1       0       0       0       0
+   880 ;;      Temps:          0       0       0       0       0
+   881 ;;      Totals:         1       0       0       0       0
+   882 ;;Total ram usage:        1 bytes
+   883 ;; Hardware stack levels used: 1
+   884 ;; Hardware stack levels required when called: 1
+   885 ;; This function calls:
+   886 ;;		Nothing
+   887 ;; This function is called by:
+   888 ;;		_setup
+   889 ;; This function uses a non-reentrant model
+   890 ;;
+   891                           
+   892     01A9                     _I2C_Slave_Init:	
+   893                           ;psect for function _I2C_Slave_Init
+   894                           
+   895                           
+   896                           ;incstack = 0
+   897                           ; Regs used in _I2C_Slave_Init: [wreg]
+   898                           ;I2C_Slave_Init@address stored from wreg
+   899     01A9  00F3               	movwf	I2C_Slave_Init@address
+   900     01AA                     l1136:
+   901                           
+   902                           ;../PIC_MASTER.X/I2C.c: 93: void I2C_Slave_Init(uint8_t address);../PIC_MASTER.X/I2C.c: 
       +                          94: {;../PIC_MASTER.X/I2C.c: 95:     SSPADD = address;
-   905     01AA  0873               	movf	I2C_Slave_Init@address,w
-   906     01AB  1683               	bsf	3,5	;RP0=1, select bank1
-   907     01AC  1303               	bcf	3,6	;RP1=0, select bank1
-   908     01AD  0093               	movwf	19	;volatile
-   909                           
-   910                           ;../PIC_MASTER.X/I2C.c: 96:     SSPCON = 0x36;
-   911     01AE  3036               	movlw	54
-   912     01AF  1283               	bcf	3,5	;RP0=0, select bank0
-   913     01B0  1303               	bcf	3,6	;RP1=0, select bank0
-   914     01B1  0094               	movwf	20	;volatile
-   915                           
-   916                           ;../PIC_MASTER.X/I2C.c: 97:     SSPSTAT = 0x80;
-   917     01B2  3080               	movlw	128
-   918     01B3  1683               	bsf	3,5	;RP0=1, select bank1
-   919     01B4  1303               	bcf	3,6	;RP1=0, select bank1
-   920     01B5  0094               	movwf	20	;volatile
-   921                           
-   922                           ;../PIC_MASTER.X/I2C.c: 98:     SSPCON2 = 0x01;
-   923     01B6  3001               	movlw	1
-   924     01B7  0091               	movwf	17	;volatile
-   925     01B8                     l1138:
-   926                           
-   927                           ;../PIC_MASTER.X/I2C.c: 99:     TRISC3 = 1;
-   928     01B8  1587               	bsf	7,3	;volatile
-   929     01B9                     l1140:
-   930                           
-   931                           ;../PIC_MASTER.X/I2C.c: 100:     TRISC4 = 1;
-   932     01B9  1607               	bsf	7,4	;volatile
-   933     01BA                     l1142:
-   934                           
-   935                           ;../PIC_MASTER.X/I2C.c: 101:     GIE = 1;
-   936     01BA  178B               	bsf	11,7	;volatile
-   937     01BB                     l1144:
-   938                           
-   939                           ;../PIC_MASTER.X/I2C.c: 102:     PEIE = 1;
-   940     01BB  170B               	bsf	11,6	;volatile
-   941     01BC                     l1146:
-   942                           
-   943                           ;../PIC_MASTER.X/I2C.c: 103:     SSPIF = 0;
-   944     01BC  1283               	bcf	3,5	;RP0=0, select bank0
-   945     01BD  1303               	bcf	3,6	;RP1=0, select bank0
-   946     01BE  118C               	bcf	12,3	;volatile
-   947     01BF                     l1148:
-   948                           
-   949                           ;../PIC_MASTER.X/I2C.c: 104:     SSPIE = 1;
-   950     01BF  1683               	bsf	3,5	;RP0=1, select bank1
-   951     01C0  1303               	bcf	3,6	;RP1=0, select bank1
-   952     01C1  158C               	bsf	12,3	;volatile
-   953     01C2                     l236:
-   954     01C2  0008               	return
-   955     01C3                     __end_of_I2C_Slave_Init:
-   956                           
-   957                           	psect	text3
-   958     0026                     __ptext3:	
-   959 ;; *************** function _DHT11_read_data *****************
-   960 ;; Defined at:
-   961 ;;		line 48 in file "DHT11.c"
-   962 ;; Parameters:    Size  Location     Type
-   963 ;;  hum             1    wreg     PTR int 
-   964 ;;		 -> humedad(2), 
-   965 ;;  temp            1    6[COMMON] PTR int 
-   966 ;;		 -> temperatura(2), 
-   967 ;; Auto vars:     Size  Location     Type
-   968 ;;  hum             1    4[BANK0 ] PTR int 
-   969 ;;		 -> humedad(2), 
-   970 ;;  parity          1    5[BANK0 ] char 
-   971 ;; Return value:  Size  Location     Type
-   972 ;;                  1    wreg      char 
-   973 ;; Registers used:
-   974 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
-   975 ;; Tracked objects:
-   976 ;;		On entry : 0/0
-   977 ;;		On exit  : 0/0
-   978 ;;		Unchanged: 0/0
-   979 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   980 ;;      Params:         1       0       0       0       0
-   981 ;;      Locals:         0       2       0       0       0
-   982 ;;      Temps:          0       4       0       0       0
-   983 ;;      Totals:         1       6       0       0       0
-   984 ;;Total ram usage:        7 bytes
-   985 ;; Hardware stack levels used: 1
-   986 ;; Hardware stack levels required when called: 2
-   987 ;; This function calls:
-   988 ;;		_DHT11_read_byte
-   989 ;;		_DHT11_response
-   990 ;;		_DHT11_start
-   991 ;; This function is called by:
-   992 ;;		_main
-   993 ;; This function uses a non-reentrant model
-   994 ;;
-   995                           
-   996     0026                     _DHT11_read_data:	
-   997                           ;psect for function _DHT11_read_data
-   998                           
-   999                           
-  1000                           ;incstack = 0
-  1001                           ; Regs used in _DHT11_read_data: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
-  1002                           ;DHT11_read_data@hum stored from wreg
-  1003     0026  1283               	bcf	3,5	;RP0=0, select bank0
-  1004     0027  1303               	bcf	3,6	;RP1=0, select bank0
-  1005     0028  00AF               	movwf	DHT11_read_data@hum
-  1006     0029                     l1312:
-  1007     0029                     l1314:
-  1008                           
-  1009                           ;DHT11.c: 51:    DHT11_start();
-  1010     0029  120A  118A  218E  120A  118A  	fcall	_DHT11_start
-  1011     002E                     l1316:
-  1012                           
-  1013                           ;DHT11.c: 52:    DHT11_response();
-  1014     002E  120A  118A  21D3  120A  118A  	fcall	_DHT11_response
-  1015     0033                     l1318:
-  1016                           
-  1017                           ;DHT11.c: 53:    bits[0] = DHT11_read_byte();
-  1018     0033  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
-  1019     0038  1283               	bcf	3,5	;RP0=0, select bank0
-  1020     0039  1303               	bcf	3,6	;RP1=0, select bank0
-  1021     003A  00A0               	movwf	_bits
-  1022     003B                     l1320:
-  1023                           
-  1024                           ;DHT11.c: 54:    bits[1] = DHT11_read_byte();
-  1025     003B  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
-  1026     0040  1283               	bcf	3,5	;RP0=0, select bank0
-  1027     0041  1303               	bcf	3,6	;RP1=0, select bank0
-  1028     0042  00A1               	movwf	_bits+1
-  1029     0043                     l1322:
-  1030                           
-  1031                           ;DHT11.c: 55:    bits[2] = DHT11_read_byte();
-  1032     0043  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
-  1033     0048  1283               	bcf	3,5	;RP0=0, select bank0
-  1034     0049  1303               	bcf	3,6	;RP1=0, select bank0
-  1035     004A  00A2               	movwf	_bits+2
-  1036     004B                     l1324:
-  1037                           
-  1038                           ;DHT11.c: 56:    bits[3] = DHT11_read_byte();
-  1039     004B  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
-  1040     0050  1283               	bcf	3,5	;RP0=0, select bank0
-  1041     0051  1303               	bcf	3,6	;RP1=0, select bank0
-  1042     0052  00A3               	movwf	_bits+3
-  1043     0053                     l1326:
-  1044                           
-  1045                           ;DHT11.c: 57:    bits[4] = DHT11_read_byte();
-  1046     0053  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
-  1047     0058  1283               	bcf	3,5	;RP0=0, select bank0
-  1048     0059  1303               	bcf	3,6	;RP1=0, select bank0
-  1049     005A  00A4               	movwf	_bits+4
-  1050     005B                     l1328:
-  1051                           
-  1052                           ;DHT11.c: 58:    parity = bits[0] + bits[1] + bits[2] + bits[3];
-  1053     005B  0822               	movf	_bits+2,w
-  1054     005C  0721               	addwf	_bits+1,w
-  1055     005D  00AB               	movwf	??_DHT11_read_data
-  1056     005E  0823               	movf	_bits+3,w
-  1057     005F  072B               	addwf	??_DHT11_read_data,w
-  1058     0060  00AC               	movwf	??_DHT11_read_data+1
-  1059     0061  0820               	movf	_bits,w
-  1060     0062  072C               	addwf	??_DHT11_read_data+1,w
-  1061     0063  00B0               	movwf	DHT11_read_data@parity
-  1062     0064                     l1330:
-  1063                           
-  1064                           ;DHT11.c: 59:    if (parity == bits[4]){
-  1065     0064  0824               	movf	_bits+4,w
-  1066     0065  0630               	xorwf	DHT11_read_data@parity,w
-  1067     0066  1D03               	skipz
-  1068     0067  2869               	goto	u551
-  1069     0068  286A               	goto	u550
-  1070     0069                     u551:
-  1071     0069  289E               	goto	l1340
-  1072     006A                     u550:
-  1073     006A                     l1332:
-  1074                           
-  1075                           ;DHT11.c: 60:         *hum = bits[0]<<8 | bits[1];
-  1076     006A  0820               	movf	_bits,w
-  1077     006B  00AB               	movwf	??_DHT11_read_data
-  1078     006C  01AC               	clrf	??_DHT11_read_data+1
-  1079     006D  082B               	movf	??_DHT11_read_data,w
-  1080     006E  00AC               	movwf	??_DHT11_read_data+1
-  1081     006F  01AB               	clrf	??_DHT11_read_data
-  1082     0070  0821               	movf	_bits+1,w
-  1083     0071  042B               	iorwf	??_DHT11_read_data,w
-  1084     0072  00AD               	movwf	??_DHT11_read_data+2
-  1085     0073  01AE               	clrf	??_DHT11_read_data+3
-  1086     0074  1FA1               	btfss	_bits+1,7
-  1087     0075  2877               	goto	u564
-  1088     0076  03AE               	decf	??_DHT11_read_data+3,f
-  1089     0077                     u564:
-  1090     0077  1283               	bcf	3,5	;RP0=0, select bank0
-  1091     0078  1303               	bcf	3,6	;RP1=0, select bank0
-  1092     0079  082C               	movf	??_DHT11_read_data+1,w
-  1093     007A  04AE               	iorwf	??_DHT11_read_data+3,f
-  1094     007B  082F               	movf	DHT11_read_data@hum,w
-  1095     007C  0084               	movwf	4
-  1096     007D  082D               	movf	??_DHT11_read_data+2,w
-  1097     007E  1383               	bcf	3,7	;select IRP bank0
-  1098     007F  0080               	movwf	0
-  1099     0080  0A84               	incf	4,f
-  1100     0081  082E               	movf	??_DHT11_read_data+3,w
-  1101     0082  0080               	movwf	0
-  1102                           
-  1103                           ;DHT11.c: 61:         *temp = bits[2]<<8 | bits[3];
-  1104     0083  0822               	movf	_bits+2,w
-  1105     0084  00AB               	movwf	??_DHT11_read_data
-  1106     0085  01AC               	clrf	??_DHT11_read_data+1
-  1107     0086  082B               	movf	??_DHT11_read_data,w
-  1108     0087  00AC               	movwf	??_DHT11_read_data+1
-  1109     0088  01AB               	clrf	??_DHT11_read_data
-  1110     0089  0823               	movf	_bits+3,w
-  1111     008A  042B               	iorwf	??_DHT11_read_data,w
-  1112     008B  00AD               	movwf	??_DHT11_read_data+2
-  1113     008C  01AE               	clrf	??_DHT11_read_data+3
-  1114     008D  1FA3               	btfss	_bits+3,7
-  1115     008E  2890               	goto	u574
-  1116     008F  03AE               	decf	??_DHT11_read_data+3,f
-  1117     0090                     u574:
-  1118     0090  1283               	bcf	3,5	;RP0=0, select bank0
-  1119     0091  1303               	bcf	3,6	;RP1=0, select bank0
-  1120     0092  082C               	movf	??_DHT11_read_data+1,w
-  1121     0093  04AE               	iorwf	??_DHT11_read_data+3,f
-  1122     0094  0876               	movf	DHT11_read_data@temp,w
-  1123     0095  0084               	movwf	4
-  1124     0096  082D               	movf	??_DHT11_read_data+2,w
-  1125     0097  1383               	bcf	3,7	;select IRP bank0
-  1126     0098  0080               	movwf	0
-  1127     0099  0A84               	incf	4,f
-  1128     009A  082E               	movf	??_DHT11_read_data+3,w
-  1129     009B  0080               	movwf	0
-  1130     009C                     l1334:
-  1131                           
-  1132                           ;DHT11.c: 62:     return 1;
-  1133     009C  3001               	movlw	1
-  1134     009D  289F               	goto	l180
-  1135     009E                     l1340:
-  1136                           
-  1137                           ;DHT11.c: 65:       return 0;
-  1138     009E  3000               	movlw	0
-  1139     009F                     l180:
-  1140     009F  0008               	return
-  1141     00A0                     __end_of_DHT11_read_data:
-  1142                           
-  1143                           	psect	text4
-  1144     018E                     __ptext4:	
-  1145 ;; *************** function _DHT11_start *****************
-  1146 ;; Defined at:
-  1147 ;;		line 15 in file "DHT11.c"
-  1148 ;; Parameters:    Size  Location     Type
+   903     01AA  0873               	movf	I2C_Slave_Init@address,w
+   904     01AB  1683               	bsf	3,5	;RP0=1, select bank1
+   905     01AC  1303               	bcf	3,6	;RP1=0, select bank1
+   906     01AD  0093               	movwf	19	;volatile
+   907                           
+   908                           ;../PIC_MASTER.X/I2C.c: 96:     SSPCON = 0x36;
+   909     01AE  3036               	movlw	54
+   910     01AF  1283               	bcf	3,5	;RP0=0, select bank0
+   911     01B0  1303               	bcf	3,6	;RP1=0, select bank0
+   912     01B1  0094               	movwf	20	;volatile
+   913                           
+   914                           ;../PIC_MASTER.X/I2C.c: 97:     SSPSTAT = 0x80;
+   915     01B2  3080               	movlw	128
+   916     01B3  1683               	bsf	3,5	;RP0=1, select bank1
+   917     01B4  1303               	bcf	3,6	;RP1=0, select bank1
+   918     01B5  0094               	movwf	20	;volatile
+   919                           
+   920                           ;../PIC_MASTER.X/I2C.c: 98:     SSPCON2 = 0x01;
+   921     01B6  3001               	movlw	1
+   922     01B7  0091               	movwf	17	;volatile
+   923     01B8                     l1138:
+   924                           
+   925                           ;../PIC_MASTER.X/I2C.c: 99:     TRISC3 = 1;
+   926     01B8  1587               	bsf	7,3	;volatile
+   927     01B9                     l1140:
+   928                           
+   929                           ;../PIC_MASTER.X/I2C.c: 100:     TRISC4 = 1;
+   930     01B9  1607               	bsf	7,4	;volatile
+   931     01BA                     l1142:
+   932                           
+   933                           ;../PIC_MASTER.X/I2C.c: 101:     GIE = 1;
+   934     01BA  178B               	bsf	11,7	;volatile
+   935     01BB                     l1144:
+   936                           
+   937                           ;../PIC_MASTER.X/I2C.c: 102:     PEIE = 1;
+   938     01BB  170B               	bsf	11,6	;volatile
+   939     01BC                     l1146:
+   940                           
+   941                           ;../PIC_MASTER.X/I2C.c: 103:     SSPIF = 0;
+   942     01BC  1283               	bcf	3,5	;RP0=0, select bank0
+   943     01BD  1303               	bcf	3,6	;RP1=0, select bank0
+   944     01BE  118C               	bcf	12,3	;volatile
+   945     01BF                     l1148:
+   946                           
+   947                           ;../PIC_MASTER.X/I2C.c: 104:     SSPIE = 1;
+   948     01BF  1683               	bsf	3,5	;RP0=1, select bank1
+   949     01C0  1303               	bcf	3,6	;RP1=0, select bank1
+   950     01C1  158C               	bsf	12,3	;volatile
+   951     01C2                     l236:
+   952     01C2  0008               	return
+   953     01C3                     __end_of_I2C_Slave_Init:
+   954                           
+   955                           	psect	text3
+   956     0026                     __ptext3:	
+   957 ;; *************** function _DHT11_read_data *****************
+   958 ;; Defined at:
+   959 ;;		line 48 in file "DHT11.c"
+   960 ;; Parameters:    Size  Location     Type
+   961 ;;  hum             1    wreg     PTR int 
+   962 ;;		 -> humedad(2), 
+   963 ;;  temp            1    6[COMMON] PTR int 
+   964 ;;		 -> temperatura(2), 
+   965 ;; Auto vars:     Size  Location     Type
+   966 ;;  hum             1    4[BANK0 ] PTR int 
+   967 ;;		 -> humedad(2), 
+   968 ;;  parity          1    5[BANK0 ] char 
+   969 ;; Return value:  Size  Location     Type
+   970 ;;                  1    wreg      char 
+   971 ;; Registers used:
+   972 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   973 ;; Tracked objects:
+   974 ;;		On entry : 0/0
+   975 ;;		On exit  : 0/0
+   976 ;;		Unchanged: 0/0
+   977 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   978 ;;      Params:         1       0       0       0       0
+   979 ;;      Locals:         0       2       0       0       0
+   980 ;;      Temps:          0       4       0       0       0
+   981 ;;      Totals:         1       6       0       0       0
+   982 ;;Total ram usage:        7 bytes
+   983 ;; Hardware stack levels used: 1
+   984 ;; Hardware stack levels required when called: 2
+   985 ;; This function calls:
+   986 ;;		_DHT11_read_byte
+   987 ;;		_DHT11_response
+   988 ;;		_DHT11_start
+   989 ;; This function is called by:
+   990 ;;		_main
+   991 ;; This function uses a non-reentrant model
+   992 ;;
+   993                           
+   994     0026                     _DHT11_read_data:	
+   995                           ;psect for function _DHT11_read_data
+   996                           
+   997                           
+   998                           ;incstack = 0
+   999                           ; Regs used in _DHT11_read_data: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1000                           ;DHT11_read_data@hum stored from wreg
+  1001     0026  1283               	bcf	3,5	;RP0=0, select bank0
+  1002     0027  1303               	bcf	3,6	;RP1=0, select bank0
+  1003     0028  00AF               	movwf	DHT11_read_data@hum
+  1004     0029                     l1312:
+  1005     0029                     l1314:
+  1006                           
+  1007                           ;DHT11.c: 51:    DHT11_start();
+  1008     0029  120A  118A  218E  120A  118A  	fcall	_DHT11_start
+  1009     002E                     l1316:
+  1010                           
+  1011                           ;DHT11.c: 52:    DHT11_response();
+  1012     002E  120A  118A  21D3  120A  118A  	fcall	_DHT11_response
+  1013     0033                     l1318:
+  1014                           
+  1015                           ;DHT11.c: 53:    bits[0] = DHT11_read_byte();
+  1016     0033  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
+  1017     0038  1283               	bcf	3,5	;RP0=0, select bank0
+  1018     0039  1303               	bcf	3,6	;RP1=0, select bank0
+  1019     003A  00A0               	movwf	_bits
+  1020     003B                     l1320:
+  1021                           
+  1022                           ;DHT11.c: 54:    bits[1] = DHT11_read_byte();
+  1023     003B  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
+  1024     0040  1283               	bcf	3,5	;RP0=0, select bank0
+  1025     0041  1303               	bcf	3,6	;RP1=0, select bank0
+  1026     0042  00A1               	movwf	_bits+1
+  1027     0043                     l1322:
+  1028                           
+  1029                           ;DHT11.c: 55:    bits[2] = DHT11_read_byte();
+  1030     0043  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
+  1031     0048  1283               	bcf	3,5	;RP0=0, select bank0
+  1032     0049  1303               	bcf	3,6	;RP1=0, select bank0
+  1033     004A  00A2               	movwf	_bits+2
+  1034     004B                     l1324:
+  1035                           
+  1036                           ;DHT11.c: 56:    bits[3] = DHT11_read_byte();
+  1037     004B  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
+  1038     0050  1283               	bcf	3,5	;RP0=0, select bank0
+  1039     0051  1303               	bcf	3,6	;RP1=0, select bank0
+  1040     0052  00A3               	movwf	_bits+3
+  1041     0053                     l1326:
+  1042                           
+  1043                           ;DHT11.c: 57:    bits[4] = DHT11_read_byte();
+  1044     0053  120A  118A  2163  120A  118A  	fcall	_DHT11_read_byte
+  1045     0058  1283               	bcf	3,5	;RP0=0, select bank0
+  1046     0059  1303               	bcf	3,6	;RP1=0, select bank0
+  1047     005A  00A4               	movwf	_bits+4
+  1048     005B                     l1328:
+  1049                           
+  1050                           ;DHT11.c: 58:    parity = bits[0] + bits[1] + bits[2] + bits[3];
+  1051     005B  0822               	movf	_bits+2,w
+  1052     005C  0721               	addwf	_bits+1,w
+  1053     005D  00AB               	movwf	??_DHT11_read_data
+  1054     005E  0823               	movf	_bits+3,w
+  1055     005F  072B               	addwf	??_DHT11_read_data,w
+  1056     0060  00AC               	movwf	??_DHT11_read_data+1
+  1057     0061  0820               	movf	_bits,w
+  1058     0062  072C               	addwf	??_DHT11_read_data+1,w
+  1059     0063  00B0               	movwf	DHT11_read_data@parity
+  1060     0064                     l1330:
+  1061                           
+  1062                           ;DHT11.c: 59:    if (parity == bits[4]){
+  1063     0064  0824               	movf	_bits+4,w
+  1064     0065  0630               	xorwf	DHT11_read_data@parity,w
+  1065     0066  1D03               	skipz
+  1066     0067  2869               	goto	u551
+  1067     0068  286A               	goto	u550
+  1068     0069                     u551:
+  1069     0069  289E               	goto	l1340
+  1070     006A                     u550:
+  1071     006A                     l1332:
+  1072                           
+  1073                           ;DHT11.c: 60:         *hum = bits[0]<<8 | bits[1];
+  1074     006A  0820               	movf	_bits,w
+  1075     006B  00AB               	movwf	??_DHT11_read_data
+  1076     006C  01AC               	clrf	??_DHT11_read_data+1
+  1077     006D  082B               	movf	??_DHT11_read_data,w
+  1078     006E  00AC               	movwf	??_DHT11_read_data+1
+  1079     006F  01AB               	clrf	??_DHT11_read_data
+  1080     0070  0821               	movf	_bits+1,w
+  1081     0071  042B               	iorwf	??_DHT11_read_data,w
+  1082     0072  00AD               	movwf	??_DHT11_read_data+2
+  1083     0073  01AE               	clrf	??_DHT11_read_data+3
+  1084     0074  1FA1               	btfss	_bits+1,7
+  1085     0075  2877               	goto	u564
+  1086     0076  03AE               	decf	??_DHT11_read_data+3,f
+  1087     0077                     u564:
+  1088     0077  1283               	bcf	3,5	;RP0=0, select bank0
+  1089     0078  1303               	bcf	3,6	;RP1=0, select bank0
+  1090     0079  082C               	movf	??_DHT11_read_data+1,w
+  1091     007A  04AE               	iorwf	??_DHT11_read_data+3,f
+  1092     007B  082F               	movf	DHT11_read_data@hum,w
+  1093     007C  0084               	movwf	4
+  1094     007D  082D               	movf	??_DHT11_read_data+2,w
+  1095     007E  1383               	bcf	3,7	;select IRP bank0
+  1096     007F  0080               	movwf	0
+  1097     0080  0A84               	incf	4,f
+  1098     0081  082E               	movf	??_DHT11_read_data+3,w
+  1099     0082  0080               	movwf	0
+  1100                           
+  1101                           ;DHT11.c: 61:         *temp = bits[2]<<8 | bits[3];
+  1102     0083  0822               	movf	_bits+2,w
+  1103     0084  00AB               	movwf	??_DHT11_read_data
+  1104     0085  01AC               	clrf	??_DHT11_read_data+1
+  1105     0086  082B               	movf	??_DHT11_read_data,w
+  1106     0087  00AC               	movwf	??_DHT11_read_data+1
+  1107     0088  01AB               	clrf	??_DHT11_read_data
+  1108     0089  0823               	movf	_bits+3,w
+  1109     008A  042B               	iorwf	??_DHT11_read_data,w
+  1110     008B  00AD               	movwf	??_DHT11_read_data+2
+  1111     008C  01AE               	clrf	??_DHT11_read_data+3
+  1112     008D  1FA3               	btfss	_bits+3,7
+  1113     008E  2890               	goto	u574
+  1114     008F  03AE               	decf	??_DHT11_read_data+3,f
+  1115     0090                     u574:
+  1116     0090  1283               	bcf	3,5	;RP0=0, select bank0
+  1117     0091  1303               	bcf	3,6	;RP1=0, select bank0
+  1118     0092  082C               	movf	??_DHT11_read_data+1,w
+  1119     0093  04AE               	iorwf	??_DHT11_read_data+3,f
+  1120     0094  0876               	movf	DHT11_read_data@temp,w
+  1121     0095  0084               	movwf	4
+  1122     0096  082D               	movf	??_DHT11_read_data+2,w
+  1123     0097  1383               	bcf	3,7	;select IRP bank0
+  1124     0098  0080               	movwf	0
+  1125     0099  0A84               	incf	4,f
+  1126     009A  082E               	movf	??_DHT11_read_data+3,w
+  1127     009B  0080               	movwf	0
+  1128     009C                     l1334:
+  1129                           
+  1130                           ;DHT11.c: 62:     return 1;
+  1131     009C  3001               	movlw	1
+  1132     009D  289F               	goto	l180
+  1133     009E                     l1340:
+  1134                           
+  1135                           ;DHT11.c: 65:       return 0;
+  1136     009E  3000               	movlw	0
+  1137     009F                     l180:
+  1138     009F  0008               	return
+  1139     00A0                     __end_of_DHT11_read_data:
+  1140                           
+  1141                           	psect	text4
+  1142     018E                     __ptext4:	
+  1143 ;; *************** function _DHT11_start *****************
+  1144 ;; Defined at:
+  1145 ;;		line 15 in file "DHT11.c"
+  1146 ;; Parameters:    Size  Location     Type
+  1147 ;;		None
+  1148 ;; Auto vars:     Size  Location     Type
   1149 ;;		None
-  1150 ;; Auto vars:     Size  Location     Type
-  1151 ;;		None
-  1152 ;; Return value:  Size  Location     Type
-  1153 ;;                  1    wreg      void 
-  1154 ;; Registers used:
-  1155 ;;		wreg
-  1156 ;; Tracked objects:
-  1157 ;;		On entry : 0/0
-  1158 ;;		On exit  : 0/0
-  1159 ;;		Unchanged: 0/0
-  1160 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1161 ;;      Params:         0       0       0       0       0
-  1162 ;;      Locals:         0       0       0       0       0
-  1163 ;;      Temps:          2       0       0       0       0
-  1164 ;;      Totals:         2       0       0       0       0
-  1165 ;;Total ram usage:        2 bytes
-  1166 ;; Hardware stack levels used: 1
-  1167 ;; Hardware stack levels required when called: 1
-  1168 ;; This function calls:
-  1169 ;;		Nothing
-  1170 ;; This function is called by:
-  1171 ;;		_main
-  1172 ;;		_DHT11_read_data
-  1173 ;; This function uses a non-reentrant model
-  1174 ;;
-  1175                           
-  1176     018E                     _DHT11_start:	
-  1177                           ;psect for function _DHT11_start
-  1178                           
-  1179     018E                     l1128:	
-  1180                           ;incstack = 0
-  1181                           ; Regs used in _DHT11_start: [wreg]
-  1182                           
-  1183                           
-  1184                           ;DHT11.c: 16:     TRISD0 = 0;
-  1185     018E  1683               	bsf	3,5	;RP0=1, select bank1
-  1186     018F  1303               	bcf	3,6	;RP1=0, select bank1
-  1187     0190  1008               	bcf	8,0	;volatile
-  1188                           
-  1189                           ;DHT11.c: 17:     RD0 = 0;
-  1190     0191  1283               	bcf	3,5	;RP0=0, select bank0
-  1191     0192  1303               	bcf	3,6	;RP1=0, select bank0
-  1192     0193  1008               	bcf	8,0	;volatile
-  1193     0194                     l1130:
-  1194                           
-  1195                           ;DHT11.c: 18:     _delay((unsigned long)((25)*(8000000/4000.0)));
-  1196     0194  3041               	movlw	65
-  1197     0195  00F4               	movwf	??_DHT11_start+1
-  1198     0196  30EE               	movlw	238
-  1199     0197  00F3               	movwf	??_DHT11_start
-  1200     0198                     u617:
-  1201     0198  0BF3               	decfsz	??_DHT11_start,f
-  1202     0199  2998               	goto	u617
-  1203     019A  0BF4               	decfsz	??_DHT11_start+1,f
-  1204     019B  2998               	goto	u617
-  1205     019C  0000               	nop
-  1206     019D                     l1132:
-  1207                           
-  1208                           ;DHT11.c: 19:     RD0 = 1;
-  1209     019D  1283               	bcf	3,5	;RP0=0, select bank0
-  1210     019E  1303               	bcf	3,6	;RP1=0, select bank0
-  1211     019F  1408               	bsf	8,0	;volatile
-  1212     01A0                     l1134:
-  1213                           
-  1214                           ;DHT11.c: 20:     TRISD0 = 1;
-  1215     01A0  1683               	bsf	3,5	;RP0=1, select bank1
-  1216     01A1  1303               	bcf	3,6	;RP1=0, select bank1
-  1217     01A2  1408               	bsf	8,0	;volatile
-  1218                           
-  1219                           ;DHT11.c: 21:     _delay((unsigned long)((30)*(8000000/4000000.0)));
-  1220     01A3  3013               	movlw	19
-  1221     01A4  00F3               	movwf	??_DHT11_start
-  1222     01A5                     u627:
-  1223     01A5  0BF3               	decfsz	??_DHT11_start,f
-  1224     01A6  29A5               	goto	u627
-  1225     01A7  29A8               	nop2
-  1226     01A8                     l151:
-  1227     01A8  0008               	return
-  1228     01A9                     __end_of_DHT11_start:
-  1229                           
-  1230                           	psect	text5
-  1231     01D3                     __ptext5:	
-  1232 ;; *************** function _DHT11_response *****************
-  1233 ;; Defined at:
-  1234 ;;		line 24 in file "DHT11.c"
-  1235 ;; Parameters:    Size  Location     Type
+  1150 ;; Return value:  Size  Location     Type
+  1151 ;;                  1    wreg      void 
+  1152 ;; Registers used:
+  1153 ;;		wreg
+  1154 ;; Tracked objects:
+  1155 ;;		On entry : 0/0
+  1156 ;;		On exit  : 0/0
+  1157 ;;		Unchanged: 0/0
+  1158 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1159 ;;      Params:         0       0       0       0       0
+  1160 ;;      Locals:         0       0       0       0       0
+  1161 ;;      Temps:          2       0       0       0       0
+  1162 ;;      Totals:         2       0       0       0       0
+  1163 ;;Total ram usage:        2 bytes
+  1164 ;; Hardware stack levels used: 1
+  1165 ;; Hardware stack levels required when called: 1
+  1166 ;; This function calls:
+  1167 ;;		Nothing
+  1168 ;; This function is called by:
+  1169 ;;		_main
+  1170 ;;		_DHT11_read_data
+  1171 ;; This function uses a non-reentrant model
+  1172 ;;
+  1173                           
+  1174     018E                     _DHT11_start:	
+  1175                           ;psect for function _DHT11_start
+  1176                           
+  1177     018E                     l1128:	
+  1178                           ;incstack = 0
+  1179                           ; Regs used in _DHT11_start: [wreg]
+  1180                           
+  1181                           
+  1182                           ;DHT11.c: 16:     TRISD0 = 0;
+  1183     018E  1683               	bsf	3,5	;RP0=1, select bank1
+  1184     018F  1303               	bcf	3,6	;RP1=0, select bank1
+  1185     0190  1008               	bcf	8,0	;volatile
+  1186                           
+  1187                           ;DHT11.c: 17:     RD0 = 0;
+  1188     0191  1283               	bcf	3,5	;RP0=0, select bank0
+  1189     0192  1303               	bcf	3,6	;RP1=0, select bank0
+  1190     0193  1008               	bcf	8,0	;volatile
+  1191     0194                     l1130:
+  1192                           
+  1193                           ;DHT11.c: 18:     _delay((unsigned long)((25)*(8000000/4000.0)));
+  1194     0194  3041               	movlw	65
+  1195     0195  00F4               	movwf	??_DHT11_start+1
+  1196     0196  30EE               	movlw	238
+  1197     0197  00F3               	movwf	??_DHT11_start
+  1198     0198                     u617:
+  1199     0198  0BF3               	decfsz	??_DHT11_start,f
+  1200     0199  2998               	goto	u617
+  1201     019A  0BF4               	decfsz	??_DHT11_start+1,f
+  1202     019B  2998               	goto	u617
+  1203     019C  0000               	nop
+  1204     019D                     l1132:
+  1205                           
+  1206                           ;DHT11.c: 19:     RD0 = 1;
+  1207     019D  1283               	bcf	3,5	;RP0=0, select bank0
+  1208     019E  1303               	bcf	3,6	;RP1=0, select bank0
+  1209     019F  1408               	bsf	8,0	;volatile
+  1210     01A0                     l1134:
+  1211                           
+  1212                           ;DHT11.c: 20:     TRISD0 = 1;
+  1213     01A0  1683               	bsf	3,5	;RP0=1, select bank1
+  1214     01A1  1303               	bcf	3,6	;RP1=0, select bank1
+  1215     01A2  1408               	bsf	8,0	;volatile
+  1216                           
+  1217                           ;DHT11.c: 21:     _delay((unsigned long)((30)*(8000000/4000000.0)));
+  1218     01A3  3013               	movlw	19
+  1219     01A4  00F3               	movwf	??_DHT11_start
+  1220     01A5                     u627:
+  1221     01A5  0BF3               	decfsz	??_DHT11_start,f
+  1222     01A6  29A5               	goto	u627
+  1223     01A7  29A8               	nop2
+  1224     01A8                     l151:
+  1225     01A8  0008               	return
+  1226     01A9                     __end_of_DHT11_start:
+  1227                           
+  1228                           	psect	text5
+  1229     01D3                     __ptext5:	
+  1230 ;; *************** function _DHT11_response *****************
+  1231 ;; Defined at:
+  1232 ;;		line 24 in file "DHT11.c"
+  1233 ;; Parameters:    Size  Location     Type
+  1234 ;;		None
+  1235 ;; Auto vars:     Size  Location     Type
   1236 ;;		None
-  1237 ;; Auto vars:     Size  Location     Type
-  1238 ;;		None
-  1239 ;; Return value:  Size  Location     Type
-  1240 ;;                  1    wreg      void 
-  1241 ;; Registers used:
-  1242 ;;		None
-  1243 ;; Tracked objects:
-  1244 ;;		On entry : 0/0
-  1245 ;;		On exit  : 0/0
-  1246 ;;		Unchanged: 0/0
-  1247 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1248 ;;      Params:         0       0       0       0       0
-  1249 ;;      Locals:         0       0       0       0       0
-  1250 ;;      Temps:          0       0       0       0       0
-  1251 ;;      Totals:         0       0       0       0       0
-  1252 ;;Total ram usage:        0 bytes
-  1253 ;; Hardware stack levels used: 1
-  1254 ;; Hardware stack levels required when called: 1
-  1255 ;; This function calls:
-  1256 ;;		Nothing
-  1257 ;; This function is called by:
-  1258 ;;		_DHT11_read_data
-  1259 ;; This function uses a non-reentrant model
-  1260 ;;
-  1261                           
-  1262     01D3                     _DHT11_response:	
-  1263                           ;psect for function _DHT11_response
-  1264                           
-  1265     01D3                     l1150:	
-  1266                           ;incstack = 0
-  1267                           ; Regs used in _DHT11_response: []
-  1268                           
-  1269     01D3                     l154:	
-  1270                           ;DHT11.c: 25:     while(RD0 == 1);
-  1271                           
-  1272     01D3  1283               	bcf	3,5	;RP0=0, select bank0
-  1273     01D4  1303               	bcf	3,6	;RP1=0, select bank0
-  1274     01D5  1808               	btfsc	8,0	;volatile
-  1275     01D6  29D8               	goto	u351
-  1276     01D7  29D9               	goto	u350
-  1277     01D8                     u351:
-  1278     01D8  29D3               	goto	l154
-  1279     01D9                     u350:
-  1280     01D9                     l157:
-  1281     01D9  1C08               	btfss	8,0	;volatile
-  1282     01DA  29DC               	goto	u361
-  1283     01DB  29DD               	goto	u360
-  1284     01DC                     u361:
-  1285     01DC  29D9               	goto	l157
-  1286     01DD                     u360:
-  1287     01DD                     l160:
-  1288     01DD  1808               	btfsc	8,0	;volatile
-  1289     01DE  29E0               	goto	u371
-  1290     01DF  29E1               	goto	u370
-  1291     01E0                     u371:
-  1292     01E0  29DD               	goto	l160
-  1293     01E1                     u370:
-  1294     01E1                     l163:
-  1295     01E1  0008               	return
-  1296     01E2                     __end_of_DHT11_response:
-  1297                           
-  1298                           	psect	text6
-  1299     0163                     __ptext6:	
-  1300 ;; *************** function _DHT11_read_byte *****************
-  1301 ;; Defined at:
-  1302 ;;		line 30 in file "DHT11.c"
-  1303 ;; Parameters:    Size  Location     Type
-  1304 ;;		None
-  1305 ;; Auto vars:     Size  Location     Type
-  1306 ;;  data            1    5[COMMON] char 
-  1307 ;;  i               1    4[COMMON] char 
-  1308 ;; Return value:  Size  Location     Type
-  1309 ;;                  1    wreg      char 
-  1310 ;; Registers used:
-  1311 ;;		wreg, status,2, status,0, btemp+1
-  1312 ;; Tracked objects:
-  1313 ;;		On entry : 0/0
-  1314 ;;		On exit  : 0/0
-  1315 ;;		Unchanged: 0/0
-  1316 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1317 ;;      Params:         0       0       0       0       0
-  1318 ;;      Locals:         2       0       0       0       0
-  1319 ;;      Temps:          1       0       0       0       0
-  1320 ;;      Totals:         3       0       0       0       0
-  1321 ;;Total ram usage:        3 bytes
-  1322 ;; Hardware stack levels used: 1
-  1323 ;; Hardware stack levels required when called: 1
-  1324 ;; This function calls:
-  1325 ;;		Nothing
-  1326 ;; This function is called by:
-  1327 ;;		_DHT11_read_data
-  1328 ;; This function uses a non-reentrant model
-  1329 ;;
-  1330                           
-  1331     0163                     _DHT11_read_byte:	
-  1332                           ;psect for function _DHT11_read_byte
-  1333                           
-  1334     0163                     l1152:	
-  1335                           ;incstack = 0
-  1336                           ; Regs used in _DHT11_read_byte: [wreg+status,2+status,0+btemp+1]
-  1337                           
-  1338                           
-  1339                           ;DHT11.c: 32:    int8_t i;;DHT11.c: 33:    int8_t data = 0;
-  1340     0163  01F5               	clrf	DHT11_read_byte@data
-  1341                           
-  1342                           ;DHT11.c: 34:    for(i=0; i<8; i++){
-  1343     0164  01F4               	clrf	DHT11_read_byte@i
-  1344     0165                     l168:
-  1345     0165  1283               	bcf	3,5	;RP0=0, select bank0
-  1346     0166  1303               	bcf	3,6	;RP1=0, select bank0
-  1347     0167  1C08               	btfss	8,0	;volatile
-  1348     0168  296A               	goto	u381
-  1349     0169  296B               	goto	u380
-  1350     016A                     u381:
-  1351     016A  2965               	goto	l168
-  1352     016B                     u380:
-  1353     016B                     l1158:
-  1354                           
-  1355                           ;DHT11.c: 36:     _delay((unsigned long)((30)*(8000000/4000000.0)));
-  1356     016B  3013               	movlw	19
-  1357     016C  00F3               	movwf	??_DHT11_read_byte
-  1358     016D                     u637:
-  1359     016D  0BF3               	decfsz	??_DHT11_read_byte,f
-  1360     016E  296D               	goto	u637
-  1361     016F  2970               	nop2
-  1362     0170                     l1160:
-  1363                           
-  1364                           ;DHT11.c: 37:     if(RD0 == 1){
-  1365     0170  1283               	bcf	3,5	;RP0=0, select bank0
-  1366     0171  1303               	bcf	3,6	;RP1=0, select bank0
-  1367     0172  1C08               	btfss	8,0	;volatile
-  1368     0173  2975               	goto	u391
-  1369     0174  2976               	goto	u390
-  1370     0175                     u391:
-  1371     0175  2979               	goto	l1164
-  1372     0176                     u390:
-  1373     0176                     l1162:
-  1374                           
-  1375                           ;DHT11.c: 38:         data = (data<<1 | 1);
-  1376     0176  1403               	setc
-  1377     0177  0DF5               	rlf	DHT11_read_byte@data,f
-  1378                           
-  1379                           ;DHT11.c: 39:     }
-  1380     0178  297D               	goto	l173
-  1381     0179                     l1164:
-  1382                           
-  1383                           ;DHT11.c: 41:         data = (data<<1);
-  1384     0179  0875               	movf	DHT11_read_byte@data,w
-  1385     017A  00F3               	movwf	??_DHT11_read_byte
-  1386     017B  0773               	addwf	??_DHT11_read_byte,w
-  1387     017C  00F5               	movwf	DHT11_read_byte@data
-  1388     017D                     l173:
-  1389     017D  1808               	btfsc	8,0	;volatile
-  1390     017E  2980               	goto	u401
-  1391     017F  2981               	goto	u400
-  1392     0180                     u401:
-  1393     0180  297D               	goto	l173
-  1394     0181                     u400:
-  1395     0181                     l1166:
-  1396                           
-  1397                           ;DHT11.c: 44:    }
-  1398     0181  3001               	movlw	1
-  1399     0182  00FF               	movwf	btemp+1
-  1400     0183  087F               	movf	btemp+1,w
-  1401     0184  07F4               	addwf	DHT11_read_byte@i,f
-  1402     0185                     l1168:
-  1403     0185  0874               	movf	DHT11_read_byte@i,w
-  1404     0186  3A80               	xorlw	128
-  1405     0187  3E78               	addlw	-136
-  1406     0188  1C03               	skipc
-  1407     0189  298B               	goto	u411
-  1408     018A  298C               	goto	u410
-  1409     018B                     u411:
-  1410     018B  2965               	goto	l168
-  1411     018C                     u410:
-  1412     018C                     l1170:
-  1413                           
-  1414                           ;DHT11.c: 45:    return data;
-  1415     018C  0875               	movf	DHT11_read_byte@data,w
-  1416     018D                     l176:
-  1417     018D  0008               	return
-  1418     018E                     __end_of_DHT11_read_byte:
-  1419                           
-  1420                           	psect	text7
-  1421     0106                     __ptext7:	
-  1422 ;; *************** function _isr *****************
-  1423 ;; Defined at:
-  1424 ;;		line 56 in file "slave_DHT11.c"
-  1425 ;; Parameters:    Size  Location     Type
+  1237 ;; Return value:  Size  Location     Type
+  1238 ;;                  1    wreg      void 
+  1239 ;; Registers used:
+  1240 ;;		None
+  1241 ;; Tracked objects:
+  1242 ;;		On entry : 0/0
+  1243 ;;		On exit  : 0/0
+  1244 ;;		Unchanged: 0/0
+  1245 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1246 ;;      Params:         0       0       0       0       0
+  1247 ;;      Locals:         0       0       0       0       0
+  1248 ;;      Temps:          0       0       0       0       0
+  1249 ;;      Totals:         0       0       0       0       0
+  1250 ;;Total ram usage:        0 bytes
+  1251 ;; Hardware stack levels used: 1
+  1252 ;; Hardware stack levels required when called: 1
+  1253 ;; This function calls:
+  1254 ;;		Nothing
+  1255 ;; This function is called by:
+  1256 ;;		_DHT11_read_data
+  1257 ;; This function uses a non-reentrant model
+  1258 ;;
+  1259                           
+  1260     01D3                     _DHT11_response:	
+  1261                           ;psect for function _DHT11_response
+  1262                           
+  1263     01D3                     l1150:	
+  1264                           ;incstack = 0
+  1265                           ; Regs used in _DHT11_response: []
+  1266                           
+  1267     01D3                     l154:	
+  1268                           ;DHT11.c: 25:     while(RD0 == 1);
+  1269                           
+  1270     01D3  1283               	bcf	3,5	;RP0=0, select bank0
+  1271     01D4  1303               	bcf	3,6	;RP1=0, select bank0
+  1272     01D5  1808               	btfsc	8,0	;volatile
+  1273     01D6  29D8               	goto	u351
+  1274     01D7  29D9               	goto	u350
+  1275     01D8                     u351:
+  1276     01D8  29D3               	goto	l154
+  1277     01D9                     u350:
+  1278     01D9                     l157:
+  1279     01D9  1C08               	btfss	8,0	;volatile
+  1280     01DA  29DC               	goto	u361
+  1281     01DB  29DD               	goto	u360
+  1282     01DC                     u361:
+  1283     01DC  29D9               	goto	l157
+  1284     01DD                     u360:
+  1285     01DD                     l160:
+  1286     01DD  1808               	btfsc	8,0	;volatile
+  1287     01DE  29E0               	goto	u371
+  1288     01DF  29E1               	goto	u370
+  1289     01E0                     u371:
+  1290     01E0  29DD               	goto	l160
+  1291     01E1                     u370:
+  1292     01E1                     l163:
+  1293     01E1  0008               	return
+  1294     01E2                     __end_of_DHT11_response:
+  1295                           
+  1296                           	psect	text6
+  1297     0163                     __ptext6:	
+  1298 ;; *************** function _DHT11_read_byte *****************
+  1299 ;; Defined at:
+  1300 ;;		line 30 in file "DHT11.c"
+  1301 ;; Parameters:    Size  Location     Type
+  1302 ;;		None
+  1303 ;; Auto vars:     Size  Location     Type
+  1304 ;;  data            1    5[COMMON] char 
+  1305 ;;  i               1    4[COMMON] char 
+  1306 ;; Return value:  Size  Location     Type
+  1307 ;;                  1    wreg      char 
+  1308 ;; Registers used:
+  1309 ;;		wreg, status,2, status,0, btemp+1
+  1310 ;; Tracked objects:
+  1311 ;;		On entry : 0/0
+  1312 ;;		On exit  : 0/0
+  1313 ;;		Unchanged: 0/0
+  1314 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1315 ;;      Params:         0       0       0       0       0
+  1316 ;;      Locals:         2       0       0       0       0
+  1317 ;;      Temps:          1       0       0       0       0
+  1318 ;;      Totals:         3       0       0       0       0
+  1319 ;;Total ram usage:        3 bytes
+  1320 ;; Hardware stack levels used: 1
+  1321 ;; Hardware stack levels required when called: 1
+  1322 ;; This function calls:
+  1323 ;;		Nothing
+  1324 ;; This function is called by:
+  1325 ;;		_DHT11_read_data
+  1326 ;; This function uses a non-reentrant model
+  1327 ;;
+  1328                           
+  1329     0163                     _DHT11_read_byte:	
+  1330                           ;psect for function _DHT11_read_byte
+  1331                           
+  1332     0163                     l1152:	
+  1333                           ;incstack = 0
+  1334                           ; Regs used in _DHT11_read_byte: [wreg+status,2+status,0+btemp+1]
+  1335                           
+  1336                           
+  1337                           ;DHT11.c: 32:    int8_t i;;DHT11.c: 33:    int8_t data = 0;
+  1338     0163  01F5               	clrf	DHT11_read_byte@data
+  1339                           
+  1340                           ;DHT11.c: 34:    for(i=0; i<8; i++){
+  1341     0164  01F4               	clrf	DHT11_read_byte@i
+  1342     0165                     l168:
+  1343     0165  1283               	bcf	3,5	;RP0=0, select bank0
+  1344     0166  1303               	bcf	3,6	;RP1=0, select bank0
+  1345     0167  1C08               	btfss	8,0	;volatile
+  1346     0168  296A               	goto	u381
+  1347     0169  296B               	goto	u380
+  1348     016A                     u381:
+  1349     016A  2965               	goto	l168
+  1350     016B                     u380:
+  1351     016B                     l1158:
+  1352                           
+  1353                           ;DHT11.c: 36:     _delay((unsigned long)((30)*(8000000/4000000.0)));
+  1354     016B  3013               	movlw	19
+  1355     016C  00F3               	movwf	??_DHT11_read_byte
+  1356     016D                     u637:
+  1357     016D  0BF3               	decfsz	??_DHT11_read_byte,f
+  1358     016E  296D               	goto	u637
+  1359     016F  2970               	nop2
+  1360     0170                     l1160:
+  1361                           
+  1362                           ;DHT11.c: 37:     if(RD0 == 1){
+  1363     0170  1283               	bcf	3,5	;RP0=0, select bank0
+  1364     0171  1303               	bcf	3,6	;RP1=0, select bank0
+  1365     0172  1C08               	btfss	8,0	;volatile
+  1366     0173  2975               	goto	u391
+  1367     0174  2976               	goto	u390
+  1368     0175                     u391:
+  1369     0175  2979               	goto	l1164
+  1370     0176                     u390:
+  1371     0176                     l1162:
+  1372                           
+  1373                           ;DHT11.c: 38:         data = (data<<1 | 1);
+  1374     0176  1403               	setc
+  1375     0177  0DF5               	rlf	DHT11_read_byte@data,f
+  1376                           
+  1377                           ;DHT11.c: 39:     }
+  1378     0178  297D               	goto	l173
+  1379     0179                     l1164:
+  1380                           
+  1381                           ;DHT11.c: 41:         data = (data<<1);
+  1382     0179  0875               	movf	DHT11_read_byte@data,w
+  1383     017A  00F3               	movwf	??_DHT11_read_byte
+  1384     017B  0773               	addwf	??_DHT11_read_byte,w
+  1385     017C  00F5               	movwf	DHT11_read_byte@data
+  1386     017D                     l173:
+  1387     017D  1808               	btfsc	8,0	;volatile
+  1388     017E  2980               	goto	u401
+  1389     017F  2981               	goto	u400
+  1390     0180                     u401:
+  1391     0180  297D               	goto	l173
+  1392     0181                     u400:
+  1393     0181                     l1166:
+  1394                           
+  1395                           ;DHT11.c: 44:    }
+  1396     0181  3001               	movlw	1
+  1397     0182  00FF               	movwf	btemp+1
+  1398     0183  087F               	movf	btemp+1,w
+  1399     0184  07F4               	addwf	DHT11_read_byte@i,f
+  1400     0185                     l1168:
+  1401     0185  0874               	movf	DHT11_read_byte@i,w
+  1402     0186  3A80               	xorlw	128
+  1403     0187  3E78               	addlw	-136
+  1404     0188  1C03               	skipc
+  1405     0189  298B               	goto	u411
+  1406     018A  298C               	goto	u410
+  1407     018B                     u411:
+  1408     018B  2965               	goto	l168
+  1409     018C                     u410:
+  1410     018C                     l1170:
+  1411                           
+  1412                           ;DHT11.c: 45:    return data;
+  1413     018C  0875               	movf	DHT11_read_byte@data,w
+  1414     018D                     l176:
+  1415     018D  0008               	return
+  1416     018E                     __end_of_DHT11_read_byte:
+  1417                           
+  1418                           	psect	text7
+  1419     0106                     __ptext7:	
+  1420 ;; *************** function _isr *****************
+  1421 ;; Defined at:
+  1422 ;;		line 58 in file "slave_DHT11.c"
+  1423 ;; Parameters:    Size  Location     Type
+  1424 ;;		None
+  1425 ;; Auto vars:     Size  Location     Type
   1426 ;;		None
-  1427 ;; Auto vars:     Size  Location     Type
-  1428 ;;		None
-  1429 ;; Return value:  Size  Location     Type
-  1430 ;;                  1    wreg      void 
-  1431 ;; Registers used:
-  1432 ;;		wreg
-  1433 ;; Tracked objects:
-  1434 ;;		On entry : 0/0
-  1435 ;;		On exit  : 0/0
-  1436 ;;		Unchanged: 0/0
-  1437 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1438 ;;      Params:         0       0       0       0       0
-  1439 ;;      Locals:         0       0       0       0       0
-  1440 ;;      Temps:          3       0       0       0       0
-  1441 ;;      Totals:         3       0       0       0       0
-  1442 ;;Total ram usage:        3 bytes
-  1443 ;; Hardware stack levels used: 1
-  1444 ;; This function calls:
-  1445 ;;		Nothing
-  1446 ;; This function is called by:
-  1447 ;;		Interrupt level 1
-  1448 ;; This function uses a non-reentrant model
-  1449 ;;
-  1450                           
-  1451     0106                     _isr:	
-  1452                           ;psect for function _isr
+  1427 ;; Return value:  Size  Location     Type
+  1428 ;;                  1    wreg      void 
+  1429 ;; Registers used:
+  1430 ;;		wreg
+  1431 ;; Tracked objects:
+  1432 ;;		On entry : 0/0
+  1433 ;;		On exit  : 0/0
+  1434 ;;		Unchanged: 0/0
+  1435 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1436 ;;      Params:         0       0       0       0       0
+  1437 ;;      Locals:         0       0       0       0       0
+  1438 ;;      Temps:          3       0       0       0       0
+  1439 ;;      Totals:         3       0       0       0       0
+  1440 ;;Total ram usage:        3 bytes
+  1441 ;; Hardware stack levels used: 1
+  1442 ;; This function calls:
+  1443 ;;		Nothing
+  1444 ;; This function is called by:
+  1445 ;;		Interrupt level 1
+  1446 ;; This function uses a non-reentrant model
+  1447 ;;
+  1448                           
+  1449     0106                     _isr:	
+  1450                           ;psect for function _isr
+  1451                           
+  1452     0106                     i1l1214:
   1453                           
-  1454     0106                     i1l1214:
-  1455                           
-  1456                           ;slave_DHT11.c: 57: 
-  1457     0106  1283               	bcf	3,5	;RP0=0, select bank0
-  1458     0107  1303               	bcf	3,6	;RP1=0, select bank0
-  1459     0108  1D8C               	btfss	12,3	;volatile
-  1460     0109  290B               	goto	u45_21
-  1461     010A  290C               	goto	u45_20
-  1462     010B                     u45_21:
-  1463     010B  295C               	goto	i1l66
-  1464     010C                     u45_20:
-  1465     010C                     i1l1216:
-  1466                           
-  1467                           ;slave_DHT11.c: 59: int main(void) {
-  1468     010C  1214               	bcf	20,4	;volatile
-  1469                           
-  1470                           ;slave_DHT11.c: 61:     DHT11_start();
-  1471     010D  1B14               	btfsc	20,6	;volatile
-  1472     010E  2910               	goto	u46_21
-  1473     010F  2911               	goto	u46_20
-  1474     0110                     u46_21:
-  1475     0110  2915               	goto	i1l1220
-  1476     0111                     u46_20:
-  1477     0111                     i1l1218:
-  1478     0111  1F94               	btfss	20,7	;volatile
-  1479     0112  2914               	goto	u47_21
-  1480     0113  2915               	goto	u47_20
-  1481     0114                     u47_21:
-  1482     0114  291A               	goto	i1l1228
-  1483     0115                     u47_20:
-  1484     0115                     i1l1220:
-  1485                           
-  1486                           ;slave_DHT11.c: 62:     _delay((unsigned long)((100)*(8000000/4000.0)));
-  1487     0115  0813               	movf	19,w	;volatile
-  1488     0116  00A6               	movwf	_discard
-  1489     0117                     i1l1222:
-  1490                           
-  1491                           ;slave_DHT11.c: 63:     while(1){
-  1492     0117  1314               	bcf	20,6	;volatile
-  1493     0118                     i1l1224:
-  1494                           
-  1495                           ;slave_DHT11.c: 64: 
-  1496     0118  1394               	bcf	20,7	;volatile
-  1497     0119                     i1l1226:
-  1498                           
-  1499                           ;slave_DHT11.c: 65: 
-  1500     0119  1614               	bsf	20,4	;volatile
-  1501     011A                     i1l1228:
-  1502                           
-  1503                           ;slave_DHT11.c: 68:             data_ok = DHT11_read_data(&humedad, &temperatura);
-  1504     011A  1683               	bsf	3,5	;RP0=1, select bank1
-  1505     011B  1303               	bcf	3,6	;RP1=0, select bank1
-  1506     011C  1A94               	btfsc	20,5	;volatile
-  1507     011D  291F               	goto	u48_21
-  1508     011E  2920               	goto	u48_20
-  1509     011F                     u48_21:
-  1510     011F  293A               	goto	i1l57
-  1511     0120                     u48_20:
-  1512     0120                     i1l1230:
-  1513     0120  1914               	btfsc	20,2	;volatile
-  1514     0121  2923               	goto	u49_21
-  1515     0122  2924               	goto	u49_20
-  1516     0123                     u49_21:
-  1517     0123  293A               	goto	i1l57
-  1518     0124                     u49_20:
-  1519     0124                     i1l1232:
-  1520                           
-  1521                           ;slave_DHT11.c: 70:         }
-  1522     0124  1283               	bcf	3,5	;RP0=0, select bank0
-  1523     0125  1303               	bcf	3,6	;RP1=0, select bank0
-  1524     0126  0813               	movf	19,w	;volatile
-  1525     0127  00A6               	movwf	_discard
-  1526     0128                     i1l1234:
-  1527                           
-  1528                           ;slave_DHT11.c: 72: 
-  1529     0128  118C               	bcf	12,3	;volatile
-  1530     0129                     i1l1236:
-  1531                           
-  1532                           ;slave_DHT11.c: 73:         switch(request){
-  1533     0129  1614               	bsf	20,4	;volatile
-  1534     012A                     i1l58:	
-  1535                           ;slave_DHT11.c: 74:             case 'T':
-  1536                           
-  1537     012A  1683               	bsf	3,5	;RP0=1, select bank1
-  1538     012B  1303               	bcf	3,6	;RP1=0, select bank1
-  1539     012C  1C14               	btfss	20,0	;volatile
-  1540     012D  292F               	goto	u50_21
-  1541     012E  2930               	goto	u50_20
-  1542     012F                     u50_21:
-  1543     012F  292A               	goto	i1l58
-  1544     0130                     u50_20:
-  1545     0130                     i1l1238:
-  1546                           
-  1547                           ;slave_DHT11.c: 75:                 send_data = (temperatura & 0xFF00)>>8;
-  1548     0130  1283               	bcf	3,5	;RP0=0, select bank0
-  1549     0131  1303               	bcf	3,6	;RP1=0, select bank0
-  1550     0132  0813               	movf	19,w	;volatile
-  1551     0133  00F7               	movwf	_request
-  1552                           
-  1553                           ;slave_DHT11.c: 76:                 break;
-  1554     0134  30A6               	movlw	166
-  1555     0135  00F0               	movwf	??_isr
-  1556     0136                     u64_27:
-  1557     0136  0BF0               	decfsz	??_isr,f
-  1558     0137  2936               	goto	u64_27
-  1559     0138  0000               	nop
-  1560                           
-  1561                           ;slave_DHT11.c: 77:             case 't':
-  1562     0139  2959               	goto	i1l61
-  1563     013A                     i1l57:	
-  1564                           ;slave_DHT11.c: 78:                 send_data = (temperatura & 0x00FF);
-  1565                           
-  1566     013A  1A94               	btfsc	20,5	;volatile
-  1567     013B  293D               	goto	u51_21
-  1568     013C  293E               	goto	u51_20
-  1569     013D                     u51_21:
-  1570     013D  2959               	goto	i1l61
-  1571     013E                     u51_20:
-  1572     013E                     i1l1240:
-  1573     013E  1D14               	btfss	20,2	;volatile
-  1574     013F  2941               	goto	u52_21
-  1575     0140  2942               	goto	u52_20
-  1576     0141                     u52_21:
-  1577     0141  2959               	goto	i1l61
-  1578     0142                     u52_20:
-  1579     0142                     i1l1242:
-  1580                           
-  1581                           ;slave_DHT11.c: 79:                 break;
-  1582     0142  1283               	bcf	3,5	;RP0=0, select bank0
-  1583     0143  1303               	bcf	3,6	;RP1=0, select bank0
-  1584     0144  0813               	movf	19,w	;volatile
-  1585     0145  00A6               	movwf	_discard
-  1586     0146                     i1l1244:
-  1587                           
-  1588                           ;slave_DHT11.c: 80:             case 'H':
-  1589     0146  1683               	bsf	3,5	;RP0=1, select bank1
-  1590     0147  1303               	bcf	3,6	;RP1=0, select bank1
-  1591     0148  1014               	bcf	20,0	;volatile
-  1592                           
-  1593                           ;slave_DHT11.c: 81:                 send_data = (humedad & 0xFF00)>>8;
-  1594     0149  0878               	movf	_send_data,w
-  1595     014A  1283               	bcf	3,5	;RP0=0, select bank0
-  1596     014B  1303               	bcf	3,6	;RP1=0, select bank0
-  1597     014C  0093               	movwf	19	;volatile
-  1598     014D                     i1l1246:
-  1599                           
-  1600                           ;slave_DHT11.c: 82:                 break;
-  1601     014D  1614               	bsf	20,4	;volatile
-  1602                           
-  1603                           ;slave_DHT11.c: 83:             case 'h':
-  1604     014E  30A6               	movlw	166
-  1605     014F  00F0               	movwf	??_isr
-  1606     0150                     u65_27:
-  1607     0150  0BF0               	decfsz	??_isr,f
-  1608     0151  2950               	goto	u65_27
-  1609     0152  0000               	nop
-  1610     0153                     i1l63:	
-  1611                           ;slave_DHT11.c: 84:                 send_data = (humedad & 0x00FF);
-  1612                           
-  1613     0153  1683               	bsf	3,5	;RP0=1, select bank1
-  1614     0154  1303               	bcf	3,6	;RP1=0, select bank1
-  1615     0155  1814               	btfsc	20,0	;volatile
-  1616     0156  2958               	goto	u53_21
-  1617     0157  2959               	goto	u53_20
-  1618     0158                     u53_21:
-  1619     0158  2953               	goto	i1l63
-  1620     0159                     u53_20:
-  1621     0159                     i1l61:
-  1622                           
-  1623                           ;slave_DHT11.c: 87:                 send_data = 0xFF;
-  1624     0159  1283               	bcf	3,5	;RP0=0, select bank0
-  1625     015A  1303               	bcf	3,6	;RP1=0, select bank0
-  1626     015B  118C               	bcf	12,3	;volatile
-  1627     015C                     i1l66:
-  1628     015C  0872               	movf	??_isr+2,w
-  1629     015D  008A               	movwf	10
-  1630     015E  0E71               	swapf	??_isr+1,w
-  1631     015F  0083               	movwf	3
-  1632     0160  0EFE               	swapf	btemp,f
-  1633     0161  0E7E               	swapf	btemp,w
-  1634     0162  0009               	retfie
-  1635     0163                     __end_of_isr:
-  1636     007E                     btemp	set	126	;btemp
-  1637     007E                     wtemp0	set	126
-  1638                           
-  1639                           	psect	intentry
-  1640     0004                     __pintentry:	
-  1641                           ;incstack = 0
-  1642                           ; Regs used in _isr: [wreg]
-  1643                           
-  1644     0004                     interrupt_function:
-  1645     007E                     saved_w	set	btemp
-  1646     0004  00FE               	movwf	btemp
-  1647     0005  0E03               	swapf	3,w
-  1648     0006  00F1               	movwf	??_isr+1
-  1649     0007  080A               	movf	10,w
-  1650     0008  00F2               	movwf	??_isr+2
-  1651     0009  120A  118A  2906   	ljmp	_isr
+  1454                           ;slave_DHT11.c: 59: int main(void) {
+  1455     0106  1283               	bcf	3,5	;RP0=0, select bank0
+  1456     0107  1303               	bcf	3,6	;RP1=0, select bank0
+  1457     0108  1D8C               	btfss	12,3	;volatile
+  1458     0109  290B               	goto	u45_21
+  1459     010A  290C               	goto	u45_20
+  1460     010B                     u45_21:
+  1461     010B  295C               	goto	i1l66
+  1462     010C                     u45_20:
+  1463     010C                     i1l1216:
+  1464                           
+  1465                           ;slave_DHT11.c: 61:     DHT11_start();
+  1466     010C  1214               	bcf	20,4	;volatile
+  1467                           
+  1468                           ;slave_DHT11.c: 63:     while(1){
+  1469     010D  1B14               	btfsc	20,6	;volatile
+  1470     010E  2910               	goto	u46_21
+  1471     010F  2911               	goto	u46_20
+  1472     0110                     u46_21:
+  1473     0110  2915               	goto	i1l1220
+  1474     0111                     u46_20:
+  1475     0111                     i1l1218:
+  1476     0111  1F94               	btfss	20,7	;volatile
+  1477     0112  2914               	goto	u47_21
+  1478     0113  2915               	goto	u47_20
+  1479     0114                     u47_21:
+  1480     0114  291A               	goto	i1l1228
+  1481     0115                     u47_20:
+  1482     0115                     i1l1220:
+  1483                           
+  1484                           ;slave_DHT11.c: 64: 
+  1485     0115  0813               	movf	19,w	;volatile
+  1486     0116  00A6               	movwf	_discard
+  1487     0117                     i1l1222:
+  1488                           
+  1489                           ;slave_DHT11.c: 65: 
+  1490     0117  1314               	bcf	20,6	;volatile
+  1491     0118                     i1l1224:
+  1492                           
+  1493                           ;slave_DHT11.c: 66: 
+  1494     0118  1394               	bcf	20,7	;volatile
+  1495     0119                     i1l1226:
+  1496                           
+  1497                           ;slave_DHT11.c: 67:         if(counter >= 250){
+  1498     0119  1614               	bsf	20,4	;volatile
+  1499     011A                     i1l1228:
+  1500                           
+  1501                           ;slave_DHT11.c: 70:         }
+  1502     011A  1683               	bsf	3,5	;RP0=1, select bank1
+  1503     011B  1303               	bcf	3,6	;RP1=0, select bank1
+  1504     011C  1A94               	btfsc	20,5	;volatile
+  1505     011D  291F               	goto	u48_21
+  1506     011E  2920               	goto	u48_20
+  1507     011F                     u48_21:
+  1508     011F  293A               	goto	i1l57
+  1509     0120                     u48_20:
+  1510     0120                     i1l1230:
+  1511     0120  1914               	btfsc	20,2	;volatile
+  1512     0121  2923               	goto	u49_21
+  1513     0122  2924               	goto	u49_20
+  1514     0123                     u49_21:
+  1515     0123  293A               	goto	i1l57
+  1516     0124                     u49_20:
+  1517     0124                     i1l1232:
+  1518                           
+  1519                           ;slave_DHT11.c: 72: 
+  1520     0124  1283               	bcf	3,5	;RP0=0, select bank0
+  1521     0125  1303               	bcf	3,6	;RP1=0, select bank0
+  1522     0126  0813               	movf	19,w	;volatile
+  1523     0127  00A6               	movwf	_discard
+  1524     0128                     i1l1234:
+  1525                           
+  1526                           ;slave_DHT11.c: 74:             case 'T':
+  1527     0128  118C               	bcf	12,3	;volatile
+  1528     0129                     i1l1236:
+  1529                           
+  1530                           ;slave_DHT11.c: 75:                 send_data = (temperatura & 0xFF00)>>8;
+  1531     0129  1614               	bsf	20,4	;volatile
+  1532     012A                     i1l58:	
+  1533                           ;slave_DHT11.c: 76:                 break;
+  1534                           
+  1535     012A  1683               	bsf	3,5	;RP0=1, select bank1
+  1536     012B  1303               	bcf	3,6	;RP1=0, select bank1
+  1537     012C  1C14               	btfss	20,0	;volatile
+  1538     012D  292F               	goto	u50_21
+  1539     012E  2930               	goto	u50_20
+  1540     012F                     u50_21:
+  1541     012F  292A               	goto	i1l58
+  1542     0130                     u50_20:
+  1543     0130                     i1l1238:
+  1544                           
+  1545                           ;slave_DHT11.c: 77:             case 't':
+  1546     0130  1283               	bcf	3,5	;RP0=0, select bank0
+  1547     0131  1303               	bcf	3,6	;RP1=0, select bank0
+  1548     0132  0813               	movf	19,w	;volatile
+  1549     0133  00F7               	movwf	_request
+  1550                           
+  1551                           ;slave_DHT11.c: 78:                 send_data = (temperatura & 0x00FF);
+  1552     0134  30A6               	movlw	166
+  1553     0135  00F0               	movwf	??_isr
+  1554     0136                     u64_27:
+  1555     0136  0BF0               	decfsz	??_isr,f
+  1556     0137  2936               	goto	u64_27
+  1557     0138  0000               	nop
+  1558                           
+  1559                           ;slave_DHT11.c: 79:                 break;
+  1560     0139  2959               	goto	i1l61
+  1561     013A                     i1l57:	
+  1562                           ;slave_DHT11.c: 80:             case 'H':
+  1563                           
+  1564     013A  1A94               	btfsc	20,5	;volatile
+  1565     013B  293D               	goto	u51_21
+  1566     013C  293E               	goto	u51_20
+  1567     013D                     u51_21:
+  1568     013D  2959               	goto	i1l61
+  1569     013E                     u51_20:
+  1570     013E                     i1l1240:
+  1571     013E  1D14               	btfss	20,2	;volatile
+  1572     013F  2941               	goto	u52_21
+  1573     0140  2942               	goto	u52_20
+  1574     0141                     u52_21:
+  1575     0141  2959               	goto	i1l61
+  1576     0142                     u52_20:
+  1577     0142                     i1l1242:
+  1578                           
+  1579                           ;slave_DHT11.c: 81:                 send_data = (humedad & 0xFF00)>>8;
+  1580     0142  1283               	bcf	3,5	;RP0=0, select bank0
+  1581     0143  1303               	bcf	3,6	;RP1=0, select bank0
+  1582     0144  0813               	movf	19,w	;volatile
+  1583     0145  00A6               	movwf	_discard
+  1584     0146                     i1l1244:
+  1585                           
+  1586                           ;slave_DHT11.c: 82:                 break;
+  1587     0146  1683               	bsf	3,5	;RP0=1, select bank1
+  1588     0147  1303               	bcf	3,6	;RP1=0, select bank1
+  1589     0148  1014               	bcf	20,0	;volatile
+  1590                           
+  1591                           ;slave_DHT11.c: 83:             case 'h':
+  1592     0149  0878               	movf	_send_data,w
+  1593     014A  1283               	bcf	3,5	;RP0=0, select bank0
+  1594     014B  1303               	bcf	3,6	;RP1=0, select bank0
+  1595     014C  0093               	movwf	19	;volatile
+  1596     014D                     i1l1246:
+  1597                           
+  1598                           ;slave_DHT11.c: 84:                 send_data = (humedad & 0x00FF);
+  1599     014D  1614               	bsf	20,4	;volatile
+  1600                           
+  1601                           ;slave_DHT11.c: 85:                 break;
+  1602     014E  30A6               	movlw	166
+  1603     014F  00F0               	movwf	??_isr
+  1604     0150                     u65_27:
+  1605     0150  0BF0               	decfsz	??_isr,f
+  1606     0151  2950               	goto	u65_27
+  1607     0152  0000               	nop
+  1608     0153                     i1l63:	
+  1609                           ;slave_DHT11.c: 86:             default:
+  1610                           
+  1611     0153  1683               	bsf	3,5	;RP0=1, select bank1
+  1612     0154  1303               	bcf	3,6	;RP1=0, select bank1
+  1613     0155  1814               	btfsc	20,0	;volatile
+  1614     0156  2958               	goto	u53_21
+  1615     0157  2959               	goto	u53_20
+  1616     0158                     u53_21:
+  1617     0158  2953               	goto	i1l63
+  1618     0159                     u53_20:
+  1619     0159                     i1l61:
+  1620                           
+  1621                           ;slave_DHT11.c: 89:         }
+  1622     0159  1283               	bcf	3,5	;RP0=0, select bank0
+  1623     015A  1303               	bcf	3,6	;RP1=0, select bank0
+  1624     015B  118C               	bcf	12,3	;volatile
+  1625     015C                     i1l66:
+  1626     015C  0872               	movf	??_isr+2,w
+  1627     015D  008A               	movwf	10
+  1628     015E  0E71               	swapf	??_isr+1,w
+  1629     015F  0083               	movwf	3
+  1630     0160  0EFE               	swapf	btemp,f
+  1631     0161  0E7E               	swapf	btemp,w
+  1632     0162  0009               	retfie
+  1633     0163                     __end_of_isr:
+  1634     007E                     btemp	set	126	;btemp
+  1635     007E                     wtemp0	set	126
+  1636                           
+  1637                           	psect	intentry
+  1638     0004                     __pintentry:	
+  1639                           ;incstack = 0
+  1640                           ; Regs used in _isr: [wreg]
+  1641                           
+  1642     0004                     interrupt_function:
+  1643     007E                     saved_w	set	btemp
+  1644     0004  00FE               	movwf	btemp
+  1645     0005  0E03               	swapf	3,w
+  1646     0006  00F1               	movwf	??_isr+1
+  1647     0007  080A               	movf	10,w
+  1648     0008  00F2               	movwf	??_isr+2
+  1649     0009  120A  118A  2906   	ljmp	_isr
+  1650                           
+  1651                           	psect	config
   1652                           
-  1653                           	psect	config
-  1654                           
-  1655                           ;Config register CONFIG1 @ 0x2007
-  1656                           ;	Oscillator Selection bits
-  1657                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
+  1653                           ;Config register CONFIG1 @ 0x2007
+  1654                           ;	Oscillator Selection bits
+  1655                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
       +                          unction on RA7/OSC1/CLKIN
-  1658                           ;	Watchdog Timer Enable bit
-  1659                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
-  1660                           ;	Power-up Timer Enable bit
-  1661                           ;	PWRTE = OFF, PWRT disabled
-  1662                           ;	RE3/MCLR pin function select bit
-  1663                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
-  1664                           ;	Code Protection bit
-  1665                           ;	CP = OFF, Program memory code protection is disabled
-  1666                           ;	Data Code Protection bit
-  1667                           ;	CPD = OFF, Data memory code protection is disabled
-  1668                           ;	Brown Out Reset Selection bits
-  1669                           ;	BOREN = OFF, BOR disabled
-  1670                           ;	Internal External Switchover bit
-  1671                           ;	IESO = OFF, Internal/External Switchover mode is disabled
-  1672                           ;	Fail-Safe Clock Monitor Enabled bit
-  1673                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
-  1674                           ;	Low Voltage Programming Enable bit
-  1675                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
-  1676                           ;	In-Circuit Debugger Mode bit
-  1677                           ;	DEBUG = 0x1, unprogrammed default
-  1678     2007                     	org	8199
-  1679     2007  20D4               	dw	8404
-  1680                           
-  1681                           ;Config register CONFIG2 @ 0x2008
-  1682                           ;	Brown-out Reset Selection bit
-  1683                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
-  1684                           ;	Flash Program Memory Self Write Enable bits
-  1685                           ;	WRT = OFF, Write protection off
-  1686     2008                     	org	8200
-  1687     2008  3FFF               	dw	16383
+  1656                           ;	Watchdog Timer Enable bit
+  1657                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
+  1658                           ;	Power-up Timer Enable bit
+  1659                           ;	PWRTE = OFF, PWRT disabled
+  1660                           ;	RE3/MCLR pin function select bit
+  1661                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
+  1662                           ;	Code Protection bit
+  1663                           ;	CP = OFF, Program memory code protection is disabled
+  1664                           ;	Data Code Protection bit
+  1665                           ;	CPD = OFF, Data memory code protection is disabled
+  1666                           ;	Brown Out Reset Selection bits
+  1667                           ;	BOREN = OFF, BOR disabled
+  1668                           ;	Internal External Switchover bit
+  1669                           ;	IESO = OFF, Internal/External Switchover mode is disabled
+  1670                           ;	Fail-Safe Clock Monitor Enabled bit
+  1671                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
+  1672                           ;	Low Voltage Programming Enable bit
+  1673                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
+  1674                           ;	In-Circuit Debugger Mode bit
+  1675                           ;	DEBUG = 0x1, unprogrammed default
+  1676     2007                     	org	8199
+  1677     2007  20D4               	dw	8404
+  1678                           
+  1679                           ;Config register CONFIG2 @ 0x2008
+  1680                           ;	Brown-out Reset Selection bit
+  1681                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
+  1682                           ;	Flash Program Memory Self Write Enable bits
+  1683                           ;	WRT = OFF, Write protection off
+  1684     2008                     	org	8200
+  1685     2008  3FFF               	dw	16383
 
 Data Sizes:
     Strings     0
@@ -1854,7 +1852,7 @@ EEDATA             100      0       0       0        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.41 build 20230208172133 
-Symbol Table                                                                                   Wed Aug 23 08:35:49 2023
+Symbol Table                                                                                   Thu Aug 24 17:06:03 2023
 
                      _BF 04A0                       l85 01D2                      l151 01A8  
                     l160 01DD                      l154 01D3                      l163 01E1  

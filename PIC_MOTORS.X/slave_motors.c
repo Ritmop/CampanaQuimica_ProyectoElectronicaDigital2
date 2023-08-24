@@ -4,11 +4,14 @@
  * Author: Judah Pérez - 21536
  *Compiler: XC8 (v2.40)
  * 
- * Program: 
- * Hardware: ****
+ * Program: Slave PIC for Motor Control
+ * Hardware:
+ *          SCL and SDA connected to Master
+ *          DC motor on RC0
+ *          Servomotor on RC2
  * 
  * Created: Aug 21, 2023
- * Last updated:
+ * Last updated: Aug 24, 2023
  */
 
 /*--------------------------------- LIBRARIES --------------------------------*/
@@ -37,6 +40,7 @@
 #define address_motors  0x30
 #define TMR0_n          131 //TMR0 Interrupt set to 50Hz
 #define servoPin        RC2
+#define motorPin        RC0
 
 uint8_t discard;
 uint8_t send_data;
@@ -45,8 +49,6 @@ uint8_t TMR0count = 0;
 uint8_t TMR0count2 = 0;
 
 uint8_t servoPos = 2;
-uint8_t prevPos = 0;
-uint8_t stateDC = 0;
         
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
@@ -61,7 +63,6 @@ void __interrupt() isr (void){
         CKP = 0; //Hold clock in low to ensure data setup time
        
         if (SSPOV || WCOL ){ //Received overflow or Write collision
-            RC0 = 1;
             discard = SSPBUF;// Discard value by reading the buffer
             SSPOV = 0;       // Clear the overflow flag
             WCOL = 0;        // Clear the collision bit
@@ -92,7 +93,6 @@ void __interrupt() isr (void){
     
     if(T0IF){
         TMR0count++;
-//        TMR0count2++;
         TMR0 = TMR0_n;
         T0IF = 0;
     }
@@ -111,17 +111,15 @@ int main(void) {
         //Loop
         
         //Servo position
-        PORTA = readI2C;
         servoPos = readI2C & 0x0F;
         
-//        if(servoPos != prevPos)
-            angle_to_PWM(servoPos); 
+        angle_to_PWM(servoPos); 
         
         //DC motor state
         if((readI2C & 0xF0) == 0x10)
-            RC0 = 1;  //Activate motor
+            motorPin = 1;  //Activate motor
         else
-            RC0 = 0;  //Deactivate motor
+            motorPin = 0;  //Deactivate motor
     }
 }
 /*-------------------------------- SUBROUTINES -------------------------------*/
@@ -130,12 +128,9 @@ void setup(void){
     ANSEL = 0;
     ANSELH= 0;
     
-    TRISA = 0;
-    PORTA = 0;
-    
-    TRISC0 = 0;
-    TRISC2 = 0;
+    TRISC0 = 0; //DC Motor
     RC0 = 0;
+    TRISC2 = 0; //Servomotor
     RC2 = 0;
     
     //OSCILLATOR CONFIG
@@ -161,7 +156,7 @@ void initPWM(void){
 }
 
 void angle_to_PWM(uint8_t position){
-    //Position = 2 ? 0deg, 3 ? 90deg, 4 ? 180deg
+    //Position = 2 -> 0deg, 3 -> 90deg, 4 -> 180deg
     if(TMR0count >= 40){
         TMR0count = 0;                        
         servoPin = 1;
@@ -169,8 +164,4 @@ void angle_to_PWM(uint8_t position){
     else if (TMR0count == position){                        
         servoPin = 0;           
     }
-//    if(TMR0count2 >= 200){ //Send 5 pulses
-//        TMR0count2 = 0;
-//        //prevPos = servoPos; //Update last position
-//    }
 }

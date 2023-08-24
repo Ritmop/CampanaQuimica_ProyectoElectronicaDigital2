@@ -6,18 +6,17 @@
  * 
  * Program: Slave PIC for DHT11 sensor
  * Hardware: 
- *          SCL and SDA connected to Master.
- * 
+ *          SCL and SDA connected to Master
+ *          DHT11 sensor on RD0 
  * 
  * Created: Aug 18, 2023
- * Last updated:
+ * Last updated: Aug 24, 2023
  */
 
 /*--------------------------------- LIBRARIES --------------------------------*/
 #include <xc.h>
 #include "I2C.h"
 #include "DHT11.h"
-//#include "LCD4b.h"
 
 /*---------------------------- CONFIGURATION BITS ----------------------------*/
 // CONFIG1
@@ -38,20 +37,21 @@
 
 /*----------------------- GLOBAL VARIABLES & CONSTANTS -----------------------*/
 #define _XTAL_FREQ      8000000
-#define address_DHT11   0x10
 
-uint8_t discard;
+#define address_DHT11   0x10    //I2C address
+
+uint8_t discard;    //I2C read and write data
 uint8_t send_data;
 uint8_t request;
 
-int8_t data_ok;
-int16_t humedad, temperatura;
+int8_t data_ok;     //DHT11 data received successfully
+int16_t humedad, temperatura;   //DHT11 sensor values
 
-uint8_t counter = 250;    //Contador para lectura de sensores lentos
+uint8_t counter = 250;  //Slow-rate sensor request
+
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
-void LDC_output(void);
-void separar_digitos8(uint8_t num, char dig8[]);
+
 /*------------------------------- RESET VECTOR -------------------------------*/
 
 /*----------------------------- INTERRUPT VECTOR -----------------------------*/
@@ -60,27 +60,27 @@ void __interrupt() isr(void){
 
         CKP = 0; //Hold clock in low to ensure data setup time
        
-        if (SSPOV || WCOL ){ //Received overflow or Write collision
-            discard = SSPBUF;// Discard value by reading the buffer
-            SSPOV = 0;       // Clear the overflow flag
-            WCOL = 0;        // Clear the collision bit
-            CKP = 1;         // Enables SCL (Clock)
+        if (SSPOV || WCOL ){    //Received overflow or Write collision
+            discard = SSPBUF;   //Discard value by reading the buffer
+            SSPOV = 0;          //Clear the overflow flag
+            WCOL = 0;           //Clear the collision bit
+            CKP = 1;            //Enables SCL (Clock)
         }
         
         if(!D_nA && !R_nW) {    //Received an Address and Write
             //__delay_us(7);
-            discard = SSPBUF;   // Discard address by reading the buffer
+            discard = SSPBUF;   //Discard address by reading the buffer
             //__delay_us(2);
             SSPIF = 0;
             CKP = 1;
-            while(!BF);         // Wait to receive data
-            request = SSPBUF;   // Store data
+            while(!BF);         //Wait to receive data
+            request = SSPBUF;   //Store data
             __delay_us(250);
         }
-        else if(!D_nA && R_nW){//Received an Address and Read
+        else if(!D_nA && R_nW){ //Received an Address and Read
             discard = SSPBUF;   //Discard address by reading the buffer
             BF = 0;
-            SSPBUF = send_data;     //Load data to buffer
+            SSPBUF = send_data; //Load data to buffer
             CKP = 1;
             __delay_us(250);
             while(BF);          //Wait until buffer is cleared
@@ -89,7 +89,6 @@ void __interrupt() isr(void){
         SSPIF = 0;    
     }
 }
-
 /*--------------------------- INTERRUPT SUBROUTINES --------------------------*/
 
 /*---------------------------------- TABLES ----------------------------------*/
@@ -140,6 +139,6 @@ void setup(void){
     OSCCONbits.IRCF = 0b111;  //Internal clock frequency 8MHz
     SCS = 1;
     
-    //Initialize I2C Com    
+    //Initialize I2C communication
     I2C_Slave_Init(address_DHT11);
 }

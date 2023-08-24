@@ -6,12 +6,13 @@
  * 
  * Program: Master PIC
  * Hardware:
- *          4.7kOhm pull-up resistors in SCL and SDA pins.
- *          LCD in PORTD
- *          SCL and SDA 
+ *          4.7kOhm pull-up resistors on SCL and SDA pins
+ *          LCD on PORTD[2:7]
+ *          SCL and SDA connected to 3 slave PIC16F887
+ *          TX and RX connected to ESP32
  * 
  * Created: Aug 20, 2023
- * Last updated:
+ * Last updated: Aug 24, 2023
  */
 
 /*--------------------------------- LIBRARIES --------------------------------*/
@@ -39,17 +40,20 @@
 
 /*----------------------- GLOBAL VARIABLES & CONSTANTS -----------------------*/
 #define _XTAL_FREQ      8000000
-#define address_DHT11   0x10
-#define address_MQ2_IR  0x20
+
+#define address_DHT11   0x10    //Slave address for I2C
+#define address_sensors 0x20
 #define address_motors  0x30
-#define read  1
+
+#define read  1     //Add to I2C address to read/write
 #define write 0
+
 #define thresTemp       50  //Temperature threshold (°C)
 #define thresGas        400 //Gas threshold (PPM)
 
-uint8_t n_temp,n_hum,n_gas,n_ired;    //Sensors data as numbers
+uint8_t n_temp,n_hum,n_gas,n_ired;  //Sensors data as numbers
 
-uint8_t  tempC;     //Sensor data convertion
+uint8_t  tempC;     //Sensor data mapped values
 uint16_t gasPPM;
 
 char S_temp[4];    //Sensor data as strings
@@ -57,28 +61,36 @@ char S_hum [3];
 char S_gas [4];
 char S_ired[2];
 
-uint8_t counter;    //Slow-rate sensor read counter
-uint8_t servoPos = 180;   //Servo position
+uint8_t counter;    //Slow-rate sensor request
+uint8_t servoPos;   //Servo position
 uint8_t motorCon;   //Motor control (High nibble: DC motor, Low nibble: Servo)
+
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
-void requestTemp(void);
+
+void requestTemp(void); //Request sensor data through I2C
 void requestHum(void);
 void requestGas(void);
 void requestIR(void);
-void writeMotors(void);
-void LDC_output(void);
-void sendDataUART(void);
 
-void num_to_string(uint16_t num, char dig8[], uint8_t len);
+void writeMotors(void); //Send data to motor through I2C
+
+void LDC_output(void);  //Display sensor data on LDC
+
+void sendDataUART(void);//Send sensor data through UART
+
+void num_to_string(uint16_t num, char dig8[], uint8_t len);//Number to string conversion
 uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2);
+
 /*------------------------------- RESET VECTOR -------------------------------*/
 
 /*----------------------------- INTERRUPT VECTOR -----------------------------*/
 void __interrupt() isr(void){
-    
+    if(RCIF){        
+        servoPos  = UART_read_char(); //Receive Servo position from UART
+        RCIF = 0;
+    }
 }
-
 /*--------------------------- INTERRUPT SUBROUTINES --------------------------*/
 
 /*---------------------------------- TABLES ----------------------------------*/
@@ -89,7 +101,7 @@ int main(void) {
     while(1){
         //Loop
         //Data request
-        if (counter >= 25){ //Request every 3000 ms (3 s)
+        if (counter >= 25){ //Request after more than 2500ms
             requestHum();           
             counter = 0;
         }
@@ -100,11 +112,11 @@ int main(void) {
         //Data write
         writeMotors();
         
-        LDC_output();   //Display sensors data in LDC
+        LDC_output();   //Display sensors data on LDC
         sendDataUART(); //Send data to ESP32
         
-        __delay_ms(100);
         counter++;
+        __delay_ms(100);
     }
 }
 /*-------------------------------- SUBROUTINES -------------------------------*/
@@ -123,21 +135,22 @@ void setup(void){
     Lcd_Init();
     __delay_ms(10);
     
-    // Initialize I2C Com
+    // Initialize I2C communication
     I2C_Master_Init(100000);
     
     //Initialize UART    
-//    UART_RX_config(9600);
+    UART_RX_config(9600);
     UART_TX_config(9600);
 }
 
 void requestTemp(void){
+    //Request Temperature to PIC_SENSORS
     I2C_Master_Start();
-    I2C_Master_Write(address_MQ2_IR+write);
+    I2C_Master_Write(address_sensors+write);
     I2C_Master_Write('T');
     __delay_ms(20);
     I2C_Master_RepeatedStart();
-    I2C_Master_Write(address_MQ2_IR+read);
+    I2C_Master_Write(address_sensors+read);
     n_temp = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);    
@@ -146,6 +159,7 @@ void requestTemp(void){
 }
 
 void requestHum(void){
+    //Request Humidity to PIC_SENSORS
     I2C_Master_Start();
     I2C_Master_Write(address_DHT11+write);
     I2C_Master_Write('H');
@@ -158,12 +172,13 @@ void requestHum(void){
 }
 
 void requestGas(void){
+    //Request Gas particles to PIC_SENSORS
     I2C_Master_Start();
-    I2C_Master_Write(address_MQ2_IR+write);
+    I2C_Master_Write(address_sensors+write);
     I2C_Master_Write('G');
     __delay_ms(20);
     I2C_Master_RepeatedStart();
-    I2C_Master_Write(address_MQ2_IR+read);
+    I2C_Master_Write(address_sensors+read);
     n_gas = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);    
@@ -172,12 +187,13 @@ void requestGas(void){
 }
 
 void requestIR(void){
+    //Request Infrared state to PIC_SENSORS
     I2C_Master_Start();
-    I2C_Master_Write(address_MQ2_IR+write);
+    I2C_Master_Write(address_sensors+write);
     I2C_Master_Write('I');
     __delay_ms(20);
     I2C_Master_RepeatedStart();
-    I2C_Master_Write(address_MQ2_IR+read);
+    I2C_Master_Write(address_sensors+read);
     n_ired = I2C_Master_Read(0);
     I2C_Master_Stop();
     __delay_ms(20);
@@ -185,21 +201,22 @@ void requestIR(void){
 
 void writeMotors(void){
     //Check conditions for water pump
-    if(tempC > thresTemp || gasPPM > thresGas)
+    if(tempC > thresTemp && gasPPM > thresGas)
         motorCon |= 0x10;   //Set DC, copy Servo
     else
         motorCon &= 0x0F;   //Reset DC, copy Servo
     
-    //Update servo position
+    //Update motor control register to match new servo position
     //Position = 2 -> 0deg, 3 -> 90deg, 4 -> 180deg
+    motorCon &= 0xF0;   //Copy DC, clear servo
     switch(servoPos){
-        case 0:
+        case '0':
             motorCon |= 0x02;   //Copy DC, set servo
             break;
-        case 90:
+        case '1':
             motorCon |= 0x03;   //Copy DC, set servo
             break;
-        case 180:
+        case '2':
             motorCon |= 0x04;   //Copy DC, set servo
             break;
         default:
@@ -207,7 +224,7 @@ void writeMotors(void){
             break;
     }
     
-    //Send motor control register to slave
+    //Send motor control register to PIC_MOTORS
     I2C_Master_Start();
     I2C_Master_Write(address_motors+write);
     I2C_Master_Write(motorCon);
@@ -223,30 +240,29 @@ void LDC_output(void){
     num_to_string(gasPPM,S_gas,3);
     num_to_string(n_ired,S_ired,1);
     
-    //Display in LCD
-    //Temperature (°C)
-    Lcd_Set_Cursor(1,1);
+    //Display on LCD
+    Lcd_Set_Cursor(1,1);    //Temperature (°C)
     Lcd_Write_String("T:");
     Lcd_Write_String(S_temp);
     Lcd_Write_String("^C");
-    //Humidity (%RH)
-    Lcd_Set_Cursor(2,1);
+    
+    Lcd_Set_Cursor(2,1);    //Humidity (%RH)
     Lcd_Write_String("H:");
     Lcd_Write_String(S_hum);
     Lcd_Write_String("%RH");
-    //Gas (ppm)
-    Lcd_Set_Cursor(1,9);
+    
+    Lcd_Set_Cursor(1,9);    //Gas (ppm)
     Lcd_Write_String("G:");
     Lcd_Write_String(S_gas);    
     Lcd_Write_String("ppm");
-    //Infrared (Digital)
-    Lcd_Set_Cursor(2,9);
+    
+    Lcd_Set_Cursor(2,9);    //Infrared (Digital)
     Lcd_Write_String("IR:");
     Lcd_Write_String(S_ired);
 }
 
-
 void sendDataUART(void){
+    //Data sent to ESP32
     UART_write_char('\n');
     UART_write_char(tempC);
     UART_write_char(' ');
