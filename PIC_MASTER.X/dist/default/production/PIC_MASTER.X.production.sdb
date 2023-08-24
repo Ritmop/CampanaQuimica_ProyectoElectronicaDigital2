@@ -49,33 +49,37 @@
 [v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
 "98
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
-"73 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
+"78 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
 [v _isr isr `II(v  1 e 1 0 ]
-"82
+"87
 [v _main main `(i  1 e 2 0 ]
-"103
+"111
 [v _setup setup `(v  1 e 1 0 ]
-"125
+"134
 [v _requestTemp requestTemp `(v  1 e 1 0 ]
-"139
+"148
 [v _requestHum requestHum `(v  1 e 1 0 ]
-"151
+"160
 [v _requestGas requestGas `(v  1 e 1 0 ]
-"165
+"174
 [v _requestIR requestIR `(v  1 e 1 0 ]
-"177
+"186
 [v _writeMotors writeMotors `(v  1 e 1 0 ]
-"209
+"218
 [v _LDC_output LDC_output `(v  1 e 1 0 ]
-"239
-[v _num_to_string num_to_string `(v  1 e 1 0 ]
+"249
+[v _sendDataUART sendDataUART `(v  1 e 1 0 ]
 "263
+[v _num_to_string num_to_string `(v  1 e 1 0 ]
+"287
 [v _map map `(ui  1 e 2 0 ]
-"166 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
-[v _PORTA PORTA `VEuc  1 e 1 @5 ]
-"352
+"25 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\UART.c
+[v _UART_TX_config UART_TX_config `(v  1 e 1 0 ]
+"42
+[v _UART_write_char UART_write_char `(v  1 e 1 0 ]
+"352 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S297 . 1 `uc 1 RD0 1 0 :1:0 
+[s S310 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -85,15 +89,17 @@
 `uc 1 RD7 1 0 :1:7 
 ]
 "369
-[u S306 . 1 `S297 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES306  1 e 1 @8 ]
+[u S319 . 1 `S310 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES319  1 e 1 @8 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
-"1416
-[v _TRISA TRISA `VEuc  1 e 1 @133 ]
-[s S214 . 1 `uc 1 TRISC0 1 0 :1:0 
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+[s S227 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -103,27 +109,27 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1557
-[u S223 . 1 `S214 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES223  1 e 1 @135 ]
+[u S236 . 1 `S227 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES236  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
-[s S62 . 1 `uc 1 SCS 1 0 :1:0 
+[s S64 . 1 `uc 1 SCS 1 0 :1:0 
 `uc 1 LTS 1 0 :1:1 
 `uc 1 HTS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 ]
 "1882
-[s S68 . 1 `uc 1 . 1 0 :4:0 
+[s S70 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 IRCF0 1 0 :1:4 
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S73 . 1 `S62 1 . 1 0 `S68 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES73  1 e 1 @143 ]
+[u S75 . 1 `S64 1 . 1 0 `S70 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES75  1 e 1 @143 ]
 "1979
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
-[s S235 . 1 `uc 1 SEN 1 0 :1:0 
+[s S248 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -133,20 +139,30 @@
 `uc 1 GCEN 1 0 :1:7 
 ]
 "1996
-[u S244 . 1 `S235 1 . 1 0 ]
-[v _SSPCON2bits SSPCON2bits `VES244  1 e 1 @145 ]
+[u S257 . 1 `S248 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES257  1 e 1 @145 ]
 "2048
 [v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
 "2177
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+"2642
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2704
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @154 ]
 "3387
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"3840
+[v _CREN CREN `VEb  1 e 0 @196 ]
 "3900
 [v _GIE GIE `VEb  1 e 0 @95 ]
 "4044
 [v _PEIE PEIE `VEb  1 e 0 @94 ]
+"4176
+[v _RCIE RCIE `VEb  1 e 0 @1125 ]
+"4179
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
 "4194
 [v _RD3 RD3 `VEb  1 e 0 @67 ]
 "4197
@@ -159,49 +175,68 @@
 [v _RD7 RD7 `VEb  1 e 0 @71 ]
 "4251
 [v _SCS SCS `VEb  1 e 0 @1144 ]
+"4263
+[v _SPEN SPEN `VEb  1 e 0 @199 ]
 "4278
 [v _SSPIE SSPIE `VEb  1 e 0 @1123 ]
 "4281
 [v _SSPIF SSPIF `VEb  1 e 0 @99 ]
+"4317
+[v _SYNC SYNC `VEb  1 e 0 @1220 ]
 "4461
 [v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
 "4464
 [v _TRISC4 TRISC4 `VEb  1 e 0 @1084 ]
-"46 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
+"4542
+[v _TXEN TXEN `VEb  1 e 0 @1221 ]
+"4545
+[v _TXIE TXIE `VEb  1 e 0 @1124 ]
+"4548
+[v _TXIF TXIF `VEb  1 e 0 @100 ]
+"50 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
 [v _n_temp n_temp `uc  1 e 1 0 ]
 [v _n_hum n_hum `uc  1 e 1 0 ]
 [v _n_gas n_gas `uc  1 e 1 0 ]
 [v _n_ired n_ired `uc  1 e 1 0 ]
-"48
-[v _tempC tempC `uc  1 e 1 0 ]
-"49
-[v _gasPPM gasPPM `ui  1 e 2 0 ]
-"51
-[v _S_temp S_temp `[4]uc  1 e 4 0 ]
 "52
-[v _S_hum S_hum `[3]uc  1 e 3 0 ]
+[v _tempC tempC `uc  1 e 1 0 ]
 "53
-[v _S_gas S_gas `[4]uc  1 e 4 0 ]
-"54
-[v _S_ired S_ired `[2]uc  1 e 2 0 ]
+[v _gasPPM gasPPM `ui  1 e 2 0 ]
+"55
+[v _S_temp S_temp `[4]uc  1 e 4 0 ]
 "56
-[v _counter counter `uc  1 e 1 0 ]
+[v _S_hum S_hum `[3]uc  1 e 3 0 ]
+"57
+[v _S_gas S_gas `[4]uc  1 e 4 0 ]
 "58
+[v _S_ired S_ired `[2]uc  1 e 2 0 ]
+"60
+[v _counter counter `uc  1 e 1 0 ]
+"62
 [v _motorCon motorCon `uc  1 e 1 0 ]
-"82
+"87
 [v _main main `(i  1 e 2 0 ]
 {
-"101
+"109
 } 0
-"177
+"186
 [v _writeMotors writeMotors `(v  1 e 1 0 ]
 {
-"207
+"216
 } 0
-"103
+"111
 [v _setup setup `(v  1 e 1 0 ]
 {
-"123
+"132
+} 0
+"25 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\UART.c
+[v _UART_TX_config UART_TX_config `(v  1 e 1 0 ]
+{
+"28
+[v UART_TX_config@BR BR `l  1 a 4 33 ]
+"25
+[v UART_TX_config@baudrate baudrate `l  1 p 4 20 ]
+"39
 } 0
 "65 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\LCD4b.c
 [v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
@@ -226,27 +261,40 @@
 [v ___lldiv@dividend dividend `ul  1 p 4 6 ]
 "30
 } 0
-"125 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
+"249 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
+[v _sendDataUART sendDataUART `(v  1 e 1 0 ]
+{
+"261
+} 0
+"42 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\UART.c
+[v _UART_write_char UART_write_char `(v  1 e 1 0 ]
+{
+[v UART_write_char@c c `uc  1 a 1 wreg ]
+[v UART_write_char@c c `uc  1 a 1 wreg ]
+[v UART_write_char@c c `uc  1 a 1 2 ]
+"46
+} 0
+"134 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
 [v _requestTemp requestTemp `(v  1 e 1 0 ]
 {
-"137
+"146
 } 0
-"165
+"174
 [v _requestIR requestIR `(v  1 e 1 0 ]
 {
-"175
+"184
 } 0
-"139
+"148
 [v _requestHum requestHum `(v  1 e 1 0 ]
 {
-"149
+"158
 } 0
-"151
+"160
 [v _requestGas requestGas `(v  1 e 1 0 ]
 {
-"163
+"172
 } 0
-"263
+"287
 [v _map map `(ui  1 e 2 0 ]
 {
 [v map@val val `uc  1 a 1 wreg ]
@@ -256,7 +304,7 @@
 [v map@min2 min2 `uc  1 p 1 22 ]
 [v map@max2 max2 `l  1 p 4 23 ]
 [v map@val val `uc  1 a 1 35 ]
-"265
+"289
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
@@ -316,26 +364,26 @@
 {
 "35
 } 0
-"209 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
+"218 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
 [v _LDC_output LDC_output `(v  1 e 1 0 ]
 {
-"237
+"246
 } 0
-"239
+"263
 [v _num_to_string num_to_string `(v  1 e 1 0 ]
 {
-"240
+"264
 [v num_to_string@unidades unidades `ui  1 a 2 14 ]
 [v num_to_string@decenas decenas `ui  1 a 2 12 ]
 [v num_to_string@div2 div2 `ui  1 a 2 10 ]
 [v num_to_string@div1 div1 `ui  1 a 2 8 ]
 [v num_to_string@centenas centenas `ui  1 a 2 6 ]
 [v num_to_string@div3 div3 `ui  1 a 2 4 ]
-"239
+"263
 [v num_to_string@num num `ui  1 p 2 0 ]
 [v num_to_string@dig8 dig8 `*.4uc  1 p 1 2 ]
 [v num_to_string@len len `uc  1 p 1 3 ]
-"261
+"285
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
@@ -417,8 +465,8 @@
 [v Lcd_Port@a a `uc  1 a 1 2 ]
 "33
 } 0
-"73 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
+"78 C:\Users\judah\OneDrive\Escritorio\Proyectos Varios\ElectronicaDigital2\ProyectoED2\PIC_MASTER.X\master.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"75
+"80
 } 0

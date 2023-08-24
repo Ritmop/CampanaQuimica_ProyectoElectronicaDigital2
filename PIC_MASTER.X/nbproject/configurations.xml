@@ -17,6 +17,8 @@
       <itemPath>I2C.h</itemPath>
       <itemPath>LCD4b.c</itemPath>
       <itemPath>LCD4b.h</itemPath>
+      <itemPath>UART.c</itemPath>
+      <itemPath>UART.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

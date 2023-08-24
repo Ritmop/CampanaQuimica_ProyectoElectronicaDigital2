@@ -18,6 +18,7 @@
 #include <xc.h>
 #include "I2C.h"
 #include "LCD4b.h"
+#include "UART.h"
 
 /*---------------------------- CONFIGURATION BITS ----------------------------*/
 // CONFIG1
@@ -43,7 +44,7 @@
 #define address_motors  0x30
 #define read  1
 #define write 0
-#define thresTemp       30  //Temperature threshold (°C)
+#define thresTemp       50  //Temperature threshold (°C)
 #define thresGas        400 //Gas threshold (PPM)
 
 uint8_t n_temp,n_hum,n_gas,n_ired;    //Sensors data as numbers
@@ -67,6 +68,7 @@ void requestGas(void);
 void requestIR(void);
 void writeMotors(void);
 void LDC_output(void);
+void sendDataUART(void);
 
 void num_to_string(uint16_t num, char dig8[], uint8_t len);
 uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2);
@@ -86,7 +88,8 @@ int main(void) {
     setup();
     while(1){
         //Loop
-        if (counter >= 15){ //Request every 3000 ms (3 s)
+        //Data request
+        if (counter >= 25){ //Request every 3000 ms (3 s)
             requestHum();           
             counter = 0;
         }
@@ -94,11 +97,13 @@ int main(void) {
         requestGas();
         requestIR();
         
+        //Data write
         writeMotors();
         
-        LDC_output();
+        LDC_output();   //Display sensors data in LDC
+        sendDataUART(); //Send data to ESP32
         
-        __delay_ms(200);
+        __delay_ms(100);
         counter++;
     }
 }
@@ -106,9 +111,6 @@ int main(void) {
 void setup(void){
     ANSEL = 0;
     ANSELH= 0;
-    
-    TRISA = 0;
-    PORTA = 0;
     
     TRISD = 0;  //LCD output
     PORTD = 0;
@@ -122,7 +124,11 @@ void setup(void){
     __delay_ms(10);
     
     // Initialize I2C Com
-    I2C_Master_Init(100000);        
+    I2C_Master_Init(100000);
+    
+    //Initialize UART    
+//    UART_RX_config(9600);
+    UART_TX_config(9600);
 }
 
 void requestTemp(void){
@@ -179,7 +185,7 @@ void requestIR(void){
 
 void writeMotors(void){
     //Check conditions for water pump
-    if(tempC > thresTemp && gasPPM > thresGas)
+    if(tempC > thresTemp || gasPPM > thresGas)
         motorCon |= 0x10;   //Set DC, copy Servo
     else
         motorCon &= 0x0F;   //Reset DC, copy Servo
@@ -237,6 +243,21 @@ void LDC_output(void){
     Lcd_Set_Cursor(2,9);
     Lcd_Write_String("IR:");
     Lcd_Write_String(S_ired);
+}
+
+
+void sendDataUART(void){
+    UART_write_char('\n');
+    UART_write_char(tempC);
+    UART_write_char(' ');
+    UART_write_char(n_hum);
+    UART_write_char(' ');
+    UART_write_char((gasPPM & 0xFF00) >> 8);
+    UART_write_char(gasPPM & 0x00FF);
+    UART_write_char(' ');
+    UART_write_char(n_ired);
+    UART_write_char(' ');
+    __delay_ms(500);
 }
 
 void num_to_string(uint16_t num, char dig8[], uint8_t len){

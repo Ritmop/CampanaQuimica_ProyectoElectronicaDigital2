@@ -1,4 +1,4 @@
-# 1 "master.c"
+# 1 "UART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,9 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "master.c" 2
-# 18 "master.c"
+# 1 "UART.c" 2
+# 1 "./UART.h" 1
+# 15 "./UART.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,336 +2626,72 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 18 "master.c" 2
-
-# 1 "./I2C.h" 1
-# 20 "./I2C.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c90\\stdint.h" 1 3
-# 20 "./I2C.h" 2
-# 29 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
+# 15 "./UART.h" 2
 
 
-
-
-
-
-
-void I2C_Master_Wait(void);
-
-
-
-void I2C_Master_Start(void);
-
-
-
-void I2C_Master_RepeatedStart(void);
-
-
-
-void I2C_Master_Stop(void);
-
-
-
-
-
-void I2C_Master_Write(unsigned d);
-
-
-
-
-unsigned short I2C_Master_Read(unsigned short a);
-
-
-
-void I2C_Slave_Init(uint8_t address);
-# 19 "master.c" 2
-
-# 1 "./LCD4b.h" 1
-# 47 "./LCD4b.h"
-void Lcd_Port(char a);
-
-void Lcd_Cmd(char a);
-
-void Lcd_Clear(void);
-
-void Lcd_Set_Cursor(char a, char b);
-
-void Lcd_Init(void);
-
-void Lcd_Write_Char(char a);
-
-void Lcd_Write_String(char *a);
-
-void Lcd_Shift_Right(void);
-
-void Lcd_Shift_Left(void);
-# 20 "master.c" 2
-
-# 1 "./UART.h" 1
-# 17 "./UART.h"
 void UART_RX_config(long baudrate);
 void UART_TX_config(long baudrate);
 void UART_write_char(char c);
 void UART_write_string(char *s);
 char UART_read_char();
-# 21 "master.c" 2
+# 1 "UART.c" 2
 
 
+char prev;
 
 
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+void UART_RX_config (long baudrate){
 
 
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-# 50 "master.c"
-uint8_t n_temp,n_hum,n_gas,n_ired;
+    long BR;
+    BR = ((8000000/baudrate)/64) - 1;
+    SPBRG = BR & 0x00FF;
+    SPBRGH = (BR & 0xFF00) >> 8;
 
-uint8_t tempC;
-uint16_t gasPPM;
+    SYNC = 0;
+    SPEN = 1;
 
-char S_temp[4];
-char S_hum [3];
-char S_gas [4];
-char S_ired[2];
-
-uint8_t counter;
-uint8_t servoPos = 180;
-uint8_t motorCon;
-
-void setup(void);
-void requestTemp(void);
-void requestHum(void);
-void requestGas(void);
-void requestIR(void);
-void writeMotors(void);
-void LDC_output(void);
-void sendDataUART(void);
-
-void num_to_string(uint16_t num, char dig8[], uint8_t len);
-uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2);
+    CREN = 1;
+    RCIE = 1;
+    PEIE = 1;
+    GIE = 1;
+    RCIF = 0;
+}
 
 
+void UART_TX_config (long baudrate){
 
-void __attribute__((picinterrupt(("")))) isr(void){
 
+    long BR;
+    BR = ((8000000/baudrate)/64) - 1;
+    SPBRG = BR & 0x00FF;
+    SPBRGH = (BR & 0xFF00) >> 8;
+
+    SYNC = 0;
+    SPEN = 1;
+
+    TXEN = 1;
+    TXIE = 0;
+    TXIF = 0;
+}
+
+
+void UART_write_char(char c){
+    while(!TXIF);
+    TXIF = 0;
+    TXREG = c;
+}
+
+
+void UART_write_string(char *s){
+    int i;
+    for (i = 0; s[i] != '\0'; i++)
+        UART_write_char(s[i]);
 }
 
 
 
-
-
-
-int main(void) {
-    setup();
-    while(1){
-
-
-        if (counter >= 25){
-            requestHum();
-            counter = 0;
-        }
-        requestTemp();
-        requestGas();
-        requestIR();
-
-
-        writeMotors();
-
-        LDC_output();
-        sendDataUART();
-
-        _delay((unsigned long)((100)*(8000000/4000.0)));
-        counter++;
-    }
-}
-
-void setup(void){
-    ANSEL = 0;
-    ANSELH= 0;
-
-    TRISD = 0;
-    PORTD = 0;
-
-
-    OSCCONbits.IRCF = 0b111;
-    SCS = 1;
-
-
-    Lcd_Init();
-    _delay((unsigned long)((10)*(8000000/4000.0)));
-
-
-    I2C_Master_Init(100000);
-
-
-
-    UART_TX_config(9600);
-}
-
-void requestTemp(void){
-    I2C_Master_Start();
-    I2C_Master_Write(0x20 +0);
-    I2C_Master_Write('T');
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x20 +1);
-    n_temp = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-
-    tempC = map(n_temp,0,77,0,150);
-}
-
-void requestHum(void){
-    I2C_Master_Start();
-    I2C_Master_Write(0x10 +0);
-    I2C_Master_Write('H');
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x10 +1);
-    n_hum = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-}
-
-void requestGas(void){
-    I2C_Master_Start();
-    I2C_Master_Write(0x20 +0);
-    I2C_Master_Write('G');
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x20 +1);
-    n_gas = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-
-    gasPPM = map(n_gas,0,255,100,800);
-}
-
-void requestIR(void){
-    I2C_Master_Start();
-    I2C_Master_Write(0x20 +0);
-    I2C_Master_Write('I');
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x20 +1);
-    n_ired = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-}
-
-void writeMotors(void){
-
-    if(tempC > 50 || gasPPM > 400)
-        motorCon |= 0x10;
-    else
-        motorCon &= 0x0F;
-
-
-
-    switch(servoPos){
-        case 0:
-            motorCon |= 0x02;
-            break;
-        case 90:
-            motorCon |= 0x03;
-            break;
-        case 180:
-            motorCon |= 0x04;
-            break;
-        default:
-            motorCon |= 0x02;
-            break;
-    }
-
-
-    I2C_Master_Start();
-    I2C_Master_Write(0x30 +0);
-    I2C_Master_Write(motorCon);
-    I2C_Master_Stop();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-}
-
-void LDC_output(void){
-    Lcd_Clear();
-
-    num_to_string(tempC,S_temp,3);
-    num_to_string(n_hum,S_hum,2);
-    num_to_string(gasPPM,S_gas,3);
-    num_to_string(n_ired,S_ired,1);
-
-
-
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("T:");
-    Lcd_Write_String(S_temp);
-    Lcd_Write_String("^C");
-
-    Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("H:");
-    Lcd_Write_String(S_hum);
-    Lcd_Write_String("%RH");
-
-    Lcd_Set_Cursor(1,9);
-    Lcd_Write_String("G:");
-    Lcd_Write_String(S_gas);
-    Lcd_Write_String("ppm");
-
-    Lcd_Set_Cursor(2,9);
-    Lcd_Write_String("IR:");
-    Lcd_Write_String(S_ired);
-}
-
-
-void sendDataUART(void){
-    UART_write_char('\n');
-    UART_write_char(tempC);
-    UART_write_char(' ');
-    UART_write_char(n_hum);
-    UART_write_char(' ');
-    UART_write_char((gasPPM & 0xFF00) >> 8);
-    UART_write_char(gasPPM & 0x00FF);
-    UART_write_char(' ');
-    UART_write_char(n_ired);
-    UART_write_char(' ');
-    _delay((unsigned long)((500)*(8000000/4000.0)));
-}
-
-void num_to_string(uint16_t num, char dig8[], uint8_t len){
-    uint16_t div1,div2,div3,miles,centenas,decenas,unidades;
-    div1 = num / 10;
-    unidades = num % 10;
-    div2 = div1 / 10;
-    decenas = div1 % 10;
-    div3 = div2 / 10;
-    centenas = div2 % 10;
-    miles = div3 % 10;
-
-    if(len == 1){
-        dig8[0] = unidades + '0';
-    }
-    else if(len == 2){
-        dig8[1] = unidades + '0';
-        dig8[0] = decenas + '0';
-    }
-    else if (len == 3){
-        dig8[2] = unidades + '0';
-        dig8[1] = decenas + '0';
-        dig8[0] = centenas + '0';
-    }
-}
-
-uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2){
-    return ((val-min1)*(max2-min2)/(max1-min1))+min2;
+char UART_read_char(){
+# 68 "UART.c"
+    return RCREG;
 }
