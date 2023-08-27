@@ -9,7 +9,6 @@
  *          SCL and SDA connected to Master
  *          MQ2 sensor on RA0
  *          LM35 on RA1
- *          Infrared sensor in RA2
  * 
  * Created: Aug 18, 2023
  * Last updated: Aug 24, 2023
@@ -40,7 +39,7 @@
 /*----------------------- GLOBAL VARIABLES & CONSTANTS -----------------------*/
 #define _XTAL_FREQ      8000000
 
-#define address_MQ2_IR  0x20    //I2C address
+#define address_sensors  0x20    //I2C address
 #define MQ2chan     0   //AN0
 #define LM35chan    1   //AN1
 
@@ -50,7 +49,6 @@ uint8_t request;
 
 uint8_t MQ2_val;    //MQ2 read value
 uint8_t LM35_val;   //LM35 read value
-uint8_t IR_sens;    //IR sensor
 
 /*-------------------------------- PROTOTYPES --------------------------------*/
 void setup(void);
@@ -111,8 +109,6 @@ int main(void) {
             LM35_val = (adc_read()>>8) & 0x00FF; //Read LM35 analog value 
             adc_sel_channel(MQ2chan);   //Switch channel
         }
-                
-        IR_sens = RA2;   //Read IR digital value
         
         switch(request){
             case 'G':   //Gas
@@ -120,9 +116,6 @@ int main(void) {
                 break;
             case 'T':   //Temperature
                 send_data = LM35_val;
-                break;
-            case 'I':   //Infrared
-                send_data = IR_sens;
                 break;            
             default:
                 send_data = 0xFF;
@@ -146,5 +139,5 @@ void setup(void){
     adc_init(0, 0, 8, 0); //Initialize ADC. Left, Vdd/Vss, 8MHz, AN0.
     
     //Initialize I2C communication
-    I2C_Slave_Init(address_MQ2_IR);
+    I2C_Slave_Init(address_sensors);
 }

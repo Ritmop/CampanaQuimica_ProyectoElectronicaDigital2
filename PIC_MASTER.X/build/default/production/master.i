@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "master.c" 2
-# 19 "master.c"
+# 20 "master.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,7 +2625,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 19 "master.c" 2
+# 20 "master.c" 2
 
 # 1 "./I2C.h" 1
 # 20 "./I2C.h"
@@ -2668,7 +2668,7 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 20 "master.c" 2
+# 21 "master.c" 2
 
 # 1 "./LCD4b.h" 1
 # 47 "./LCD4b.h"
@@ -2689,7 +2689,7 @@ void Lcd_Write_String(char *a);
 void Lcd_Shift_Right(void);
 
 void Lcd_Shift_Left(void);
-# 21 "master.c" 2
+# 22 "master.c" 2
 
 # 1 "./UART.h" 1
 # 17 "./UART.h"
@@ -2698,7 +2698,7 @@ void UART_TX_config(long baudrate);
 void UART_write_char(char c);
 void UART_write_string(char *s);
 char UART_read_char();
-# 22 "master.c" 2
+# 23 "master.c" 2
 
 
 
@@ -2717,8 +2717,8 @@ char UART_read_char();
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
-# 54 "master.c"
-uint8_t n_temp,n_hum,n_gas,n_ired;
+# 55 "master.c"
+uint8_t n_temp,n_hum,n_gas;
 
 uint8_t tempC;
 uint16_t gasPPM;
@@ -2726,7 +2726,6 @@ uint16_t gasPPM;
 char S_temp[4];
 char S_hum [3];
 char S_gas [4];
-char S_ired[2];
 
 uint8_t counter;
 uint8_t servoPos;
@@ -2738,7 +2737,6 @@ void setup(void);
 void requestTemp(void);
 void requestHum(void);
 void requestGas(void);
-void requestIR(void);
 
 void writeMotors(void);
 
@@ -2774,7 +2772,6 @@ int main(void) {
         }
         requestTemp();
         requestGas();
-        requestIR();
 
 
         writeMotors();
@@ -2853,19 +2850,6 @@ void requestGas(void){
     gasPPM = map(n_gas,0,255,100,800);
 }
 
-void requestIR(void){
-
-    I2C_Master_Start();
-    I2C_Master_Write(0x20 +0);
-    I2C_Master_Write('I');
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0x20 +1);
-    n_ired = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((20)*(8000000/4000.0)));
-}
-
 void writeMotors(void){
 
     if(tempC > 50 && gasPPM > 400)
@@ -2905,7 +2889,6 @@ void LDC_output(void){
     num_to_string(tempC,S_temp,3);
     num_to_string(n_hum,S_hum,2);
     num_to_string(gasPPM,S_gas,3);
-    num_to_string(n_ired,S_ired,1);
 
 
     Lcd_Set_Cursor(1,1);
@@ -2924,8 +2907,7 @@ void LDC_output(void){
     Lcd_Write_String("ppm");
 
     Lcd_Set_Cursor(2,9);
-    Lcd_Write_String("IR:");
-    Lcd_Write_String(S_ired);
+    Lcd_Write_String("PUERTA:");
 }
 
 void sendDataUART(void){
@@ -2937,8 +2919,6 @@ void sendDataUART(void){
     UART_write_char(' ');
     UART_write_char((gasPPM & 0xFF00) >> 8);
     UART_write_char(gasPPM & 0x00FF);
-    UART_write_char(' ');
-    UART_write_char(n_ired);
     UART_write_char(' ');
     _delay((unsigned long)((500)*(8000000/4000.0)));
 }

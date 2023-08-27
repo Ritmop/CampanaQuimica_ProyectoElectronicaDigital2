@@ -7,7 +7,7 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "slave_sensors.c" 2
-# 19 "slave_sensors.c"
+# 18 "slave_sensors.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2625,7 +2625,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include\\xc.h" 2 3
-# 19 "slave_sensors.c" 2
+# 18 "slave_sensors.c" 2
 
 # 1 "./I2C.h" 1
 # 20 "./I2C.h"
@@ -2668,7 +2668,7 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 20 "slave_sensors.c" 2
+# 19 "slave_sensors.c" 2
 
 # 1 "./ADC_lib.h" 1
 # 12 "./ADC_lib.h"
@@ -2676,7 +2676,7 @@ void adc_init(uint8_t J, uint8_t R, uint8_t clock, uint8_t channel);
 uint16_t adc_read(void);
 void adc_sel_channel(uint8_t channel);
 uint8_t adc_get_channel(void);
-# 21 "slave_sensors.c" 2
+# 20 "slave_sensors.c" 2
 
 
 
@@ -2709,7 +2709,6 @@ uint8_t request;
 
 uint8_t MQ2_val;
 uint8_t LM35_val;
-uint8_t IR_sens;
 
 
 void setup(void);
@@ -2771,17 +2770,12 @@ int main(void) {
             adc_sel_channel(0);
         }
 
-        IR_sens = RA2;
-
         switch(request){
             case 'G':
                 send_data = MQ2_val;
                 break;
             case 'T':
                 send_data = LM35_val;
-                break;
-            case 'I':
-                send_data = IR_sens;
                 break;
             default:
                 send_data = 0xFF;

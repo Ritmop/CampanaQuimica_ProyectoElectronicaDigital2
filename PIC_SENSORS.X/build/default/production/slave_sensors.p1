@@ -30,8 +30,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v __delay `JF36 ~T0 @X0 0 e ]
 [p i __delay ]
 [p mainexit ]
-"56 slave_sensors.c
-[; ;slave_sensors.c: 56: 
+"54 slave_sensors.c
+[; ;slave_sensors.c: 54: 
 [v _setup `(v ~T0 @X0 0 ef ]
 "15 ./ADC_lib.h
 [; ;./ADC_lib.h: 15: uint8_t adc_get_channel(void);
@@ -42,10 +42,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "14
 [; ;./ADC_lib.h: 14: void adc_sel_channel(uint8_t channel);
 [v _adc_sel_channel `(v ~T0 @X0 0 ef1`uc ]
-"4089 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4089: extern volatile __bit RA2 __attribute__((address(0x2A)));
-[v _RA2 `Vb ~T0 @X0 0 e@42 ]
-"3387
+"3387 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
@@ -312,275 +309,259 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"25 slave_sensors.c
-[; ;slave_sensors.c: 25: 
+"24 slave_sensors.c
+[; ;slave_sensors.c: 24: 
 [p x FOSC  =  INTRC_NOCLKOUT ]
-"26
-[; ;slave_sensors.c: 26:         if (SSPOV || WCOL ){
+"25
+[; ;slave_sensors.c: 25:         if (SSPOV || WCOL ){
 [p x WDTE  =  OFF        ]
-"27
-[; ;slave_sensors.c: 27:             discard = SSPBUF;
+"26
+[; ;slave_sensors.c: 26:             discard = SSPBUF;
 [p x PWRTE  =  OFF       ]
-"28
-[; ;slave_sensors.c: 28:             SSPOV = 0;
+"27
+[; ;slave_sensors.c: 27:             SSPOV = 0;
 [p x MCLRE  =  OFF       ]
-"29
-[; ;slave_sensors.c: 29:             WCOL = 0;
+"28
+[; ;slave_sensors.c: 28:             WCOL = 0;
 [p x CP  =  OFF          ]
-"30
-[; ;slave_sensors.c: 30:             CKP = 1;
+"29
+[; ;slave_sensors.c: 29:             CKP = 1;
 [p x CPD  =  OFF         ]
-"31
-[; ;slave_sensors.c: 31:         }
+"30
+[; ;slave_sensors.c: 30:         }
 [p x BOREN  =  OFF       ]
-"32
-[; ;slave_sensors.c: 32: 
+"31
+[; ;slave_sensors.c: 31: 
 [p x IESO  =  OFF        ]
-"33
-[; ;slave_sensors.c: 33:         if(!D_nA && !R_nW) {
+"32
+[; ;slave_sensors.c: 32:         if(!D_nA && !R_nW) {
 [p x FCMEN  =  OFF       ]
-"34
-[; ;slave_sensors.c: 34: 
+"33
+[; ;slave_sensors.c: 33: 
 [p x LVP  =  OFF          ]
-"37
-[; ;slave_sensors.c: 37:             SSPIF = 0;
+"36
+[; ;slave_sensors.c: 36:             SSPIF = 0;
 [p x BOR4V  =  BOR40V    ]
-"38
-[; ;slave_sensors.c: 38:             CKP = 1;
+"37
+[; ;slave_sensors.c: 37:             CKP = 1;
 [p x WRT  =  OFF         ]
-"47
-[; ;slave_sensors.c: 47:             CKP = 1;
+"46
+[; ;slave_sensors.c: 46:             CKP = 1;
 [v _discard `uc ~T0 @X0 1 e ]
-"48
-[; ;slave_sensors.c: 48:             _delay((unsigned long)((250)*(8000000/4000000.0)));
+"47
+[; ;slave_sensors.c: 47:             _delay((unsigned long)((250)*(8000000/4000000.0)));
 [v _send_data `uc ~T0 @X0 1 e ]
-"49
-[; ;slave_sensors.c: 49:             while(BF);
+"48
+[; ;slave_sensors.c: 48:             while(BF);
 [v _request `uc ~T0 @X0 1 e ]
-"51
-[; ;slave_sensors.c: 51: 
+"50
+[; ;slave_sensors.c: 50: 
 [v _MQ2_val `uc ~T0 @X0 1 e ]
-"52
-[; ;slave_sensors.c: 52:         SSPIF = 0;
+"51
+[; ;slave_sensors.c: 51:         SSPIF = 0;
 [v _LM35_val `uc ~T0 @X0 1 e ]
-"53
-[; ;slave_sensors.c: 53:     }
-[v _IR_sens `uc ~T0 @X0 1 e ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"61
-[; ;slave_sensors.c: 61: int main(void) {
+"59
+[; ;slave_sensors.c: 59: 
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"62
-[; ;slave_sensors.c: 62:     setup();
+"60
+[; ;slave_sensors.c: 60: int main(void) {
 [e $ ! _SSPIF 139  ]
 {
+"62
+[; ;slave_sensors.c: 62:     while(1){
+[e = _CKP -> -> 0 `i `b ]
 "64
 [; ;slave_sensors.c: 64: 
-[e = _CKP -> -> 0 `i `b ]
-"66
-[; ;slave_sensors.c: 66:         if(adc_get_channel() == 0){
 [e $ ! || _SSPOV _WCOL 140  ]
 {
-"67
-[; ;slave_sensors.c: 67:             MQ2_val = (adc_read()>>8) & 0x00FF;
+"65
+[; ;slave_sensors.c: 65:         if(adc_get_channel() == 0){
 [e = _discard _SSPBUF ]
-"68
-[; ;slave_sensors.c: 68:             adc_sel_channel(1);
+"66
+[; ;slave_sensors.c: 66:             MQ2_val = (adc_read()>>8) & 0x00FF;
 [e = _SSPOV -> -> 0 `i `b ]
-"69
-[; ;slave_sensors.c: 69:         }
+"67
+[; ;slave_sensors.c: 67:             adc_sel_channel(1);
 [e = _WCOL -> -> 0 `i `b ]
-"70
-[; ;slave_sensors.c: 70:         else if (adc_get_channel() == 1){
+"68
+[; ;slave_sensors.c: 68:         }
 [e = _CKP -> -> 1 `i `b ]
-"71
-[; ;slave_sensors.c: 71:             LM35_val = (adc_read()>>8) & 0x00FF;
+"69
+[; ;slave_sensors.c: 69:         else if (adc_get_channel() == 1){
 }
 [e :U 140 ]
-"73
-[; ;slave_sensors.c: 73:         }
+"71
+[; ;slave_sensors.c: 71:             adc_sel_channel(0);
 [e $ ! && ! _D_nA ! _R_nW 141  ]
 {
-"75
-[; ;slave_sensors.c: 75:         IR_sens = RA2;
+"73
+[; ;slave_sensors.c: 73: 
 [e = _discard _SSPBUF ]
-"77
-[; ;slave_sensors.c: 77:         switch(request){
+"75
+[; ;slave_sensors.c: 75:             case 'G':
 [e = _SSPIF -> -> 0 `i `b ]
-"78
-[; ;slave_sensors.c: 78:             case 'G':
+"76
+[; ;slave_sensors.c: 76:                 send_data = MQ2_val;
 [e = _CKP -> -> 1 `i `b ]
-"79
-[; ;slave_sensors.c: 79:                 send_data = MQ2_val;
+"77
+[; ;slave_sensors.c: 77:                 break;
 [e $U 142  ]
 [e :U 143 ]
 [e :U 142 ]
 [e $ ! _BF 143  ]
 [e :U 144 ]
+"78
+[; ;slave_sensors.c: 78:             case 'T':
+[e = _request _SSPBUF ]
+"79
+[; ;slave_sensors.c: 79:                 send_data = LM35_val;
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "80
 [; ;slave_sensors.c: 80:                 break;
-[e = _request _SSPBUF ]
-"81
-[; ;slave_sensors.c: 81:             case 'T':
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"82
-[; ;slave_sensors.c: 82:                 send_data = LM35_val;
 }
 [e $U 145  ]
-"83
-[; ;slave_sensors.c: 83:                 break;
+"81
+[; ;slave_sensors.c: 81:             default:
 [e :U 141 ]
 [e $ ! && ! _D_nA _R_nW 146  ]
 {
-"84
-[; ;slave_sensors.c: 84:             case 'I':
+"82
+[; ;slave_sensors.c: 82:                 send_data = 0xFF;
 [e = _discard _SSPBUF ]
-"85
-[; ;slave_sensors.c: 85:                 send_data = IR_sens;
+"83
+[; ;slave_sensors.c: 83:                 break;
 [e = _BF -> -> 0 `i `b ]
-"86
-[; ;slave_sensors.c: 86:                 break;
+"84
+[; ;slave_sensors.c: 84:         }
 [e = _SSPBUF _send_data ]
-"87
-[; ;slave_sensors.c: 87:             default:
+"85
+[; ;slave_sensors.c: 85: 
 [e = _CKP -> -> 1 `i `b ]
-"88
-[; ;slave_sensors.c: 88:                 send_data = 0xFF;
+"86
+[; ;slave_sensors.c: 86:         _delay((unsigned long)((10)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"89
-[; ;slave_sensors.c: 89:                 break;
+"87
+[; ;slave_sensors.c: 87:     }
 [e $U 147  ]
 [e :U 148 ]
 [e :U 147 ]
 [e $ _BF 148  ]
 [e :U 149 ]
-"90
-[; ;slave_sensors.c: 90:         }
+"88
+[; ;slave_sensors.c: 88: }
 }
 [e :U 146 ]
 [e :U 145 ]
-"92
-[; ;slave_sensors.c: 92:         _delay((unsigned long)((10)*(8000000/4000.0)));
+"90
+[; ;slave_sensors.c: 90: void setup(void){
 [e = _SSPIF -> -> 0 `i `b ]
-"93
-[; ;slave_sensors.c: 93:     }
+"91
+[; ;slave_sensors.c: 91:     ANSEL = 3;
 }
 [e :U 139 ]
-"94
-[; ;slave_sensors.c: 94: }
+"92
+[; ;slave_sensors.c: 92:     ANSELH= 0;
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"101
-[; ;slave_sensors.c: 101: 
+"99
+[; ;slave_sensors.c: 99: 
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"102
-[; ;slave_sensors.c: 102:     OSCCONbits.IRCF = 0b111;
+"100
+[; ;slave_sensors.c: 100:     adc_init(0, 0, 8, 0);
 [e ( _setup ..  ]
-"103
-[; ;slave_sensors.c: 103:     SCS = 1;
+"101
+[; ;slave_sensors.c: 101: 
 [e :U 152 ]
 {
-"106
-[; ;slave_sensors.c: 106:     adc_init(0, 0, 8, 0);
+"104
+[; ;slave_sensors.c: 104: }
 [e $ ! == -> ( _adc_get_channel ..  `i -> 0 `i 154  ]
 {
-"107
-[; ;slave_sensors.c: 107: 
+"105
 [e = _MQ2_val -> & >> ( _adc_read ..  -> 8 `i -> -> 255 `i `ui `uc ]
-"108
-[; ;slave_sensors.c: 108: 
+"106
 [e ( _adc_sel_channel (1 -> -> 1 `i `uc ]
-"109
-[; ;slave_sensors.c: 109:     I2C_Slave_Init(0x20);
+"107
 }
 [e $U 155  ]
-"110
-[; ;slave_sensors.c: 110: }
+"108
 [e :U 154 ]
 [e $ ! == -> ( _adc_get_channel ..  `i -> 1 `i 156  ]
 {
-"111
+"109
 [e = _LM35_val -> & >> ( _adc_read ..  -> 8 `i -> -> 255 `i `ui `uc ]
-"112
+"110
 [e ( _adc_sel_channel (1 -> -> 0 `i `uc ]
-"113
+"111
 }
 [e :U 156 ]
 [e :U 155 ]
-"115
-[e = _IR_sens -> _RA2 `uc ]
-"117
+"113
 [e $U 158  ]
 {
-"118
+"114
 [e :U 159 ]
-"119
+"115
 [e = _send_data _MQ2_val ]
-"120
+"116
 [e $U 157  ]
-"121
+"117
 [e :U 160 ]
-"122
+"118
 [e = _send_data _LM35_val ]
-"123
+"119
 [e $U 157  ]
-"124
+"120
 [e :U 161 ]
-"125
-[e = _send_data _IR_sens ]
-"126
-[e $U 157  ]
-"127
-[e :U 162 ]
-"128
+"121
 [e = _send_data -> -> 255 `i `uc ]
-"129
+"122
 [e $U 157  ]
-"130
+"123
 }
 [e $U 157  ]
 [e :U 158 ]
 [e [\ -> _request `i , $ -> -> 71 `ui `i 159
  , $ -> -> 84 `ui `i 160
- , $ -> -> 73 `ui `i 161
- 162 ]
+ 161 ]
 [e :U 157 ]
-"132
+"125
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"133
+"126
 }
 [e :U 151 ]
 [e $U 152  ]
 [e :U 153 ]
-"134
+"127
 [e :UE 150 ]
 }
-"136
+"129
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"137
+"130
 [e = _ANSEL -> -> 3 `i `uc ]
-"138
+"131
 [e = _ANSELH -> -> 0 `i `uc ]
-"139
+"132
 [e = _TRISA -> -> 255 `i `uc ]
-"142
+"135
 [e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"143
+"136
 [e = _SCS -> -> 1 `i `b ]
-"146
+"139
 [e ( _adc_init (4 , , , -> -> 0 `i `uc -> -> 0 `i `uc -> -> 8 `i `uc -> -> 0 `i `uc ]
-"149
+"142
 [e ( _I2C_Slave_Init (1 -> -> 32 `i `uc ]
-"150
-[e :UE 163 ]
+"143
+[e :UE 162 ]
 }

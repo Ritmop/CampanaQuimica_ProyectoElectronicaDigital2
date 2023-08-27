@@ -1,7 +1,8 @@
 /*
  * File:   master.c
  * Device: PIC16F887
- * Author: Judah Pérez - 21536
+ * Author: Judah Sebastian Pérez Zeiset - 21536
+ *         Carlos Daniel Valdez Coreas - 21976
  *Compiler: XC8 (v2.41)
  * 
  * Program: Master PIC
@@ -51,7 +52,7 @@
 #define thresTemp       50  //Temperature threshold (°C)
 #define thresGas        400 //Gas threshold (PPM)
 
-uint8_t n_temp,n_hum,n_gas,n_ired;  //Sensors data as numbers
+uint8_t n_temp,n_hum,n_gas;  //Sensors data as numbers
 
 uint8_t  tempC;     //Sensor data mapped values
 uint16_t gasPPM;
@@ -59,7 +60,6 @@ uint16_t gasPPM;
 char S_temp[4];    //Sensor data as strings
 char S_hum [3];
 char S_gas [4];
-char S_ired[2];
 
 uint8_t counter;    //Slow-rate sensor request
 uint8_t servoPos;   //Servo position
@@ -71,7 +71,6 @@ void setup(void);
 void requestTemp(void); //Request sensor data through I2C
 void requestHum(void);
 void requestGas(void);
-void requestIR(void);
 
 void writeMotors(void); //Send data to motor through I2C
 
@@ -107,7 +106,6 @@ int main(void) {
         }
         requestTemp();
         requestGas();
-        requestIR();
         
         //Data write
         writeMotors();
@@ -186,19 +184,6 @@ void requestGas(void){
     gasPPM = map(n_gas,0,255,100,800);
 }
 
-void requestIR(void){
-    //Request Infrared state to PIC_SENSORS
-    I2C_Master_Start();
-    I2C_Master_Write(address_sensors+write);
-    I2C_Master_Write('I');
-    __delay_ms(20);
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(address_sensors+read);
-    n_ired = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    __delay_ms(20);
-}
-
 void writeMotors(void){
     //Check conditions for water pump
     if(tempC > thresTemp && gasPPM > thresGas)
@@ -207,7 +192,7 @@ void writeMotors(void){
         motorCon &= 0x0F;   //Reset DC, copy Servo
     
     //Update motor control register to match new servo position
-    //Position = 2 -> 0deg, 3 -> 90deg, 4 -> 180deg
+    //Position = 0 -> 0deg, 1 -> 90deg, 2 -> 180deg
     motorCon &= 0xF0;   //Copy DC, clear servo
     switch(servoPos){
         case '0':
@@ -238,7 +223,6 @@ void LDC_output(void){
     num_to_string(tempC,S_temp,3);
     num_to_string(n_hum,S_hum,2);
     num_to_string(gasPPM,S_gas,3);
-    num_to_string(n_ired,S_ired,1);
     
     //Display on LCD
     Lcd_Set_Cursor(1,1);    //Temperature (°C)
@@ -257,8 +241,7 @@ void LDC_output(void){
     Lcd_Write_String("ppm");
     
     Lcd_Set_Cursor(2,9);    //Infrared (Digital)
-    Lcd_Write_String("IR:");
-    Lcd_Write_String(S_ired);
+    Lcd_Write_String("PUERTA:");
 }
 
 void sendDataUART(void){
@@ -270,8 +253,6 @@ void sendDataUART(void){
     UART_write_char(' ');
     UART_write_char((gasPPM & 0xFF00) >> 8);
     UART_write_char(gasPPM & 0x00FF);
-    UART_write_char(' ');
-    UART_write_char(n_ired);
     UART_write_char(' ');
     __delay_ms(500);
 }
@@ -302,4 +283,4 @@ void num_to_string(uint16_t num, char dig8[], uint8_t len){
 
 uint16_t map(uint8_t val, uint8_t min1, uint8_t max1, uint8_t min2, long max2){
     return ((val-min1)*(max2-min2)/(max1-min1))+min2;
-}
+}   
