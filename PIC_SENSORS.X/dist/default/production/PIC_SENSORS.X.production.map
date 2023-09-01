@@ -6,10 +6,10 @@ Linker command line:
   --edf=C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\dat\20230322214319_en.msgs \
   -cn -h+dist/default/production\PIC_SENSORS.X.production.sym \
   --cmf=dist/default/production\PIC_SENSORS.X.production.cmf -z -Q16F887 \
-  -oC:\Users\judah\AppData\Local\Temp\xcBsfqs.1\driver_tmp_3.o \
+  -oC:\Users\judah\AppData\Local\Temp\xcAshi0.\driver_tmp_3.o \
   --defsym=__MPLAB_BUILD=1 --fixupoverflow=error \
   -Mdist/default/production/PIC_SENSORS.X.production.map \
-  --md=C:\Users\judah\AppData\Local\Temp\xcBsfqs.1\driver_tmp_0.dat -E1 \
+  --md=C:\Users\judah\AppData\Local\Temp\xcAshi0.\driver_tmp_0.dat -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh \
   -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 -AENTRY=00h-0FFhx32 \
   -ACOMMON=070h-07Fh -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh \
@@ -22,7 +22,7 @@ Linker command line:
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=ENTRY -k \
-  C:\Users\judah\AppData\Local\Temp\xcBsfqs.1\driver_tmp_12.o \
+  C:\Users\judah\AppData\Local\Temp\xcAshi0.\driver_tmp_12.o \
   dist/default/production\PIC_SENSORS.X.production.o 
 
 Object code version is 3.11
@@ -32,7 +32,7 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\judah\AppData\Local\Temp\xcBsfqs.1\driver_tmp_12.o
+C:\Users\judah\AppData\Local\Temp\xcAshi0.\driver_tmp_12.o
                 end_init                              C        C        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        2        0       4

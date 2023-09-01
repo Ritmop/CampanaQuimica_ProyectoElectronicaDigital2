@@ -1,7 +1,8 @@
 /* 
  * File:   slave_sensors.c
  * Device: PIC16F887
- * Author: Judah Pérez - 21536
+ * Author: Judah Sebastian Pérez Zeiset - 21536
+ *         Carlos Daniel Valdez Coreas - 21976
  *Compiler: XC8 (v2.41)
  * 
  * Program: Slave PIC for DHT11 sensor

@@ -13,7 +13,7 @@
  *          TX and RX connected to ESP32
  * 
  * Created: Aug 20, 2023
- * Last updated: Aug 24, 2023
+ * Last updated: Sep 1, 2023
  */
 
 /*--------------------------------- LIBRARIES --------------------------------*/
@@ -60,9 +60,10 @@ uint16_t gasPPM;
 char S_temp[4];    //Sensor data as strings
 char S_hum [3];
 char S_gas [4];
+char S_servo [4];
 
 uint8_t counter;    //Slow-rate sensor request
-uint8_t servoPos;   //Servo position
+uint8_t servoPos = '0';   //Servo position
 uint8_t motorCon;   //Motor control (High nibble: DC motor, Low nibble: Servo)
 
 /*-------------------------------- PROTOTYPES --------------------------------*/
@@ -186,7 +187,7 @@ void requestGas(void){
 
 void writeMotors(void){
     //Check conditions for water pump
-    if(tempC > thresTemp && gasPPM > thresGas)
+    if(tempC > thresTemp || gasPPM > thresGas)
         motorCon |= 0x10;   //Set DC, copy Servo
     else
         motorCon &= 0x0F;   //Reset DC, copy Servo
@@ -240,19 +241,23 @@ void LDC_output(void){
     Lcd_Write_String(S_gas);    
     Lcd_Write_String("ppm");
     
-    Lcd_Set_Cursor(2,9);    //Infrared (Digital)
-    Lcd_Write_String("PUERTA:");
+    Lcd_Set_Cursor(2,9);    //Door(Digital)
+    Lcd_Write_String("DOOR:");
+    if(servoPos == '0')
+        Lcd_Write_Char('C');
+    else{        
+        Lcd_Write_Char('O');
+    }
 }
 
 void sendDataUART(void){
     //Data sent to ESP32
     UART_write_char('\n');
-    UART_write_char(tempC);
+    UART_write_string(S_temp);
     UART_write_char(' ');
-    UART_write_char(n_hum);
+    UART_write_string(S_hum);
     UART_write_char(' ');
-    UART_write_char((gasPPM & 0xFF00) >> 8);
-    UART_write_char(gasPPM & 0x00FF);
+    UART_write_string(S_gas);
     UART_write_char(' ');
     __delay_ms(500);
 }

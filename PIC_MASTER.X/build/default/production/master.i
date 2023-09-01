@@ -2726,9 +2726,10 @@ uint16_t gasPPM;
 char S_temp[4];
 char S_hum [3];
 char S_gas [4];
+char S_servo [4];
 
 uint8_t counter;
-uint8_t servoPos;
+uint8_t servoPos = '0';
 uint8_t motorCon;
 
 
@@ -2852,7 +2853,7 @@ void requestGas(void){
 
 void writeMotors(void){
 
-    if(tempC > 50 && gasPPM > 400)
+    if(tempC > 50 || gasPPM > 400)
         motorCon |= 0x10;
     else
         motorCon &= 0x0F;
@@ -2907,18 +2908,22 @@ void LDC_output(void){
     Lcd_Write_String("ppm");
 
     Lcd_Set_Cursor(2,9);
-    Lcd_Write_String("PUERTA:");
+    Lcd_Write_String("DOOR:");
+    if(servoPos == '0')
+        Lcd_Write_Char('C');
+    else{
+        Lcd_Write_Char('O');
+    }
 }
 
 void sendDataUART(void){
 
     UART_write_char('\n');
-    UART_write_char(tempC);
+    UART_write_string(S_temp);
     UART_write_char(' ');
-    UART_write_char(n_hum);
+    UART_write_string(S_hum);
     UART_write_char(' ');
-    UART_write_char((gasPPM & 0xFF00) >> 8);
-    UART_write_char(gasPPM & 0x00FF);
+    UART_write_string(S_gas);
     UART_write_char(' ');
     _delay((unsigned long)((500)*(8000000/4000.0)));
 }

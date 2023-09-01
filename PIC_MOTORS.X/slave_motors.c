@@ -1,7 +1,8 @@
 /* 
  * File:   slave_motors.c
  * Device: PIC16F887
- * Author: Judah Pérez - 21536
+ * Author: Judah Sebastian Pérez Zeiset - 21536
+ *         Carlos Daniel Valdez Coreas - 21976
  *Compiler: XC8 (v2.40)
  * 
  * Program: Slave PIC for Motor Control
@@ -46,7 +47,6 @@ uint8_t discard;
 uint8_t send_data;
 uint8_t readI2C;
 uint8_t TMR0count = 0;
-uint8_t TMR0count2 = 0;
 
 uint8_t servoPos = 2;
         

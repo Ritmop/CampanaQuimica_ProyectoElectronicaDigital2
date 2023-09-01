@@ -37,10 +37,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _TMR0 `Vuc ~T0 @X0 0 e@1 ]
 [p mainexit ]
 "54 slave_motors.c
-[; ;slave_motors.c: 54:     }
+[; ;slave_motors.c: 54: 
 [v _setup `(v ~T0 @X0 0 ef ]
 "56
-[; ;slave_motors.c: 56:     if(T0IF){
+[; ;slave_motors.c: 56:         TMR0count++;
 [v _angle_to_PWM `(v ~T0 @X0 0 ef1`uc ]
 "4137 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4137: extern volatile __bit RC0 __attribute__((address(0x38)));
@@ -82,7 +82,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./I2C.h: 64: void I2C_Slave_Init(uint8_t address);
 [v _I2C_Slave_Init `(v ~T0 @X0 0 ef1`uc ]
 "55 slave_motors.c
-[; ;slave_motors.c: 55: 
+[; ;slave_motors.c: 55:     if(T0IF){
 [v _initPWM `(v ~T0 @X0 0 ef ]
 "4320 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 4320: extern volatile __bit T0CS __attribute__((address(0x40D)));
@@ -345,78 +345,70 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"23 slave_motors.c
-[; ;slave_motors.c: 23: void __attribute__((picinterrupt(("")))) isr (void){
+"24 slave_motors.c
+[; ;slave_motors.c: 24:         CKP = 0;
 [p x FOSC  =  INTRC_NOCLKOUT ]
-"24
-[; ;slave_motors.c: 24:     if(SSPIF){
-[p x WDTE  =  OFF        ]
 "25
-[; ;slave_motors.c: 25:         CKP = 0;
-[p x PWRTE  =  OFF       ]
+[; ;slave_motors.c: 25: 
+[p x WDTE  =  OFF        ]
 "26
-[; ;slave_motors.c: 26: 
-[p x MCLRE  =  OFF       ]
+[; ;slave_motors.c: 26:         if (SSPOV || WCOL ){
+[p x PWRTE  =  OFF       ]
 "27
-[; ;slave_motors.c: 27:         if (SSPOV || WCOL ){
-[p x CP  =  OFF          ]
+[; ;slave_motors.c: 27:             discard = SSPBUF;
+[p x MCLRE  =  OFF       ]
 "28
-[; ;slave_motors.c: 28:             discard = SSPBUF;
-[p x CPD  =  OFF         ]
+[; ;slave_motors.c: 28:             SSPOV = 0;
+[p x CP  =  OFF          ]
 "29
-[; ;slave_motors.c: 29:             SSPOV = 0;
-[p x BOREN  =  OFF       ]
+[; ;slave_motors.c: 29:             WCOL = 0;
+[p x CPD  =  OFF         ]
 "30
-[; ;slave_motors.c: 30:             WCOL = 0;
-[p x IESO  =  OFF        ]
+[; ;slave_motors.c: 30:             CKP = 1;
+[p x BOREN  =  OFF       ]
 "31
-[; ;slave_motors.c: 31:             CKP = 1;
-[p x FCMEN  =  OFF       ]
+[; ;slave_motors.c: 31:         }
+[p x IESO  =  OFF        ]
 "32
-[; ;slave_motors.c: 32:         }
+[; ;slave_motors.c: 32: 
+[p x FCMEN  =  OFF       ]
+"33
+[; ;slave_motors.c: 33:         if(!D_nA && !R_nW) {
 [p x LVP  =  OFF         ]
-"35
-[; ;slave_motors.c: 35:             _delay((unsigned long)((7)*(8000000/4000000.0)));
-[p x BOR4V  =  BOR40V    ]
 "36
-[; ;slave_motors.c: 36:             discard = SSPBUF;
+[; ;slave_motors.c: 36:             _delay((unsigned long)((2)*(8000000/4000000.0)));
+[p x BOR4V  =  BOR40V    ]
+"37
+[; ;slave_motors.c: 37:             SSPIF = 0;
 [p x WRT  =  OFF         ]
-"45
-[; ;slave_motors.c: 45:             discard = SSPBUF;
-[v _discard `uc ~T0 @X0 1 e ]
 "46
-[; ;slave_motors.c: 46:             BF = 0;
-[v _send_data `uc ~T0 @X0 1 e ]
+[; ;slave_motors.c: 46:             SSPBUF = send_data;
+[v _discard `uc ~T0 @X0 1 e ]
 "47
-[; ;slave_motors.c: 47:             SSPBUF = send_data;
-[v _readI2C `uc ~T0 @X0 1 e ]
+[; ;slave_motors.c: 47:             CKP = 1;
+[v _send_data `uc ~T0 @X0 1 e ]
 "48
-[; ;slave_motors.c: 48:             CKP = 1;
+[; ;slave_motors.c: 48:             _delay((unsigned long)((250)*(8000000/4000000.0)));
+[v _readI2C `uc ~T0 @X0 1 e ]
+"49
+[; ;slave_motors.c: 49:             while(BF);
 [v _TMR0count `uc ~T0 @X0 1 e ]
 [i _TMR0count
 -> -> 0 `i `uc
 ]
-"49
-[; ;slave_motors.c: 49:             _delay((unsigned long)((250)*(8000000/4000000.0)));
-[v _TMR0count2 `uc ~T0 @X0 1 e ]
-[i _TMR0count2
--> -> 0 `i `uc
-]
 "51
-[; ;slave_motors.c: 51:         }
+[; ;slave_motors.c: 51: 
 [v _servoPos `uc ~T0 @X0 1 e ]
 [i _servoPos
 -> -> 2 `i `uc
 ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
 "61
-[; ;slave_motors.c: 61:     }
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
 "62
-[; ;slave_motors.c: 62: }
 [e $ ! _SSPIF 139  ]
 {
 "63
@@ -495,166 +487,166 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "95
 [e ++ _TMR0count -> -> 1 `i `uc ]
-"97
+"96
 [e = _TMR0 -> -> 131 `i `uc ]
-"98
+"97
 [e = _T0IF -> -> 0 `i `b ]
-"99
+"98
 }
 [e :U 150 ]
-"100
+"99
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"109
-[; ;slave_motors.c: 109: int main(void) {
+"108
+[; ;slave_motors.c: 108: int main(void) {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"110
-[; ;slave_motors.c: 110:     setup();
+"109
+[; ;slave_motors.c: 109:     setup();
 [e ( _setup ..  ]
-"111
-[; ;slave_motors.c: 111:     while(1){
+"110
+[; ;slave_motors.c: 110:     while(1){
 [e :U 153 ]
 {
-"115
-[; ;slave_motors.c: 115:         servoPos = readI2C & 0x0F;
+"114
+[; ;slave_motors.c: 114:         servoPos = readI2C & 0x0F;
 [e = _servoPos -> & -> _readI2C `i -> 15 `i `uc ]
-"117
-[; ;slave_motors.c: 117:         angle_to_PWM(servoPos);
+"116
+[; ;slave_motors.c: 116:         angle_to_PWM(servoPos);
 [e ( _angle_to_PWM (1 _servoPos ]
-"120
-[; ;slave_motors.c: 120:         if((readI2C & 0xF0) == 0x10)
+"119
+[; ;slave_motors.c: 119:         if((readI2C & 0xF0) == 0x10)
 [e $ ! == & -> _readI2C `i -> 240 `i -> 16 `i 155  ]
-"121
-[; ;slave_motors.c: 121:             RC0 = 1;
+"120
+[; ;slave_motors.c: 120:             RC0 = 1;
 [e = _RC0 -> -> 1 `i `b ]
 [e $U 156  ]
-"122
-[; ;slave_motors.c: 122:         else
+"121
+[; ;slave_motors.c: 121:         else
 [e :U 155 ]
-"123
-[; ;slave_motors.c: 123:             RC0 = 0;
+"122
+[; ;slave_motors.c: 122:             RC0 = 0;
 [e = _RC0 -> -> 0 `i `b ]
 [e :U 156 ]
-"124
-[; ;slave_motors.c: 124:     }
+"123
+[; ;slave_motors.c: 123:     }
 }
 [e :U 152 ]
 [e $U 153  ]
 [e :U 154 ]
-"125
-[; ;slave_motors.c: 125: }
+"124
+[; ;slave_motors.c: 124: }
 [e :UE 151 ]
 }
-"127
-[; ;slave_motors.c: 127: void setup(void){
+"126
+[; ;slave_motors.c: 126: void setup(void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"129
-[; ;slave_motors.c: 129:     ANSEL = 0;
+"128
+[; ;slave_motors.c: 128:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"130
-[; ;slave_motors.c: 130:     ANSELH= 0;
+"129
+[; ;slave_motors.c: 129:     ANSELH= 0;
 [e = _ANSELH -> -> 0 `i `uc ]
-"132
-[; ;slave_motors.c: 132:     TRISC0 = 0;
+"131
+[; ;slave_motors.c: 131:     TRISC0 = 0;
 [e = _TRISC0 -> -> 0 `i `b ]
-"133
-[; ;slave_motors.c: 133:     RC0 = 0;
+"132
+[; ;slave_motors.c: 132:     RC0 = 0;
 [e = _RC0 -> -> 0 `i `b ]
-"134
-[; ;slave_motors.c: 134:     TRISC2 = 0;
+"133
+[; ;slave_motors.c: 133:     TRISC2 = 0;
 [e = _TRISC2 -> -> 0 `i `b ]
-"135
-[; ;slave_motors.c: 135:     RC2 = 0;
+"134
+[; ;slave_motors.c: 134:     RC2 = 0;
 [e = _RC2 -> -> 0 `i `b ]
-"138
-[; ;slave_motors.c: 138:     OSCCONbits.IRCF = 0b111;
+"137
+[; ;slave_motors.c: 137:     OSCCONbits.IRCF = 0b111;
 [e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"139
-[; ;slave_motors.c: 139:     SCS = 1;
+"138
+[; ;slave_motors.c: 138:     SCS = 1;
 [e = _SCS -> -> 1 `i `b ]
-"142
-[; ;slave_motors.c: 142:     I2C_Slave_Init(0x30);
+"141
+[; ;slave_motors.c: 141:     I2C_Slave_Init(0x30);
 [e ( _I2C_Slave_Init (1 -> -> 48 `i `uc ]
-"145
-[; ;slave_motors.c: 145:     initPWM();
+"144
+[; ;slave_motors.c: 144:     initPWM();
 [e ( _initPWM ..  ]
-"146
-[; ;slave_motors.c: 146: }
+"145
+[; ;slave_motors.c: 145: }
 [e :UE 157 ]
 }
-"148
-[; ;slave_motors.c: 148: void initPWM(void){
+"147
+[; ;slave_motors.c: 147: void initPWM(void){
 [v _initPWM `(v ~T0 @X0 1 ef ]
 {
 [e :U _initPWM ]
 [f ]
-"150
-[; ;slave_motors.c: 150:     T0CS = 0;
+"149
+[; ;slave_motors.c: 149:     T0CS = 0;
 [e = _T0CS -> -> 0 `i `b ]
-"151
-[; ;slave_motors.c: 151:     PSA = 0;
+"150
+[; ;slave_motors.c: 150:     PSA = 0;
 [e = _PSA -> -> 0 `i `b ]
-"152
-[; ;slave_motors.c: 152:     OPTION_REGbits.PS = 0b010;
+"151
+[; ;slave_motors.c: 151:     OPTION_REGbits.PS = 0b010;
 [e = . . _OPTION_REGbits 0 0 -> -> 2 `i `uc ]
-"153
-[; ;slave_motors.c: 153:     T0IE = 1;
+"152
+[; ;slave_motors.c: 152:     T0IE = 1;
 [e = _T0IE -> -> 1 `i `b ]
-"154
-[; ;slave_motors.c: 154:     T0IF = 0;
+"153
+[; ;slave_motors.c: 153:     T0IF = 0;
 [e = _T0IF -> -> 0 `i `b ]
-"155
-[; ;slave_motors.c: 155:     GIE = 1;
+"154
+[; ;slave_motors.c: 154:     GIE = 1;
 [e = _GIE -> -> 1 `i `b ]
-"156
-[; ;slave_motors.c: 156:     TMR0 = 131;
+"155
+[; ;slave_motors.c: 155:     TMR0 = 131;
 [e = _TMR0 -> -> 131 `i `uc ]
-"157
-[; ;slave_motors.c: 157: }
+"156
+[; ;slave_motors.c: 156: }
 [e :UE 158 ]
 }
-"159
-[; ;slave_motors.c: 159: void angle_to_PWM(uint8_t position){
+"158
+[; ;slave_motors.c: 158: void angle_to_PWM(uint8_t position){
 [v _angle_to_PWM `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _angle_to_PWM ]
 [v _position `uc ~T0 @X0 1 r1 ]
 [f ]
-"161
-[; ;slave_motors.c: 161:     if(TMR0count >= 40){
+"160
+[; ;slave_motors.c: 160:     if(TMR0count >= 40){
 [e $ ! >= -> _TMR0count `i -> 40 `i 160  ]
 {
-"162
-[; ;slave_motors.c: 162:         TMR0count = 0;
+"161
+[; ;slave_motors.c: 161:         TMR0count = 0;
 [e = _TMR0count -> -> 0 `i `uc ]
-"163
-[; ;slave_motors.c: 163:         RC2 = 1;
+"162
+[; ;slave_motors.c: 162:         RC2 = 1;
 [e = _RC2 -> -> 1 `i `b ]
-"164
-[; ;slave_motors.c: 164:     }
+"163
+[; ;slave_motors.c: 163:     }
 }
 [e $U 161  ]
-"165
-[; ;slave_motors.c: 165:     else if (TMR0count == position){
+"164
+[; ;slave_motors.c: 164:     else if (TMR0count == position){
 [e :U 160 ]
 [e $ ! == -> _TMR0count `i -> _position `i 162  ]
 {
-"166
-[; ;slave_motors.c: 166:         RC2 = 0;
+"165
+[; ;slave_motors.c: 165:         RC2 = 0;
 [e = _RC2 -> -> 0 `i `b ]
-"167
-[; ;slave_motors.c: 167:     }
+"166
+[; ;slave_motors.c: 166:     }
 }
 [e :U 162 ]
 [e :U 161 ]
-"168
-[; ;slave_motors.c: 168: }
+"167
+[; ;slave_motors.c: 167: }
 [e :UE 159 ]
 }
